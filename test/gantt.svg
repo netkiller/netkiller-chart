@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1673" height="728" viewBox="0 0 1673 728">
+<defs>
+<marker markerWidth="4.0" markerHeight="4.04" viewBox="-0.1 -0.51 1.0 1.01" orient="auto" id="d0">
+<path d="M-0.1,0.5 L-0.1,-0.5 L0.9,0 Z" fill="red" />
+</marker>
+<marker markerWidth="4.0" markerHeight="4.04" viewBox="-0.1 -0.51 1.0 1.01" orient="auto" id="d1">
+<path d="M-0.1,0.5 L-0.1,-0.5 L0.9,0 Z" fill="red" />
+</marker>
+<marker markerWidth="4.0" markerHeight="4.04" viewBox="-0.1 -0.51 1.0 1.01" orient="auto" id="d2">
+<path d="M-0.1,0.5 L-0.1,-0.5 L0.9,0 Z" fill="red" />
+</marker>
+<marker markerWidth="4.0" markerHeight="4.04" viewBox="-0.1 -0.51 1.0 1.01" orient="auto" id="d3">
+<path d="M-0.1,0.5 L-0.1,-0.5 L0.9,0 Z" fill="red" />
+</marker>
+<marker markerWidth="4.0" markerHeight="4.04" viewBox="-0.1 -0.51 1.0 1.01" orient="auto" id="d4">
+<path d="M-0.1,0.5 L-0.1,-0.5 L0.9,0 Z" fill="red" />
+</marker>
+<marker markerWidth="4.0" markerHeight="4.04" viewBox="-0.1 -0.51 1.0 1.01" orient="auto" id="d5">
+<path d="M-0.1,0.5 L-0.1,-0.5 L0.9,0 Z" fill="red" />
+</marker>
+<marker markerWidth="4.0" markerHeight="4.04" viewBox="-0.1 -0.51 1.0 1.01" orient="auto" id="d6">
+<path d="M-0.1,0.5 L-0.1,-0.5 L0.9,0 Z" fill="red" />
+</marker>
+</defs>
+<g id="title" onclick="this.style.stroke = 'green'; ">
+<text x="836.5" y="25" font-size="30" text-anchor="middle" dominant-baseline="central">P1.5.3 需求 开发测试计划</text>
+</g>
+<g id="calendar">
+<g id="table">
+<title>表格</title>
+<text x="5" y="130" font-size="20" fill="#555555">任务</text>
+<path d="M805,110 L805,728" stroke="grey" />
+<text x="805" y="130" font-size="20" fill="#555555">开始日期</text>
+<path d="M905,110 L905,728" stroke="grey" />
+<text x="905" y="130" font-size="20" fill="#555555">截止日期</text>
+<path d="M1005,110 L1005,728" stroke="grey" />
+<text x="1005" y="130" font-size="20" fill="#555555">工时</text>
+<path d="M1055,110 L1055,728" stroke="grey" />
+<text x="1055" y="130" font-size="20" fill="#555555">资源</text>
+</g>
+<g id="year2023">
+<g id="month3">
+<g id="week09"></g>
+<g id="week13">
+<text x="1150" y="70" font-size="20" fill="#555555">2023年03月</text>
+<text x="1150" y="100" font-size="20" fill="#555555">一</text>
+<rect x="1146" y="110" width="30" height="618" fill="#cccccc">
+<title>27</title>
+</rect>
+<text x="1146" y="130" font-size="20" fill="#555555">27</text>
+<text x="1181" y="100" font-size="20" fill="#555555">二</text>
+<rect x="1177" y="110" width="30" height="618" fill="#cccccc">
+<title>28</title>
+</rect>
+<text x="1177" y="130" font-size="20" fill="#555555">28</text>
+<text x="1212" y="100" font-size="20" fill="#555555">三</text>
+<rect x="1208" y="110" width="30" height="618" fill="#cccccc">
+<title>29</title>
+</rect>
+<text x="1208" y="130" font-size="20" fill="#555555">29</text>
+<text x="1243" y="100" font-size="20" fill="#555555">四</text>
+<rect x="1239" y="110" width="30" height="618" fill="#cccccc">
+<title>30</title>
+</rect>
+<text x="1239" y="130" font-size="20" fill="#555555">30</text>
+<path d="M1300,50 L1300,728" stroke="black" />
+<text x="1274" y="100" font-size="20" fill="#555555">五</text>
+<rect x="1270" y="110" width="30" height="618" fill="#cccccc">
+<title>31</title>
+</rect>
+<text x="1270" y="130" font-size="20" fill="#555555">31</text>
+</g>
+</g>
+<g id="month4">
+<g id="week13">
+<text x="1305" y="70" font-size="20" fill="#555555">2023年04月</text>
+<text x="1305" y="100" font-size="20" fill="#555555">六</text>
+<rect x="1301" y="110" width="30" height="618" fill="#dddddd">
+<title>1</title>
+</rect>
+<text x="1311" y="130" font-size="20" fill="#555555">1</text>
+<text x="1336" y="100" font-size="20" fill="#555555">日</text>
+<rect x="1332" y="110" width="30" height="618" fill="#dddddd">
+<title>2</title>
+</rect>
+<path d="M1362,80 L1362,728" stroke="black" />
+<text x="1342" y="130" font-size="20" fill="#555555">2</text>
+</g>
+<g id="week14">
+<text x="1367" y="100" font-size="20" fill="#555555">一</text>
+<rect x="1363" y="110" width="30" height="618" fill="#cccccc">
+<title>3</title>
+</rect>
+<text x="1373" y="130" font-size="20" fill="#555555">3</text>
+<text x="1398" y="100" font-size="20" fill="#555555">二</text>
+<rect x="1394" y="110" width="30" height="618" fill="#cccccc">
+<title>4</title>
+</rect>
+<text x="1404" y="130" font-size="20" fill="#555555">4</text>
+<text x="1429" y="100" font-size="20" fill="#555555">三</text>
+<rect x="1425" y="110" width="30" height="618" fill="#cccccc">
+<title>5</title>
+</rect>
+<text x="1435" y="130" font-size="20" fill="#555555">5</text>
+<text x="1460" y="100" font-size="20" fill="#555555">四</text>
+<rect x="1456" y="110" width="30" height="618" fill="#cccccc">
+<title>6</title>
+</rect>
+<text x="1466" y="130" font-size="20" fill="#555555">6</text>
+<text x="1491" y="100" font-size="20" fill="#555555">五</text>
+<rect x="1487" y="110" width="30" height="618" fill="#cccccc">
+<title>7</title>
+</rect>
+<text x="1497" y="130" font-size="20" fill="#555555">7</text>
+<text x="1522" y="100" font-size="20" fill="#555555">六</text>
+<rect x="1518" y="110" width="30" height="618" fill="#cccccc">
+<title>8</title>
+</rect>
+<text x="1528" y="130" font-size="20" fill="#555555">8</text>
+<text x="1553" y="100" font-size="20" fill="#555555">日</text>
+<rect x="1549" y="110" width="30" height="618" fill="#dddddd">
+<title>9</title>
+</rect>
+<path d="M1579,80 L1579,728" stroke="black" />
+<text x="1559" y="130" font-size="20" fill="#555555">9</text>
+</g>
+<g id="week15">
+<text x="1584" y="100" font-size="20" fill="#555555">一</text>
+<rect x="1580" y="110" width="30" height="618" fill="#cccccc">
+<title>10</title>
+</rect>
+<text x="1580" y="130" font-size="20" fill="#555555">10</text>
+<text x="1615" y="100" font-size="20" fill="#555555">二</text>
+<rect x="1611" y="110" width="30" height="618" fill="#cccccc">
+<title>11</title>
+</rect>
+<text x="1611" y="130" font-size="20" fill="#555555">11</text>
+<path d="M1672,50 L1672,728" stroke="black" />
+<text x="1646" y="100" font-size="20" fill="#555555">三</text>
+<rect x="1642" y="110" width="30" height="618" fill="#cccccc">
+<title>12</title>
+</rect>
+<text x="1642" y="130" font-size="20" fill="#555555">12</text>
+</g>
+</g>
+</g>
+<path d="M1,80 L1673,80" stroke="grey" />
+<path d="M1,110 L1673,110" stroke="grey" />
+<path d="M1,140 L1673,140" stroke="grey" />
+<path d="M1,50 L1673,50" stroke="grey" />
+<path d="M1145,80 L1145,728" stroke="grey" />
+</g>
+<g id="tasks">
+<g id="task">
+<g id="text">
+<text x="5" y="160" font-size="20" text-anchor="start">总账管理-日月汇总账单</text>
+<text x="805" y="160" font-size="20" text-anchor="start">2023-03-27</text>
+<text x="905" y="160" font-size="20" text-anchor="start">2023-03-28</text>
+<text x="1015" y="160" font-size="20" text-anchor="start">2</text>
+<text x="1055" y="160" font-size="20" text-anchor="start"></text>
+</g>
+<g id="item">
+<path d="M1146,147 L1207,147 L1207,164 L1197,155 L1156,155 L1146,164 L1146,147" fill="black" stroke="black" />
+<path d="M1,170 L1673,170" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="191" font-size="20" text-anchor="start">预告交易手续费差额字段，改成“支付通道手续费差额</text>
+<text x="805" y="191" font-size="20" text-anchor="start">2023-03-27</text>
+<text x="905" y="191" font-size="20" text-anchor="start">2023-03-27</text>
+<text x="1015" y="191" font-size="20" text-anchor="start">1</text>
+<text x="1055" y="191" font-size="20" text-anchor="start">李功发</text>
+</g>
+<g id="item">
+<rect x="1146" y="175" width="30" height="20" fill="#67AAFF" stroke="black">
+<title>预告交易手续费差额字段，改成“支付通道手续费差额</title>
+</rect>
+<path d="M1,201 L1673,201" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="222" font-size="20" text-anchor="start">活动优惠金额（易能时代出资）这个字段应该不包含：平台抽佣活动，xy活动抽佣）</text>
+<text x="805" y="222" font-size="20" text-anchor="start">2023-03-28</text>
+<text x="905" y="222" font-size="20" text-anchor="start">2023-03-28</text>
+<text x="1015" y="222" font-size="20" text-anchor="start">1</text>
+<text x="1055" y="222" font-size="20" text-anchor="start">李功发</text>
+</g>
+<g id="item">
+<rect x="1177" y="206" width="30" height="20" fill="#67AAFF" stroke="black">
+<title>活动优惠金额（易能时代出资）这个字段应该不包含：平台抽佣活动，xy活动抽佣）</title>
+</rect>
+<path d="M1,232 L1673,232" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="253" font-size="20" text-anchor="start">提测日期</text>
+<text x="805" y="253" font-size="20" text-anchor="start">2023-03-28</text>
+<text x="905" y="253" font-size="20" text-anchor="start">2023-03-28</text>
+<text x="1015" y="253" font-size="20" text-anchor="start">1</text>
+<text x="1055" y="253" font-size="20" text-anchor="start"></text>
+</g>
+<g id="item">
+<path d="M1192,237 L1203,248 L1192,259 L1181,248 L1192,237 Z" fill="black" />
+<text x="1207" y="253" font-size="18" text-anchor="start" fill="black">2023年03月28日</text>
+<path d="M1,263 L1673,263" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="5" y="284" font-size="20" text-anchor="start">渠道佣金账单明细-新旧系统兼容</text>
+<text x="805" y="284" font-size="20" text-anchor="start">2023-03-27</text>
+<text x="905" y="284" font-size="20" text-anchor="start">2023-04-03</text>
+<text x="1015" y="284" font-size="20" text-anchor="start">8</text>
+<text x="1055" y="284" font-size="20" text-anchor="start"></text>
+</g>
+<g id="item">
+<path d="M1146,271 L1393,271 L1393,288 L1383,279 L1156,279 L1146,288 L1146,271" fill="black" stroke="black" />
+<path d="M1,294 L1673,294" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="315" font-size="20" text-anchor="start">对账单（包括四个模版）顾客实付和用户服务费需要合计新旧系统</text>
+<text x="805" y="315" font-size="20" text-anchor="start">2023-03-29</text>
+<text x="905" y="315" font-size="20" text-anchor="start">2023-03-30</text>
+<text x="1015" y="315" font-size="20" text-anchor="start">2</text>
+<text x="1055" y="315" font-size="20" text-anchor="start">李功发</text>
+</g>
+<g id="item">
+<rect x="1208" y="299" width="61" height="20" fill="#67AAFF" stroke="black">
+<title>对账单（包括四个模版）顾客实付和用户服务费需要合计新旧系统</title>
+</rect>
+<path d="M1,325 L1673,325" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="346" font-size="20" text-anchor="start">对账单（包括四个模版）汇总数据后，规则重新计算得到实际计算比例</text>
+<text x="805" y="346" font-size="20" text-anchor="start">2023-03-31</text>
+<text x="905" y="346" font-size="20" text-anchor="start">2023-04-03</text>
+<text x="1015" y="346" font-size="20" text-anchor="start">4</text>
+<text x="1055" y="346" font-size="20" text-anchor="start">李功发</text>
+</g>
+<g id="item">
+<rect x="1270" y="330" width="123" height="20" fill="#67AAFF" stroke="black">
+<title>对账单（包括四个模版）汇总数据后，规则重新计算得到实际计算比例</title>
+</rect>
+<path d="M1,356 L1673,356" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="377" font-size="20" text-anchor="start">订单明细——旧系统（包括四个模版）	新增旧系统的订单明细数据</text>
+<text x="805" y="377" font-size="20" text-anchor="start">2023-03-27</text>
+<text x="905" y="377" font-size="20" text-anchor="start">2023-03-29</text>
+<text x="1015" y="377" font-size="20" text-anchor="start">3</text>
+<text x="1055" y="377" font-size="20" text-anchor="start">袁健逢</text>
+</g>
+<g id="item">
+<rect x="1146" y="361" width="92" height="20" fill="#67AAFF" stroke="black">
+<title>订单明细——旧系统（包括四个模版）	新增旧系统的订单明细数据</title>
+</rect>
+<path d="M1,387 L1673,387" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="408" font-size="20" text-anchor="start">提测日期</text>
+<text x="805" y="408" font-size="20" text-anchor="start">2023-04-04</text>
+<text x="905" y="408" font-size="20" text-anchor="start">2023-04-03</text>
+<text x="1015" y="408" font-size="20" text-anchor="start">0</text>
+<text x="1055" y="408" font-size="20" text-anchor="start"></text>
+</g>
+<g id="item">
+<path d="M1409,392 L1420,403 L1409,414 L1398,403 L1409,392 Z" fill="black" />
+<text x="1424" y="408" font-size="18" text-anchor="start" fill="black">2023年04月04日</text>
+<path d="M1,418 L1673,418" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="5" y="439" font-size="20" text-anchor="start">测试计划</text>
+<text x="805" y="439" font-size="20" text-anchor="start">2023-03-28</text>
+<text x="905" y="439" font-size="20" text-anchor="start">2023-04-12</text>
+<text x="1015" y="439" font-size="20" text-anchor="start">16</text>
+<text x="1055" y="439" font-size="20" text-anchor="start"></text>
+</g>
+<g id="item">
+<path d="M1177,426 L1672,426 L1672,443 L1662,434 L1187,434 L1177,443 L1177,426" fill="black" stroke="black" />
+<path d="M1,449 L1673,449" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="470" font-size="20" text-anchor="start">用例编写</text>
+<text x="805" y="470" font-size="20" text-anchor="start">2023-04-03</text>
+<text x="905" y="470" font-size="20" text-anchor="start">2023-04-03</text>
+<text x="1015" y="470" font-size="20" text-anchor="start">1</text>
+<text x="1055" y="470" font-size="20" text-anchor="start">易柏焱</text>
+</g>
+<g id="item">
+<rect x="1363" y="454" width="30" height="20" fill="#67AAFF" stroke="black">
+<title>用例编写</title>
+</rect>
+<path d="M1,480 L1673,480" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="501" font-size="20" text-anchor="start">冒烟测试</text>
+<text x="805" y="501" font-size="20" text-anchor="start">2023-04-04</text>
+<text x="905" y="501" font-size="20" text-anchor="start">2023-04-04</text>
+<text x="1015" y="501" font-size="20" text-anchor="start">1</text>
+<text x="1055" y="501" font-size="20" text-anchor="start">易柏焱</text>
+</g>
+<g id="item">
+<rect x="1394" y="485" width="30" height="20" fill="#67AAFF" stroke="black">
+<title>冒烟测试</title>
+</rect>
+<path d="M1,511 L1673,511" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="532" font-size="20" text-anchor="start">预告交易手续费差额字段，改成“支付通道手续费差额</text>
+<text x="805" y="532" font-size="20" text-anchor="start">2023-04-05</text>
+<text x="905" y="532" font-size="20" text-anchor="start">2023-04-07</text>
+<text x="1015" y="532" font-size="20" text-anchor="start">3</text>
+<text x="1055" y="532" font-size="20" text-anchor="start">易柏焱</text>
+</g>
+<g id="item">
+<rect x="1425" y="516" width="92" height="20" fill="#67AAFF" stroke="black">
+<title>预告交易手续费差额字段，改成“支付通道手续费差额</title>
+</rect>
+<path d="M1,542 L1673,542" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="563" font-size="20" text-anchor="start">活动优惠金额（易能时代出资）这个字段应该不包含：平台抽佣活动，xy活动抽佣）</text>
+<text x="805" y="563" font-size="20" text-anchor="start">2023-04-05</text>
+<text x="905" y="563" font-size="20" text-anchor="start">2023-04-07</text>
+<text x="1015" y="563" font-size="20" text-anchor="start">3</text>
+<text x="1055" y="563" font-size="20" text-anchor="start">易柏焱</text>
+</g>
+<g id="item">
+<rect x="1425" y="547" width="92" height="20" fill="#67AAFF" stroke="black">
+<title>活动优惠金额（易能时代出资）这个字段应该不包含：平台抽佣活动，xy活动抽佣）</title>
+</rect>
+<path d="M1,573 L1673,573" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="594" font-size="20" text-anchor="start">对账单（包括四个模版）顾客实付和用户服务费需要合计新旧系统</text>
+<text x="805" y="594" font-size="20" text-anchor="start">2023-04-08</text>
+<text x="905" y="594" font-size="20" text-anchor="start">2023-04-10</text>
+<text x="1015" y="594" font-size="20" text-anchor="start">3</text>
+<text x="1055" y="594" font-size="20" text-anchor="start">易柏焱</text>
+</g>
+<g id="item">
+<rect x="1518" y="578" width="92" height="20" fill="#67AAFF" stroke="black">
+<title>对账单（包括四个模版）顾客实付和用户服务费需要合计新旧系统</title>
+</rect>
+<path d="M1,604 L1673,604" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="625" font-size="20" text-anchor="start">对账单（包括四个模版）汇总数据后，规则重新计算得到实际计算比例</text>
+<text x="805" y="625" font-size="20" text-anchor="start">2023-04-08</text>
+<text x="905" y="625" font-size="20" text-anchor="start">2023-04-10</text>
+<text x="1015" y="625" font-size="20" text-anchor="start">3</text>
+<text x="1055" y="625" font-size="20" text-anchor="start">易柏焱</text>
+</g>
+<g id="item">
+<rect x="1518" y="609" width="92" height="20" fill="#67AAFF" stroke="black">
+<title>对账单（包括四个模版）汇总数据后，规则重新计算得到实际计算比例</title>
+</rect>
+<path d="M1,635 L1673,635" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="656" font-size="20" text-anchor="start">订单明细——旧系统（包括四个模版）	新增旧系统的订单明细数据</text>
+<text x="805" y="656" font-size="20" text-anchor="start">2023-04-08</text>
+<text x="905" y="656" font-size="20" text-anchor="start">2023-04-10</text>
+<text x="1015" y="656" font-size="20" text-anchor="start">3</text>
+<text x="1055" y="656" font-size="20" text-anchor="start">易柏焱</text>
+</g>
+<g id="item">
+<rect x="1518" y="640" width="92" height="20" fill="#67AAFF" stroke="black">
+<title>订单明细——旧系统（包括四个模版）	新增旧系统的订单明细数据</title>
+</rect>
+<path d="M1,666 L1673,666" stroke="grey" />
+</g>
+</g>
+<g id="task">
+<g id="text">
+<text x="35" y="687" font-size="20" text-anchor="start">pre测试</text>
+<text x="805" y="687" font-size="20" text-anchor="start">2023-04-11</text>
+<text x="905" y="687" font-size="20" text-anchor="start">2023-04-12</text>
+<text x="1015" y="687" font-size="20" text-anchor="start">2</text>
+<text x="1055" y="687" font-size="20" text-anchor="start">易柏焱</text>
+</g>
+<g id="item">
+<rect x="1611" y="671" width="61" height="20" fill="#67AAFF" stroke="black">
+<title>pre测试</title>
+</rect>
+<path d="M1,697 L1673,697" stroke="grey" />
+</g>
+</g>
+</g>
+<g id="handover">
+<g id="link">
+<path d="M1208,217 H1161 V166" stroke="red" stroke-width="2" fill="none" marker-end="url(#d0)" />
+</g>
+<g id="link">
+<path d="M1270,310 H1192 V197" stroke="red" stroke-width="2" fill="none" marker-end="url(#d1)" />
+</g>
+<g id="link">
+<path d="M1394,341 H1223 V290" stroke="red" stroke-width="2" fill="none" marker-end="url(#d2)" />
+</g>
+<g id="link">
+<path d="M1425,496 H1378 V445" stroke="red" stroke-width="2" fill="none" marker-end="url(#d3)" />
+</g>
+<g id="link">
+<path d="M1518,527 H1409 V476" stroke="red" stroke-width="2" fill="none" marker-end="url(#d4)" />
+</g>
+<g id="link">
+<path d="M1611,589 H1440 V538" stroke="red" stroke-width="2" fill="none" marker-end="url(#d5)" />
+</g>
+<g id="link">
+<path d="M1673,682 H1533 V631" stroke="red" stroke-width="2" fill="none" marker-end="url(#d6)" />
+</g>
+</g>
+<text x="1393" y="40" font-size="15" text-anchor="start" fill="grey">https://www.netkiller.cn - design by netkiller</text>
+<rect x="0" y="0" width="1673" height="728" fill="none" stroke="black" />
+</svg>
