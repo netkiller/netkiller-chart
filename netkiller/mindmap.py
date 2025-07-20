@@ -36,7 +36,7 @@ class Point:
 
 class Mindmap:
     spacing = 200
-    distance = 100
+    distance = 50
     frontSize = 20
     charWidth = 0.5
 
@@ -63,7 +63,7 @@ class Mindmap:
 
     def center(self, text: str):
         x = self.horizontalPosition
-        y = self.verticalPosition // 2 + self.frontSize
+        y = self.verticalPosition // 2 + self.frontSize *2
         width = self.frontSize * len(text)
         height = self.frontSize * 2
 
@@ -140,14 +140,8 @@ class Mindmap:
         # return len(childNode) * self.frontSize
 
         # self.horizontalPosition = len(node['text']) * self.frontSize
-        #
-        # # self.title(node["title"])
-        #
         # # children = node['children']
-        # self.node(node)
-        #
-
-        #
+        # self.node(node)        #
         # # print(self.dwg.)
         # pass
 
@@ -157,7 +151,7 @@ class Mindmap:
     def save(self):
         self.horizontalPosition = len(self.jsonObject['text']) * self.frontSize
         # self.verticalPosition = len(self.jsonObject['children']) * self.frontSize // 2
-
+        # self.title(node["title"])
         self.arrange(self.jsonObject['children'])
         self.center(self.jsonObject['text'])
 
