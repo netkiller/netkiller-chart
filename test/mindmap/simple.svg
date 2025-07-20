@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg baseProfile="full" height="300px" version="1.1" viewBox="0 0 400 300" width="400px"
+     xmlns="http://www.w3.org/2000/svg"
+>
+    <defs/>
+    <!--    <circle cx="100" cy="100" fill="#4CAF50" r="20"/>-->
+    <!--    <text font-family="Arial" font-size="14px" text-anchor="middle" x="100" y="105">A</text>-->
+    <!--    <circle cx="300" cy="200" fill="#2196F3" r="20"/>-->
+    <!--    <text font-family="Arial" font-size="14px" text-anchor="middle" x="300" y="205">B</text>-->
+
+    <path d="M 50,50 L 150,50
+           C 150,50 200,50 280,200
+           L 450,200"
+          fill="none" stroke="#3498db" stroke-width="3"/>
+
+    <path d="M 50,50 C 100,50 200,100 250,350" fill="none" stroke="green" stroke-width="2"/>
+
+    <path d="M 50,50
+        C 100,50 200,100 400,150
+        S 400,150 400,150"
+          fill="none" stroke="purple" stroke-width="2"/>
+
+    <path d="M 50,50
+        C 100,50 200,100 350,100
+        S 350,100 350,100"
+          fill="none" stroke="purple" stroke-width="2"/>
+
+
+    <!-- 平滑贝塞尔曲线 -->
+    <path id="bezierPath" class="curve"
+          d="M 50,50
+           C 200,50 200,200 400,200
+           S 400,200 400,200" fill="none" stroke="purple" stroke-width="2"/>
+
+
+    <path d="M 50,50 L 200,50" fill="none" stroke="blue" stroke-width="2"/>
+    <text x="125" y="30" text-anchor="middle" font-size="12">单条直线 (L命令)</text>
+
+    <!-- 2. 连续折线 -->
+    <path d="M 50,100 L 100,150 L 150,100 L 200,150" fill="none" stroke="green" stroke-width="2"/>
+    <text x="125" y="80" text-anchor="middle" font-size="12">连续折线 (多个L命令)</text>
+
+    <!-- 3. 水平线和垂直线 -->
+    <path d="M 250,50 H 300 V 100 H 350" fill="none" stroke="red" stroke-width="2"/>
+    <text x="300" y="30" text-anchor="middle" font-size="12">水平/垂直线 (H/V命令)</text>
+
+    <!-- 4. 相对坐标划线 -->
+    <path d="M 250,120 m 0,30 l 50,-30 l 50,30" fill="none" stroke="purple" stroke-width="2"/>
+    <text x="325" y="110" text-anchor="middle" font-size="12">相对坐标 (m/l命令)</text>
+
+    <!-- 5. 闭合路径 -->
+    <path d="M 50,200 L 100,250 L 150,200 Z" fill="none" stroke="orange" stroke-width="2"/>
+    <text x="100" y="180" text-anchor="middle" font-size="12">闭合三角形 (Z命令)</text>
+
+
+</svg>

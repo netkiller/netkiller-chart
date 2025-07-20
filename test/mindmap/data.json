@@ -1,0 +1,49 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "一级标题",
+      "children": [
+        {
+          "type": "list_item",
+          "text": "内容段落1",
+          "children": [
+            {
+              "type": "list_item",
+              "text": "内容段落2",
+              "children": [
+                {
+                  "type": "list_item",
+                  "text": "列表项1",
+                  "children": [
+                    {
+                      "type": "list_item",
+                      "text": "列表项2",
+                      "children": [
+                        {
+                          "type": "list_item",
+                          "text": "子列表项1",
+                          "children": [
+                            {
+                              "type": "list_item",
+                              "text": "孙列表项1",
+                              "children": []
+                            }
+                          ]
+                        },
+                        ,
+
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
