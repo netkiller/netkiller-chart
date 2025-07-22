@@ -75,20 +75,21 @@ class Mindmap:
     def root(self, text: str):
         x = self.horizontalPosition
         # y = self.verticalPosition
-        y = self.verticalPosition // 2 + self.fontSize // 2
-        width = self.fontSize * len(text)
+        y = self.verticalPosition // 2 + self.charHeight // 2
+        width = self.horizontalPosition
         height = self.fontSize * 2
+        color = self.randomColor()
 
-        self.dwg.add(self.dwg.line(start=(0, y), end=(width, y), fill='lightgreen',
-                                   stroke='green',
-                                   stroke_width=2))
+        self.dwg.add(self.dwg.line(start=(2, y), end=(width, y), fill='lightgreen',
+                                   stroke=f'{color}',
+                                   stroke_width=4))
 
-        circle = self.dwg.circle(center=(width, y), r=5, fill="white", stroke="green", stroke_width="2")
+        circle = self.dwg.circle(center=(width, y), r=4, fill="white", stroke=f"{color}", stroke_width="2")
         self.dwg.add(circle)
-        self.dwg.add(self.dwg.text(text, insert=(width // 2, y), text_anchor='middle',
+        self.dwg.add(self.dwg.text(text, insert=(width // 2, y - 5), text_anchor='middle',
                                    font_family=f"{self.fontFamily}",
                                    font_size=f"{self.fontSize}",
-                                   fill="blue"
+                                   fill=f"{self.fontColor}"
                                    ))
 
     def rectangle(self, text: str):
@@ -110,7 +111,7 @@ class Mindmap:
         self.dwg.add(basic_ellipse)
         # self.dwg.add(self.dwg.text("基本椭圆", insert=(150, 100), text_anchor="middle", dominant_baseline="middle"))
 
-    def textNode(self, parentNode: dict, node: dict, width):
+    def textNode(self, parentNode: dict, node: dict, color: str, width):
 
         width = node['x'] + width
 
@@ -122,11 +123,9 @@ class Mindmap:
             d=f'M {parentNode["x"]},{parentNode["y"]} H {parentNode["x"] + self.distance / 2} V {node["y"]} H {node["x"]}',
             fill='none', stroke='#FF5722', stroke_width=2)
         # self.dwg.add(path)
-        line = self.dwg.line(start=(node["x"], node["y"]), end=(width, node["y"]), fill='lightgreen',
-                             stroke='green',
-                             stroke_width=2)
+        line = self.dwg.line(start=(node["x"], node["y"]), end=(width, node["y"]), stroke=f'{color}', stroke_width=2)
 
-        circle = self.dwg.circle(center=(width, node["y"]), r=5, fill="white", stroke="green", stroke_width="2")
+        circle = self.dwg.circle(center=(width, node["y"]), r=5, fill="white", stroke=f"{color}", stroke_width="2")
 
         self.dwg.add(line)
         self.dwg.add(circle)
@@ -140,12 +139,12 @@ class Mindmap:
 
         self.dwg.add(path)
 
-    def curve(self, parentNode, node):
+    def curve(self, parentNode, node, color: str):
         # self.dwg.add(self.dwg.text(node['text'], insert=(node["x"], node["y"]), text_anchor='start'))
 
         path = self.dwg.path(
             d=f'M{parentNode["x"]},{parentNode["y"]} C{parentNode["x"] + self.distance / 2},{parentNode["y"]} {node["x"] - self.distance / 2},{node["y"]} {node["x"]},{node["y"]}',
-            fill='none', stroke=f'{self.randomColor()}', stroke_width=2)
+            fill='none', stroke=f'{color}', stroke_width=2)
 
         self.dwg.add(path)
 
@@ -166,15 +165,17 @@ class Mindmap:
 
     def rander(self):
 
-        # self.horizontalPosition = len(self.jsonObject['text']) * self.fontSize + self.distance
         width, height = self.getTextSize(self.jsonObject['text'])
-        # self.horizontalPosition = width  # + self.distance
+
         # self.background(self.jsonObject['children'], True)
+
         self.horizontalPosition = 0
         self.verticalPosition = 0
 
+        self.horizontalPosition = width + self.fontSize  # + self.distance
+
         self.scan(self.jsonObject['children'])
-        # self.root(self.jsonObject['text'])
+        self.root(self.jsonObject['text'])
 
         # self.getTextSize("中国")
         self.dwg.save(pretty=True)
@@ -187,6 +188,9 @@ class Mindmap:
             width, height = self.getTextSize(child['text'])
             if width > textWidth:
                 textWidth = width
+
+        if textWidth > 0:
+            textWidth += 5
 
         currentVerticalPosition = self.verticalPosition
         currentHorizontalPosition = self.distance + horizontalOffset
@@ -202,11 +206,7 @@ class Mindmap:
                 if len(child['children']) > 0:
                     self.scan(child['children'], textWidth)
                 else:
-                    print()
-
-            # print(child['text'])
-
-            # x = self.horizontalPosition + horizontalOffset + textWidth
+                    pass
 
             if self.verticalOffset:
                 y = self.verticalPosition - self.verticalOffset + self.charHeight // 2
@@ -216,24 +216,27 @@ class Mindmap:
                 self.verticalPosition += self.charHeight;
                 y = self.verticalPosition
 
-            self.textNode({"x": 0, "y": 0}, {"x": x, "y": y, "text": child["text"]}, textWidth)
+            color = self.randomColor()
+            text = child["text"]
 
-            curve.append((x, y))
+            # self.textNode({"x": 0, "y": 0}, {"x": x, "y": y, "text": child["text"]}, color, textWidth)
+            curve.append((x, y, color, text))
 
         self.verticalOffset = (self.verticalPosition - currentVerticalPosition) // 2
         self.horizontalPosition -= currentHorizontalPosition
 
         px = self.horizontalPosition + horizontalOffset
         py = self.verticalPosition - self.verticalOffset + self.charHeight // 2
-        for x, y in curve:
-            self.curve({"x": px, "y": py}, {"x": x, "y": y})
+        for x, y, c, t in curve:
+            self.curve({"x": px, "y": py}, {"x": x, "y": y}, c)
+            self.textNode({"x": 0, "y": 0}, {"x": x, "y": y, "text": t}, c, textWidth + 5)
 
     def randomColor(self):
         """生成随机 RGB 颜色（返回 (r, g, b) 元组）"""
         # r = random.randint(0, 255)
         # g = random.randint(0, 255)
         # b = random.randint(0, 255)
-        # return (f"{r}{g}{b}")
+        # return f'#{r:02X}{g:02X}{b:02X}'
 
         # a = round(random.uniform(0, 1), 2)  # 透明度保留2位小数
         # return (r, g, b, a)
@@ -253,8 +256,10 @@ class Mindmap:
         # 品红：magenta（  # FF00FF）
         # 银色：silver（  # C0C0C0）
         # 金色：gold（  # FFD700）
-        color = ["red", "green", "blue", "yellow", "black", "gray", "pink", "purple", "orange", "brown", "cyan",
-                 "magenta", "silver", "gold"]
+        color = [
+            "red", "green", "blue", "black", "gray", "pink", "purple", "orange", "brown", "cyan", "magenta", "gold",
+            "#005588",
+        ]
         return random.choice(color)
 
     def arrange(self, childNode: list):
@@ -326,7 +331,7 @@ class Mindmap:
         # 计算宽度和高度
         width = right - left
         height = bottom - top
-        print(f"文本：{text} 宽度：{width}px，高度：{height}px 字体：{font.getname()} ")
+        # print(f"文本：{text} 宽度：{width}px，高度：{height}px 字体：{font.getname()} ")
         return width, height
 
     def calculate_text_width(self, text, font_family="Arial", font_size=16):
@@ -455,6 +460,18 @@ def main():
                                     {
                                         "type": "list_item",
                                         "text": "黑龙江",
+                                        "children": [
+                                        ]
+                                    },
+                                    {
+                                        "type": "list_item",
+                                        "text": "吉林",
+                                        "children": [
+                                        ]
+                                    },
+                                    {
+                                        "type": "list_item",
+                                        "text": "辽宁",
                                         "children": [
                                         ]
                                     }
