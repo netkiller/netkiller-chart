@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="350px" height="227px" viewBox="0 0 350 227" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>simple</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="simple" transform="translate(0, 2)">
+            <path d="M0,1.42108547e-14 C9.399768,1.42108547e-14 37.740125,1.42108547e-14 85.0210711,1.42108547e-14 C155.94249,1.42108547e-14 166.719704,150 230.014997,150 L350,150" id="路径" stroke="#3498DB" stroke-width="3"></path>
+            <path d="M5,209 C55,159 155,259 205,209" id="路径" stroke="#008000" stroke-width="2"></path>
+            <path d="M5,81.1708521 C105,81.1708521 138.333333,176.529886 205,178.170852" id="路径" stroke="#0000FF" stroke-width="2"></path>
+            <path d="M5,95 C75.2513377,95 76.1532533,204.439533 165.042142,204.439533" id="路径" stroke="#FFA500" stroke-width="2"></path>
+            <path d="M0,2.84217094e-14 C150,2.84217094e-14 150,150 350,150" id="bezierPath" stroke="#800080" stroke-width="2"></path>
+        </g>
+    </g>
+</svg>

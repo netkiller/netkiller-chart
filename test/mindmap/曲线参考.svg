@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="1080px" version="1.1" xmlns="http://www.w3.org/2000/svg"
+>
+    <title>simple</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+
+        <!--            <path d="M0,1 C9,1 37,1 85,1 C155,1 166,150 230,150 L350,150" id="路径" stroke="red" stroke-width="3"></path>-->
+        <!--            <path d="M5,209 C55,159 155,259 205,209" id="路径" stroke="#008000" stroke-width="2"></path>-->
+        <!--            <path d="M0,2 C150,2 150,150 350,150" id="bezierPath" stroke="#800080" stroke-width="2"></path>-->
+
+        <!--            <path d="M1,50 L100,50 C200,50 150,150 300,150 L400,150" id="路径" stroke="green" stroke-width="3"></path>-->
+
+        <text text-anchor="middle" x="50" y="120" fill="purple" stroke="none">咖啡豆分类</text>
+
+        <text text-anchor="middle" x="350" y="45" fill="red" stroke="none">阿拉比卡咖啡豆</text>
+        <path d="M0,125 L100,125 C200,125 200,50 300,50 L 400,50" id="路径" stroke="red" stroke-width="2"></path>
+
+        <text text-anchor="middle" x="350" y="95" fill="green" stroke="none">罗布斯塔咖啡豆</text>
+        <path d="M0,125 L100,125 C200,125 200,100 300,100 L 400,100" id="路径" stroke="green" stroke-width="2"></path>
+
+        <text text-anchor="middle" x="350" y="145" fill="orange" stroke="none">利比里亚咖啡豆</text>
+        <path d="M0,125 L100,125 C200,125 200,150 300,150 L 400,150" id="路径" stroke="orange" stroke-width="2"></path>
+
+        <text text-anchor="middle" x="350" y="195" fill="blue" stroke="none">埃克萨斯咖啡豆</text>
+        <path d="M0,125 L100,125 C200,125 200,200 300,200 L 400,200" id="路径" stroke="blue" stroke-width="2"></path>
+        <circle cx="100" cy="125" r="5" fill="white" stroke="blue" stroke-width="2"/>
+
+
+        <!--            <path d="M0,200 C150,200 200,0 300,0" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M0,200 C150,200 200,50 300,50" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M0,200 C150,200 200,100 300,100" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M0,200 C150,200 200,150 300,150" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M0,200 C150,200 200,200 300,200" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+
+        <!--            <path d="M0,200 C150,200 200,250 300,250" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M0,200 C150,200 200,300 300,300" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M0,200 C150,200 200,350 300,350" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M0,200 C150,200 200,400 300,400" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M0,200 C150,200 200,450 300,450" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+
+        <!--            <path d="M300,200 C400,200 500,100 600,100" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M300,200 C400,200 500,150 600,150" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M300,200 C400,200 500,200 600,200" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M300,200 C400,200 500,250 600,250" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M300,200 C400,200 500,250 600,250" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M300,200 C400,200 500,300 600,300" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            <path d="M300,200 C400,200 500,350 600,350" id="路径" stroke="#FFA500" stroke-width="2"></path>-->
+        <!--            -->
+        <!--            <circle cx="0" cy="200" r="5" fill="white" stroke="blue" stroke-width="2"/>-->
+        <!--            <circle cx="300" cy="200" r="5" fill="white" stroke="green" stroke-width="2"/>-->
+
+    </g>
+</svg>

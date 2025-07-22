@@ -10,10 +10,14 @@ try:
     import json
 except ImportError as err:
     print("Import Error: %s" % (err))
+
+
 class Markdown:
-    def __init__(self):
+    def __init__(self, markdown: str = None):
+        self.markdown = markdown
         pass
-    def _parse_heading(self,line, current_level, current_node, root, parent_map):
+
+    def _parse_heading(self, line, current_level, current_node, root, parent_map):
         """解析标题行，返回更新后的节点状态"""
         title_match = re.match(r'(#+) (.*)', line)
         if not title_match:
@@ -55,8 +59,7 @@ class Markdown:
 
         return level, current_node, parent_map
 
-
-    def _parse_list_item(self,line, current_node, parent_map, list_stack):
+    def _parse_list_item(self, line, current_node, parent_map, list_stack):
         """解析列表项行，返回更新后的节点状态"""
         list_match = re.match(r'(\s*)([-*+]) (.*)', line)
         if not list_match:
@@ -95,8 +98,7 @@ class Markdown:
 
         return current_node, parent_map, list_stack
 
-
-    def parser(self,markdown_text):
+    def parser(self, markdown_text):
         """解析 Markdown 文本，提取标题和列表结构"""
         lines = markdown_text.strip().split('\n')
         root = {'type': 'root', 'children': []}
@@ -120,13 +122,21 @@ class Markdown:
                 )
 
         return root
-    def dumps(self,text:str):
-        result = self.parser(text)
+
+    def dumps(self):
+        result = self.parser(self.markdown)
         json_output = json.dumps(result, ensure_ascii=False, indent=2)
         return json_output
+
+    def debug(self):
+        print(self.dumps())
+
+    def jsonData(self):
+        return self.parser(self.markdown)
+
     def main(self):
         # 示例 Markdown 文本
-        markdown_text = """
+        self.markdown = """
         # 一级标题
         - 内容段落1
         - 内容段落2
@@ -153,11 +163,11 @@ class Markdown:
         """
 
         # 解析并转换为 JSON
-        result = self.parser(markdown_text)
-        json_output = json.dumps(result, ensure_ascii=False, indent=2)
-
+        # result = self.parser(markdown_text)
+        # json_output = json.dumps(result, ensure_ascii=False, indent=2)
+        self.debug()
         # 打印 JSON 输出
-        print(json_output)
+
 
 if __name__ == "__main__":
     markdown = Markdown()
