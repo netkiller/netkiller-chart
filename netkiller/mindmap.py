@@ -5,47 +5,44 @@
 # Author: Neo <netkiller@msn.com>
 # Data: 2025-07-19
 ##############################################
+import random
+
+import cairo
 
 try:
     import svgwrite
-    # import drawsvg as draw
-    # from datetime import datetime, date
-    # from PIL import ImageFont
-    # import requests
-    # import os
-    # import platform
+    from PIL import ImageFont, ImageDraw, Image
 except ImportError as err:
     print("Import Error: %s" % (err))
 
 
-# class Node:
-#     nodes = []
-#
-#     def __init__(self):
-#         pass
-#
-#     def add(self, text: str):
-#         self.nodes.append(text)
-
-class Point:
-    def __init__(self, x=0, y=0):
-        """初始化点的坐标"""
-        self.x = x
-        self.y = y
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         """初始化点的坐标"""
+#         self.x = x
+#         self.y = y
 
 
 class Mindmap:
-    spacing = 200
-    distance = 50
-    frontSize = 20
-    charWidth = 0.5
+    fontSize = 16
+    # fontFamily = "SimHei"
+    # fontFamily = "Helvetica"
+    # fontFamily = "Times"
+    # fontFamily = "PingFang"
+    # fontFamily = "SimSun"
+    fontFamily = "Songti"
+    # fontColor = "black"
+    fontColor = "#515151"
+
+    distance = 100
+    charHeight = 30
     level = 0
 
     def __init__(self, width=1024, height=768):
         self.coordinate = {}
         self.horizontalPosition = 0
         self.verticalPosition = 0
-        self.horizontalOffset = 0
+        self.verticalOffset = 0
         self.width = width
         self.height = height
         # 创建一个 Drawing 对象
@@ -61,26 +58,26 @@ class Mindmap:
         self.dwg.add(title)
 
         self.horizontalPosition = len(text) // 2
-        self.verticalPosition = self.frontSize * 2
+        self.verticalPosition = self.fontSize * 2
 
     def center(self, text: str):
         x = self.horizontalPosition
-        y = self.verticalPosition // 2 + self.frontSize * 2
-        width = self.frontSize * len(text)
-        height = self.frontSize * 2
+        y = self.verticalPosition // 2 + self.fontSize * 2
+        width = self.fontSize * len(text)
+        height = self.fontSize * 2
 
         self.dwg.add(self.dwg.rect(insert=(0, y), size=(width, height), rx=30, ry=10, fill='lightgreen',
                                    stroke='green',
                                    stroke_width=2))
         self.dwg.add(
-            self.dwg.text(text, insert=(width // 2, y + self.frontSize + self.frontSize // 4), text_anchor='middle'))
+            self.dwg.text(text, insert=(width // 2, y + self.fontSize + self.fontSize // 4), text_anchor='middle'))
 
     def root(self, text: str):
         x = self.horizontalPosition
-        y = self.verticalPosition
-        # y = self.verticalPosition // 2 + self.frontSize
-        width = self.frontSize * len(text)
-        height = self.frontSize * 2
+        # y = self.verticalPosition
+        y = self.verticalPosition // 2 + self.fontSize // 2
+        width = self.fontSize * len(text)
+        height = self.fontSize * 2
 
         self.dwg.add(self.dwg.line(start=(0, y), end=(width, y), fill='lightgreen',
                                    stroke='green',
@@ -88,7 +85,11 @@ class Mindmap:
 
         circle = self.dwg.circle(center=(width, y), r=5, fill="white", stroke="green", stroke_width="2")
         self.dwg.add(circle)
-        self.dwg.add(self.dwg.text(text, insert=(width // 2, y), text_anchor='middle'))
+        self.dwg.add(self.dwg.text(text, insert=(width // 2, y), text_anchor='middle',
+                                   font_family=f"{self.fontFamily}",
+                                   font_size=f"{self.fontSize}",
+                                   fill="blue"
+                                   ))
 
     def rectangle(self, text: str):
         rect1 = self.dwg.rect(insert=(50, 70), size=(100, 80), rx=15, ry=15,
@@ -109,12 +110,26 @@ class Mindmap:
         self.dwg.add(basic_ellipse)
         # self.dwg.add(self.dwg.text("基本椭圆", insert=(150, 100), text_anchor="middle", dominant_baseline="middle"))
 
-    def textNode(self, parentNode: dict, node: dict):
-        self.dwg.add(self.dwg.text(node['text'], insert=(node["x"], node["y"]), text_anchor='start'))
+    def textNode(self, parentNode: dict, node: dict, width):
+
+        width = node['x'] + width
+
+        self.dwg.add(self.dwg.text(node['text'], insert=(node["x"], node["y"] - 4), text_anchor='start',
+                                   font_family=f"{self.fontFamily}",
+                                   font_size=f"{self.fontSize}",
+                                   fill=f"{self.fontColor}"))
         path = self.dwg.path(
             d=f'M {parentNode["x"]},{parentNode["y"]} H {parentNode["x"] + self.distance / 2} V {node["y"]} H {node["x"]}',
             fill='none', stroke='#FF5722', stroke_width=2)
         # self.dwg.add(path)
+        line = self.dwg.line(start=(node["x"], node["y"]), end=(width, node["y"]), fill='lightgreen',
+                             stroke='green',
+                             stroke_width=2)
+
+        circle = self.dwg.circle(center=(width, node["y"]), r=5, fill="white", stroke="green", stroke_width="2")
+
+        self.dwg.add(line)
+        self.dwg.add(circle)
 
     def bezierCurveNode(self, parentNode: dict, node: dict, width: int):
         self.dwg.add(self.dwg.text(node['text'], insert=(node["x"], node["y"]), text_anchor='start'))
@@ -125,12 +140,21 @@ class Mindmap:
 
         self.dwg.add(path)
 
+    def curve(self, parentNode, node):
+        # self.dwg.add(self.dwg.text(node['text'], insert=(node["x"], node["y"]), text_anchor='start'))
+
+        path = self.dwg.path(
+            d=f'M{parentNode["x"]},{parentNode["y"]} C{parentNode["x"] + self.distance / 2},{parentNode["y"]} {node["x"] - self.distance / 2},{node["y"]} {node["x"]},{node["y"]}',
+            fill='none', stroke=f'{self.randomColor()}', stroke_width=2)
+
+        self.dwg.add(path)
+
     def parent(self, text: str):
         x = self.horizontalPosition
         y = self.verticalPosition
-        # y = self.verticalPosition // 2 + self.frontSize
-        width = self.frontSize * len(text)
-        height = self.frontSize * 2
+        # y = self.verticalPosition // 2 + self.fontSize
+        width = self.fontSize * len(text)
+        height = self.fontSize * 2
 
         self.dwg.add(self.dwg.line(start=(0, y), end=(width, y), fill='lightgreen',
                                    stroke='green',
@@ -140,127 +164,114 @@ class Mindmap:
         self.dwg.add(circle)
         self.dwg.add(self.dwg.text(text, insert=(width // 2, y), text_anchor='middle'))
 
-    def rander(self, childNode: dict):
-        # self.level += 1
-        # print(self.level)
-        # for child in childNode['children']:
-        #     self.rander(child)
-        #     print(child['text'])
-        #     # if 'children' in child and len(child['children']) > 0:
-        #     #     #             self.horizontalPosition += columnWidth
-        #     #     self.scan(child['children'])
-        # # coordinates
-        #
-        # y = len(childNode['children']) * self.frontSize // 2
-        # childNode['xy'] = (0, y)
-        # # self.verticalPosition = len(childNode)
-        # self.level -= 1
+    def rander(self):
 
-        self.distance = 100
+        # self.horizontalPosition = len(self.jsonObject['text']) * self.fontSize + self.distance
+        width, height = self.getTextSize(self.jsonObject['text'])
+        # self.horizontalPosition = width  # + self.distance
+        # self.background(self.jsonObject['children'], True)
+        self.horizontalPosition = 0
+        self.verticalPosition = 0
 
-        # if not tree:
-        #     return
-        # print(len(childNode))
-        self.verticalPosition += (len(childNode['children'])) * self.frontSize // 2
-        parentY = self.verticalPosition + (len(childNode['children'])) * self.frontSize // 2
+        self.scan(self.jsonObject['children'])
+        # self.root(self.jsonObject['text'])
 
-        # self.horizontalPosition += len(childNode['text']) * self.frontSize
-        parentX = self.horizontalPosition
-        columnWidth = 0
-        for child in childNode['children']:
-            if len(child['text']) > columnWidth:
-                columnWidth = len(child['text']) * self.frontSize
+        # self.getTextSize("中国")
+        self.dwg.save(pretty=True)
 
-        self.horizontalPosition += self.distance  # + columnWidth * self.frontSize
+        pass
 
-        x = self.horizontalPosition
-
-        for child in childNode['children']:
-
-            if 'children' in child:
-                if len(child['children']) > 0:
-                    self.horizontalPosition += columnWidth
-                    self.rander(child)
-                else:
-                    self.verticalPosition += self.frontSize
-
-            print(child['text'])
-            y = self.verticalPosition
-            self.bezierCurveNode({"x": parentX, "y": parentY}, {"x": x, "y": y, "text": child["text"]}, 100)
-
-        # self.verticalPosition += (len(childNode['children'])) * self.frontSize // 2;
-        if childNode['type'] == 'root':
-            self.parent(childNode['text'])
-        self.horizontalPosition -= self.distance
-
-    def scan(self, childNode: list):
-
-        self.distance = 100
-
-        # # if not tree:
-        # #     return
-        # # print(len(childNode))
-        # # self.verticalPosition = (len(childNode) + 1) * self.frontSize // 2
-        # parentY = self.verticalPosition
-        #
-        # # self.horizontalPosition += len(childNode['text']) * self.frontSize
-        # parentX = self.horizontalPosition
-        #
-        columnWidth = 0
+    def scan(self, childNode: list, horizontalOffset: int = 0):
+        textWidth = 0
         for child in childNode:
-            if len(child['text']) > columnWidth:
-                columnWidth = len(child['text']) * self.frontSize
-
-        # self.distance += columnWidth
-        # self.horizontalPosition += self.distance  # + columnWidth * self.frontSize
-
-        x = self.horizontalPosition
+            width, height = self.getTextSize(child['text'])
+            if width > textWidth:
+                textWidth = width
 
         currentVerticalPosition = self.verticalPosition
+        currentHorizontalPosition = self.distance + horizontalOffset
+        self.horizontalPosition += currentHorizontalPosition
+
+        curve = []
+
+        x = self.horizontalPosition
 
         for child in childNode:
 
             if 'children' in child:
                 if len(child['children']) > 0:
-                    self.horizontalPosition += self.distance
-                    self.scan(child['children'])
+                    self.scan(child['children'], textWidth)
                 else:
                     print()
 
-            print(child['text'])
+            # print(child['text'])
 
-            if self.horizontalOffset:
-                # self.verticalPosition += self.horizontalOffset
-                y = self.verticalPosition - self.horizontalOffset + self.frontSize // 2
-                self.horizontalOffset = 0
+            # x = self.horizontalPosition + horizontalOffset + textWidth
+
+            if self.verticalOffset:
+                y = self.verticalPosition - self.verticalOffset + self.charHeight // 2
+                self.verticalOffset = 0
 
             else:
-                self.verticalPosition += self.frontSize;
+                self.verticalPosition += self.charHeight;
                 y = self.verticalPosition
 
-            self.textNode({"x": 0, "y": 0}, {"x": x, "y": y, "text": child["text"]})
+            self.textNode({"x": 0, "y": 0}, {"x": x, "y": y, "text": child["text"]}, textWidth)
 
-        # self.horizontalOffset = len(childNode) // 2 * self.frontSize
+            curve.append((x, y))
 
-        self.horizontalOffset = (self.verticalPosition - currentVerticalPosition) // 2
+        self.verticalOffset = (self.verticalPosition - currentVerticalPosition) // 2
+        self.horizontalPosition -= currentHorizontalPosition
 
-        self.horizontalPosition -= self.distance
+        px = self.horizontalPosition + horizontalOffset
+        py = self.verticalPosition - self.verticalOffset + self.charHeight // 2
+        for x, y in curve:
+            self.curve({"x": px, "y": py}, {"x": x, "y": y})
+
+    def randomColor(self):
+        """生成随机 RGB 颜色（返回 (r, g, b) 元组）"""
+        # r = random.randint(0, 255)
+        # g = random.randint(0, 255)
+        # b = random.randint(0, 255)
+        # return (f"{r}{g}{b}")
+
+        # a = round(random.uniform(0, 1), 2)  # 透明度保留2位小数
+        # return (r, g, b, a)
+
+        # 红色：red（  # FF0000）
+        # 绿色：green（  # 008000）
+        # 蓝色：blue（  # 0000FF）
+        # 黄色：yellow（  # FFFF00）
+        # 黑色：black（  # 000000）
+        # 白色：white（  # FFFFFF）
+        # 灰色：gray（  # 808080）
+        # 粉色：pink（  # FFC0CB）
+        # 紫色：purple（  # 800080）
+        # 橙色：orange（  # FFA500）
+        # 棕色：brown（  # A52A2A）
+        # 青色：cyan（  # 00FFFF）
+        # 品红：magenta（  # FF00FF）
+        # 银色：silver（  # C0C0C0）
+        # 金色：gold（  # FFD700）
+        color = ["red", "green", "blue", "yellow", "black", "gray", "pink", "purple", "orange", "brown", "cyan",
+                 "magenta", "silver", "gold"]
+        return random.choice(color)
 
     def arrange(self, childNode: list):
         if not childNode:
             return 0;
 
-        self.verticalPosition = len(childNode) * self.frontSize // 2
-        parentY = self.verticalPosition + self.frontSize
+        self.verticalPosition = len(childNode) * self.fontSize // 2
+        parentY = self.verticalPosition + self.fontSize
 
-        # self.horizontalPosition += len(childNode['text']) * self.frontSize
+        # self.horizontalPosition += len(childNode['text']) * self.fontSize
         parentX = self.horizontalPosition
         columnWidth = 0
         for child in childNode:
             if len(child['text']) > columnWidth:
-                columnWidth = len(child['text']) * self.frontSize
+                columnWidth = len(child['text']) * self.fontSize
 
-        self.horizontalPosition += self.distance  # + columnWidth * self.frontSize
+        self.horizontalPosition += self.distance  # + columnWidth * self.fontSize
 
         x = self.horizontalPosition
         y = 0
@@ -272,39 +283,146 @@ class Mindmap:
                 self.horizontalPosition += columnWidth
                 self.arrange(child['children'])
 
-            y += self.frontSize
+            y += self.fontSize
             # self.verticalPosition += y;
 
             self.textNode({"x": parentX, "y": parentY}, {"x": x, "y": y, "text": child["text"]})
 
         self.horizontalPosition -= self.distance
-        # return len(childNode) * self.frontSize
+        # return len(childNode) * self.fontSize
 
-        # self.horizontalPosition = len(node['text']) * self.frontSize
+        # self.horizontalPosition = len(node['text']) * self.fontSize
         # # children = node['children']
         # self.node(node)        #
         # # print(self.dwg.)
         # pass
 
+    def getTextSize(self, text, size: float = 16):
+
+        # 创建一个临时图像用于测量
+        img = Image.new('RGB', (1, 1))
+        draw = ImageDraw.Draw(img)
+
+        # import matplotlib.font_manager as fm
+        # font_path = fm.findfont(fm.FontProperties())  # 获取默认字体路径
+        # print(f"查看字体文件：{font_path}")
+
+        try:
+            font = ImageFont.truetype(self.fontFamily, size=self.fontSize, encoding="utf-8")
+        except IOError:
+            # raise FileNotFoundError(f"字体文件不存在：{font_path}，请替换为系统中实际存在的字体路径")
+            if self.fontSize > 0:
+                font = ImageFont.load_default(size)
+            else:
+                font = ImageFont.load_default()
+                # print()
+
+        # 计算文本尺寸
+        # 使用 textbbox 获取边界框（参数为文本左上角坐标）
+        left, top, right, bottom = draw.textbbox((0, 0), text, font=font,
+                                                 # spacing=0,
+                                                 align="left")
+
+        # 计算宽度和高度
+        width = right - left
+        height = bottom - top
+        print(f"文本：{text} 宽度：{width}px，高度：{height}px 字体：{font.getname()} ")
+        return width, height
+
+    def calculate_text_width(self, text, font_family="Arial", font_size=16):
+        """用cairo计算文本宽度（像素）"""
+        # 创建虚拟SVG表面用于测量
+        surface = cairo.SVGSurface(None, 0, 0)
+        ctx = cairo.Context(surface)
+        # 设置字体样式
+        ctx.select_font_face(self.fontFamily)
+        ctx.set_font_size(self.fontSize)
+        # 获取文本边界信息
+        # _, _, width, _, _, _ = ctx.text_extents(text)
+        x_bearing, y_bearing, width, height, x_advance, y_advance = ctx.text_extents(text)
+
+        print(f"文本：{text} 宽度：{width}px，高度：px")
+        return width
+
     def data(self, jsonObject: dict):
         self.jsonObject = jsonObject
 
     def save(self):
-        self.horizontalPosition = len(self.jsonObject['text']) * self.frontSize
-        # self.verticalPosition = len(self.jsonObject['children']) * self.frontSize // 2
+        self.horizontalPosition = len(self.jsonObject['text']) * self.fontSize
+        # self.verticalPosition = len(self.jsonObject['children']) * self.fontSize // 2
         # self.title(node["title"])
 
         # self.arrange(self.jsonObject['children'])
         # self.center(self.jsonObject['text'])
         self.dwg.save(pretty=True)
 
-    def debug(self):
-        self.horizontalPosition = len(self.jsonObject['text']) * self.frontSize
-        self.scan(self.jsonObject['children'])
-        self.root(self.jsonObject['text'])
+    def font(self):
+        import matplotlib.font_manager as fm
 
-        # self.rander(self.jsonObject)
-        self.dwg.save(pretty=True)
+        # 获取所有系统字体
+        font_list = fm.findSystemFonts()
+        print("\n".join(font_list))
+
+    def background(self, childNode: list, bg: bool = False):
+
+        if bg:
+            self.dwg.add(self.dwg.rect(insert=(0, 0), size=(self.width, self.height), fill='#EEEEEE'))
+            circle = self.dwg.circle(center=(0, 0), r=5, fill="white", stroke="green", stroke_width="2")
+            self.dwg.add(circle)
+
+        self.horizontalPosition += self.distance
+        x = self.horizontalPosition
+
+        self.dwg.add(self.dwg.line(start=(x, 0), end=(x, self.height),
+                                   stroke='grey', stroke_width=1, stroke_dasharray='2,8'
+                                   ))
+
+        # textWidth = 0
+        # for child in childNode:
+        #     width, height = self.getTextSize(child['text'])
+        #     if width > textWidth:
+        #         textWidth = width
+        #
+        # x1 = self.horizontalPosition + textWidth
+        # self.dwg.add(self.dwg.line(start=(x1, 0), end=(x1, self.height),
+        #                            stroke='black', stroke_width=1, stroke_dasharray='10,2'
+        #                            ))
+
+        for child in childNode:
+            print(child['text'])
+
+            if 'children' in child and len(child['children']) > 0:
+                # self.horizontalPosition += columnWidth
+                self.background(child['children'])
+
+            self.verticalPosition += self.charHeight
+            y = self.verticalPosition
+            self.dwg.add(self.dwg.line(start=(0, y), end=(self.width, y),
+                                       stroke='grey', stroke_width=1, stroke_dasharray='2,8'
+                                       ))
+
+    def debug(self):
+        # self.getTextSize("中")
+        # self.getTextSize("中国")
+        # self.getTextSize("W")
+        # self.getTextSize("ABCDEFG")
+        # self.getTextSize("a")
+        # self.getTextSize("abc")
+        # self.getTextSize("aB")
+        # self.getTextSize("中A")
+        # self.calculate_text_width("中")
+        # self.calculate_text_width("A")
+        # self.calculate_text_width("中国")
+        # self.calculate_text_width("AB")
+        # self.calculate_text_width("a")
+
+        # rect1 = self.dwg.rect(insert=(50, 70), size=(100, 80), rx=15, ry=15,
+        #                       fill='lightblue', stroke='blue', stroke_width=2)
+        # self.dwg.add(rect1)
+        # self.dwg.add(self.dwg.text(text, insert=(100, 120), text_anchor='middle'))
+        # self.debug = True
+
+        self.rander()
 
 
 def main():
@@ -318,26 +436,32 @@ def main():
                 "type": "heading",
                 "direction": "right",
                 "level": 1,
-                "text": "Linux",
+                "text": "中国",
                 "children": [
                     {
                         "type": "list_item",
-                        "text": "Redhat 1",
+                        "text": "台湾",
                         "children": [
                         ]
                     },
                     {
                         "type": "list_item",
-                        "text": "CentOS 2",
+                        "text": "大陆",
                         "children": [
                             {
                                 "type": "list_item",
-                                "text": "子列表项1",
+                                "text": "东北",
                                 "children": [
+                                    {
+                                        "type": "list_item",
+                                        "text": "黑龙江",
+                                        "children": [
+                                        ]
+                                    }
                                 ]
                             }, {
                                 "type": "list_item",
-                                "text": "列表项2",
+                                "text": "华南",
                                 "children": [
                                 ]
                             }
@@ -345,7 +469,7 @@ def main():
                     },
                     {
                         "type": "list_item",
-                        "text": "Mandrank",
+                        "text": "香港",
                         "children": [
                         ]
                     }
