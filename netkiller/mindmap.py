@@ -5,13 +5,15 @@
 # Author: Neo <netkiller@msn.com>
 # Data: 2025-07-19
 ##############################################
-import random
-
-import cairo
+from netkiller.markdown import Markdown
 
 try:
+    import os
+    import random
     import svgwrite
     from PIL import ImageFont, ImageDraw, Image
+    # import cairo
+    # from cairosvg import svg2png
 except ImportError as err:
     print("Import Error: %s" % (err))
 
@@ -38,27 +40,38 @@ class Mindmap:
     charHeight = 30
     level = 0
 
-    def __init__(self, width=1024, height=768):
+    def __init__(self, jsonObject: str = None):
         self.coordinate = {}
         self.horizontalPosition = 0
         self.verticalPosition = 0
         self.verticalOffset = 0
-        self.width = width
-        self.height = height
-        # 创建一个 Drawing 对象
-        self.dwg = svgwrite.Drawing('example.svg', size=(width, height), profile='tiny'
-                                    # , viewBox=f"0 -{height // 2} {width} {height // 2}",
-                                    # preserveAspectRatio="xMidYMid slice"
-                                    )
+        self.width = 0
+        self.height = 0
+        self.jsonObject = jsonObject
+        self.level = {}
         pass
 
+    def sytle(self):
+        # 定义样式（颜色、字体等）
+        styles = """
+            .center-node { fill: #4a90e2; stroke: #333; stroke-width: 2; }
+            .center-text { font-family: Arial; font-size: 16px; font-weight: bold; fill: white; text-anchor: middle; dominant-baseline: middle; }
+            .level1-node { fill: #5cb85c; stroke: #333; stroke-width: 1.5; rx: 5; ry: 5; } /* 带圆角的矩形 */
+            .level1-text { font-family: Arial; font-size: 14px; fill: white; text-anchor: middle; dominant-baseline: middle; }
+            .level2-node { fill: #f0ad4e; stroke: #333; stroke-width: 1; rx: 3; ry: 3; }
+            .level2-text { font-family: Arial; font-size: 12px; fill: #333; text-anchor: middle; dominant-baseline: middle; }
+            .connection { stroke: #666; stroke-width: 1.5; fill: none; }
+        """
+        self.dwg.defs.add(self.dwg.style(styles))
+
     def title(self, text):
-        title = self.dwg.text(text, insert=(self.width / 2, 30), text_anchor='middle',
-                              font_size='20', font_family='Arial')
+        title = self.dwg.text(text, insert=(self.width / 2, self.charHeight + self.charHeight // 2),
+                              text_anchor='middle',
+                              font_size='25', font_family='Arial')
         self.dwg.add(title)
 
-        self.horizontalPosition = len(text) // 2
-        self.verticalPosition = self.fontSize * 2
+        # self.horizontalPosition = len(text) // 2
+        # self.verticalPosition = self.fontSize * 2
 
     def center(self, text: str):
         x = self.horizontalPosition
@@ -74,15 +87,11 @@ class Mindmap:
 
     def root(self, text: str):
         x = self.horizontalPosition
-        # y = self.verticalPosition
-        y = self.verticalPosition // 2 + self.charHeight // 2
+        y = self.verticalPosition // 2 + self.charHeight + self.charHeight // 2
         width = self.horizontalPosition
-        height = self.fontSize * 2
         color = self.randomColor()
 
-        self.dwg.add(self.dwg.line(start=(2, y), end=(width, y), fill='lightgreen',
-                                   stroke=f'{color}',
-                                   stroke_width=4))
+        self.dwg.add(self.dwg.line(start=(2, y), end=(width, y), stroke=f'{color}', stroke_width=4))
 
         circle = self.dwg.circle(center=(width, y), r=4, fill="white", stroke=f"{color}", stroke_width="2")
         self.dwg.add(circle)
@@ -140,7 +149,6 @@ class Mindmap:
         self.dwg.add(path)
 
     def curve(self, parentNode, node, color: str):
-        # self.dwg.add(self.dwg.text(node['text'], insert=(node["x"], node["y"]), text_anchor='start'))
 
         path = self.dwg.path(
             d=f'M{parentNode["x"]},{parentNode["y"]} C{parentNode["x"] + self.distance / 2},{parentNode["y"]} {node["x"] - self.distance / 2},{node["y"]} {node["x"]},{node["y"]}',
@@ -151,7 +159,7 @@ class Mindmap:
     def parent(self, text: str):
         x = self.horizontalPosition
         y = self.verticalPosition
-        # y = self.verticalPosition // 2 + self.fontSize
+
         width = self.fontSize * len(text)
         height = self.fontSize * 2
 
@@ -163,26 +171,36 @@ class Mindmap:
         self.dwg.add(circle)
         self.dwg.add(self.dwg.text(text, insert=(width // 2, y), text_anchor='middle'))
 
-    def rander(self):
+    def scan(self, childNode, horizontalOffset: int = 0, level=1):
 
-        width, height = self.getTextSize(self.jsonObject['text'])
+        textWidth = 0
+        for child in childNode:
+            width, height = self.getTextSize(child['text'])
+            if width > textWidth:
+                textWidth = width
 
-        # self.background(self.jsonObject['children'], True)
+        if textWidth > 0:
+            textWidth += 5
 
-        self.horizontalPosition = 0
-        self.verticalPosition = 0
+        if level not in self.level:
+            self.level[level] = True
+            self.width += self.distance + horizontalOffset + textWidth
 
-        self.horizontalPosition = width + self.fontSize  # + self.distance
+        for child in childNode:
 
-        self.scan(self.jsonObject['children'])
-        self.root(self.jsonObject['text'])
+            if 'children' in child and len(child['children']) > 0:
+                self.scan(child['children'], textWidth, level + 1)
+            else:
+                self.skipNode = False
 
-        # self.getTextSize("中国")
-        self.dwg.save(pretty=True)
+                # if self.skipNode:
+                #     self.skipNode = False
+                #     continue
+                # else:
+                self.height += self.charHeight;
 
-        pass
+    def arrange(self, childNode: list, horizontalOffset: int = 0):
 
-    def scan(self, childNode: list, horizontalOffset: int = 0):
         textWidth = 0
         for child in childNode:
             width, height = self.getTextSize(child['text'])
@@ -204,7 +222,7 @@ class Mindmap:
 
             if 'children' in child:
                 if len(child['children']) > 0:
-                    self.scan(child['children'], textWidth)
+                    self.arrange(child['children'], textWidth)
                 else:
                     pass
 
@@ -262,46 +280,6 @@ class Mindmap:
         ]
         return random.choice(color)
 
-    def arrange(self, childNode: list):
-        if not childNode:
-            return 0;
-
-        self.verticalPosition = len(childNode) * self.fontSize // 2
-        parentY = self.verticalPosition + self.fontSize
-
-        # self.horizontalPosition += len(childNode['text']) * self.fontSize
-        parentX = self.horizontalPosition
-        columnWidth = 0
-        for child in childNode:
-            if len(child['text']) > columnWidth:
-                columnWidth = len(child['text']) * self.fontSize
-
-        self.horizontalPosition += self.distance  # + columnWidth * self.fontSize
-
-        x = self.horizontalPosition
-        y = 0
-
-        for child in childNode:
-            print(child['text'])
-
-            if 'children' in child and len(child['children']) > 0:
-                self.horizontalPosition += columnWidth
-                self.arrange(child['children'])
-
-            y += self.fontSize
-            # self.verticalPosition += y;
-
-            self.textNode({"x": parentX, "y": parentY}, {"x": x, "y": y, "text": child["text"]})
-
-        self.horizontalPosition -= self.distance
-        # return len(childNode) * self.fontSize
-
-        # self.horizontalPosition = len(node['text']) * self.fontSize
-        # # children = node['children']
-        # self.node(node)        #
-        # # print(self.dwg.)
-        # pass
-
     def getTextSize(self, text, size: float = 16):
 
         # 创建一个临时图像用于测量
@@ -334,32 +312,69 @@ class Mindmap:
         # print(f"文本：{text} 宽度：{width}px，高度：{height}px 字体：{font.getname()} ")
         return width, height
 
-    def calculate_text_width(self, text, font_family="Arial", font_size=16):
-        """用cairo计算文本宽度（像素）"""
-        # 创建虚拟SVG表面用于测量
-        surface = cairo.SVGSurface(None, 0, 0)
-        ctx = cairo.Context(surface)
-        # 设置字体样式
-        ctx.select_font_face(self.fontFamily)
-        ctx.set_font_size(self.fontSize)
-        # 获取文本边界信息
-        # _, _, width, _, _, _ = ctx.text_extents(text)
-        x_bearing, y_bearing, width, height, x_advance, y_advance = ctx.text_extents(text)
-
-        print(f"文本：{text} 宽度：{width}px，高度：px")
-        return width
+    # def calculate_text_width(self, text, font_family="Arial", font_size=16):
+    #     """用cairo计算文本宽度（像素）"""
+    #     # 创建虚拟SVG表面用于测量
+    #     surface = cairo.SVGSurface(None, 0, 0)
+    #     ctx = cairo.Context(surface)
+    #     # 设置字体样式
+    #     ctx.select_font_face(self.fontFamily)
+    #     ctx.set_font_size(self.fontSize)
+    #     # 获取文本边界信息
+    #     # _, _, width, _, _, _ = ctx.text_extents(text)
+    #     x_bearing, y_bearing, width, height, x_advance, y_advance = ctx.text_extents(text)
+    #
+    #     print(f"文本：{text} 宽度：{width}px，高度：px")
+    #     return width
 
     def data(self, jsonObject: dict):
         self.jsonObject = jsonObject
 
-    def save(self):
-        self.horizontalPosition = len(self.jsonObject['text']) * self.fontSize
-        # self.verticalPosition = len(self.jsonObject['children']) * self.fontSize // 2
-        # self.title(node["title"])
+    def markdown(self, text: str):
+        markdown = Markdown(text)
+        self.jsonObject = markdown.jsonData()
 
-        # self.arrange(self.jsonObject['children'])
-        # self.center(self.jsonObject['text'])
+    def rander(self):
+
+        width, height = self.getTextSize(self.jsonObject['text'])
+        self.width = width
+        self.height = self.charHeight * 3
+
+        self.scan(self.jsonObject['children'])
+
+        self.dwg = svgwrite.Drawing(self.filepath, size=(self.width, self.height), profile='tiny'
+                                    # , viewBox=f"0 -{height // 2} {width} {height // 2}",
+                                    # preserveAspectRatio="xMidYMid slice"
+                                    )
+
+        self.background(self.jsonObject['children'], True)
+
+        self.title(self.jsonObject['title'])
+
+        self.horizontalPosition = 0
+        self.verticalPosition = self.charHeight * 2
+
+        self.horizontalPosition = width + self.fontSize  # + self.distance
+
+        self.arrange(self.jsonObject['children'])
+        self.root(self.jsonObject['text'])
+
+        # self.getTextSize("中国")
         self.dwg.save(pretty=True)
+
+    def save(self, filepath: str = 'example.svg'):
+        self.filepath = filepath
+        self.rander()
+        # self.dwg.save(pretty=True)
+
+    # def exportPng(self, filepath="example.png"):
+    #     self.save(os.path.splitext(filepath)[0])
+    #
+    #     with open(filepath, "rb") as svg_file:
+    #         svg_data = svg_file.read()
+    #         # 转换并保存为PNG
+    #         svg2png(bytestring=svg_data, write_to=filepath, dpi=300)  # dpi控制清晰度
+    #     pass
 
     def font(self):
         import matplotlib.font_manager as fm
@@ -407,19 +422,6 @@ class Mindmap:
                                        ))
 
     def debug(self):
-        # self.getTextSize("中")
-        # self.getTextSize("中国")
-        # self.getTextSize("W")
-        # self.getTextSize("ABCDEFG")
-        # self.getTextSize("a")
-        # self.getTextSize("abc")
-        # self.getTextSize("aB")
-        # self.getTextSize("中A")
-        # self.calculate_text_width("中")
-        # self.calculate_text_width("A")
-        # self.calculate_text_width("中国")
-        # self.calculate_text_width("AB")
-        # self.calculate_text_width("a")
 
         # rect1 = self.dwg.rect(insert=(50, 70), size=(100, 80), rx=15, ry=15,
         #                       fill='lightblue', stroke='blue', stroke_width=2)
@@ -428,159 +430,3 @@ class Mindmap:
         # self.debug = True
 
         self.rander()
-
-
-def main():
-    mindmapData = {
-        "type": "root",
-        "level": 0,
-        "title": "会议思维导图",
-        "text": "计算机语言语言",
-        "children": [
-            {
-                "type": "heading",
-                "direction": "right",
-                "level": 1,
-                "text": "中国",
-                "children": [
-                    {
-                        "type": "list_item",
-                        "text": "台湾",
-                        "children": [
-                        ]
-                    },
-                    {
-                        "type": "list_item",
-                        "text": "大陆",
-                        "children": [
-                            {
-                                "type": "list_item",
-                                "text": "东北",
-                                "children": [
-                                    {
-                                        "type": "list_item",
-                                        "text": "黑龙江",
-                                        "children": [
-                                        ]
-                                    },
-                                    {
-                                        "type": "list_item",
-                                        "text": "吉林",
-                                        "children": [
-                                        ]
-                                    },
-                                    {
-                                        "type": "list_item",
-                                        "text": "辽宁",
-                                        "children": [
-                                        ]
-                                    }
-                                ]
-                            }, {
-                                "type": "list_item",
-                                "text": "华南",
-                                "children": [
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "type": "list_item",
-                        "text": "香港",
-                        "children": [
-                        ]
-                    }
-                ]
-            },
-            {
-                "type": "list_item",
-                "text": "孙列表项1",
-                "children": []
-            },
-
-            {
-                "type": "list_item",
-                "text": "Python",
-                "children": [
-                    {
-                        "type": "list_item",
-                        "text": "列表项1",
-                        "children": [
-                        ]
-                    }, {
-                        "type": "list_item",
-                        "text": "内容段落2",
-                        "children": [
-                        ]
-                    }, {
-                        "type": "list_item",
-                        "text": "内容段落1",
-                        "children": [
-                        ]
-                    }, {
-                        "type": "heading",
-                        "level": 1,
-                        "text": "一级标题",
-                        "children": [
-
-                        ]
-                    }
-                ]
-            },
-            {
-                "type": "list_item",
-                "text": "PHP",
-                "children": []
-            },
-            {
-                "type": "list_item",
-                "text": "C语言",
-                "children": [
-                    {
-                        "type": "list_item",
-                        "text": "GNU C",
-                        "children": []
-                    },
-                    {
-                        "type": "list_item",
-                        "text": "Clang",
-                        "children": []
-                    },
-                    {
-                        "type": "list_item",
-                        "text": "C++ 语言",
-                        "children": []
-                    }
-                ]
-            },
-            {
-                "type": "list_item",
-                "text": "Rust",
-                "children": []
-            }
-        ]
-    }
-    data = """
-# 操作系统
-- Linux
-  - Redhat
-  - CentOS
-  - Rocky Linux
-  - AlmaLinux
-    """
-
-    # markdown = Markdown(data)
-    # jsonData = markdown.jsonData()
-    # markdown.debug()
-
-    mindmap = Mindmap()
-    mindmap.data(mindmapData)
-    # mindmap.rectangle("咖啡营销会议")
-    # mindmap.ellipse("咖啡营销会议")
-    # print(mindmapData)
-    # mindmap.save()
-    mindmap.debug()
-
-
-if __name__ == "__main__":
-    main()

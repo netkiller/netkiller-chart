@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="tiny" height="570" version="1.2" width="869">
+  <defs/>
+  <rect fill="#EEEEEE" height="570" width="869" x="0" y="0"/>
+  <circle cx="0" cy="0" fill="white" r="5" stroke="green" stroke-width="2"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="100" x2="100" y1="0" y2="570"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="200" x2="200" y1="0" y2="570"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="30" y2="30"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="300" x2="300" y1="0" y2="570"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="400" x2="400" y1="0" y2="570"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="60" y2="60"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="90" y2="90"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="120" y2="120"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="150" y2="150"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="180" y2="180"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="210" y2="210"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="240" y2="240"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="270" y2="270"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="300" y2="300"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="500" x2="500" y1="0" y2="570"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="330" y2="330"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="360" y2="360"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="390" y2="390"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="420" y2="420"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="450" y2="450"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="480" y2="480"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="600" x2="600" y1="0" y2="570"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="510" y2="510"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="540" y2="540"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="570" y2="570"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="600" y2="600"/>
+  <line stroke="grey" stroke-dasharray="2,8" stroke-width="1" x1="0" x2="869" y1="630" y2="630"/>
+  <text font-family="Arial" font-size="25" text-anchor="middle" x="434.5" y="45">会议思维导图</text>
+  <path d="M580,150 C630.0,150 630.0,120 680,120" fill="none" stroke="cyan" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="680" y="116">黑龙江</text>
+  <line stroke="cyan" stroke-width="2" x1="680" x2="738" y1="120" y2="120"/>
+  <circle cx="738" cy="120" fill="white" r="5" stroke="cyan" stroke-width="2"/>
+  <path d="M580,150 C630.0,150 630.0,150 680,150" fill="none" stroke="blue" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="680" y="146">吉林</text>
+  <line stroke="blue" stroke-width="2" x1="680" x2="738" y1="150" y2="150"/>
+  <circle cx="738" cy="150" fill="white" r="5" stroke="blue" stroke-width="2"/>
+  <path d="M580,150 C630.0,150 630.0,180 680,180" fill="none" stroke="gold" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="680" y="176">辽宁</text>
+  <line stroke="gold" stroke-width="2" x1="680" x2="738" y1="180" y2="180"/>
+  <circle cx="738" cy="180" fill="white" r="5" stroke="gold" stroke-width="2"/>
+  <path d="M443,165 C493.0,165 493.0,150 543,150" fill="none" stroke="blue" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="543" y="146">东北</text>
+  <line stroke="blue" stroke-width="2" x1="543" x2="585" y1="150" y2="150"/>
+  <circle cx="585" cy="150" fill="white" r="5" stroke="blue" stroke-width="2"/>
+  <path d="M443,165 C493.0,165 493.0,210 543,210" fill="none" stroke="green" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="543" y="206">华南</text>
+  <line stroke="green" stroke-width="2" x1="543" x2="585" y1="210" y2="210"/>
+  <circle cx="585" cy="210" fill="white" r="5" stroke="green" stroke-width="2"/>
+  <path d="M305,165 C355.0,165 355.0,90 405,90" fill="none" stroke="black" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="86">台湾</text>
+  <line stroke="black" stroke-width="2" x1="405" x2="448" y1="90" y2="90"/>
+  <circle cx="448" cy="90" fill="white" r="5" stroke="black" stroke-width="2"/>
+  <path d="M305,165 C355.0,165 355.0,165 405,165" fill="none" stroke="cyan" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="161">大陆</text>
+  <line stroke="cyan" stroke-width="2" x1="405" x2="448" y1="165" y2="165"/>
+  <circle cx="448" cy="165" fill="white" r="5" stroke="cyan" stroke-width="2"/>
+  <path d="M305,165 C355.0,165 355.0,240 405,240" fill="none" stroke="purple" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="236">香港</text>
+  <line stroke="purple" stroke-width="2" x1="405" x2="448" y1="240" y2="240"/>
+  <circle cx="448" cy="240" fill="white" r="5" stroke="purple" stroke-width="2"/>
+  <path d="M305,345 C355.0,345 355.0,300 405,300" fill="none" stroke="red" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="296">列表项1</text>
+  <line stroke="red" stroke-width="2" x1="405" x2="487" y1="300" y2="300"/>
+  <circle cx="487" cy="300" fill="white" r="5" stroke="red" stroke-width="2"/>
+  <path d="M305,345 C355.0,345 355.0,330 405,330" fill="none" stroke="gold" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="326">内容段落2</text>
+  <line stroke="gold" stroke-width="2" x1="405" x2="487" y1="330" y2="330"/>
+  <circle cx="487" cy="330" fill="white" r="5" stroke="gold" stroke-width="2"/>
+  <path d="M305,345 C355.0,345 355.0,360 405,360" fill="none" stroke="orange" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="356">内容段落1</text>
+  <line stroke="orange" stroke-width="2" x1="405" x2="487" y1="360" y2="360"/>
+  <circle cx="487" cy="360" fill="white" r="5" stroke="orange" stroke-width="2"/>
+  <path d="M305,345 C355.0,345 355.0,390 405,390" fill="none" stroke="black" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="386">一级标题</text>
+  <line stroke="black" stroke-width="2" x1="405" x2="487" y1="390" y2="390"/>
+  <circle cx="487" cy="390" fill="white" r="5" stroke="black" stroke-width="2"/>
+  <path d="M305,480 C355.0,480 355.0,450 405,450" fill="none" stroke="orange" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="446">GNU C</text>
+  <line stroke="orange" stroke-width="2" x1="405" x2="484" y1="450" y2="450"/>
+  <circle cx="484" cy="450" fill="white" r="5" stroke="orange" stroke-width="2"/>
+  <path d="M305,480 C355.0,480 355.0,480 405,480" fill="none" stroke="brown" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="476">Clang</text>
+  <line stroke="brown" stroke-width="2" x1="405" x2="484" y1="480" y2="480"/>
+  <circle cx="484" cy="480" fill="white" r="5" stroke="brown" stroke-width="2"/>
+  <path d="M305,480 C355.0,480 355.0,510 405,510" fill="none" stroke="magenta" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="405" y="506">C++ 语言</text>
+  <line stroke="magenta" stroke-width="2" x1="405" x2="484" y1="510" y2="510"/>
+  <circle cx="484" cy="510" fill="white" r="5" stroke="magenta" stroke-width="2"/>
+  <path d="M128,315 C178.0,315 178.0,165 228,165" fill="none" stroke="red" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="228" y="161">中国</text>
+  <line stroke="red" stroke-width="2" x1="228" x2="310" y1="165" y2="165"/>
+  <circle cx="310" cy="165" fill="white" r="5" stroke="red" stroke-width="2"/>
+  <path d="M128,315 C178.0,315 178.0,270 228,270" fill="none" stroke="red" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="228" y="266">孙列表项1</text>
+  <line stroke="red" stroke-width="2" x1="228" x2="310" y1="270" y2="270"/>
+  <circle cx="310" cy="270" fill="white" r="5" stroke="red" stroke-width="2"/>
+  <path d="M128,315 C178.0,315 178.0,345 228,345" fill="none" stroke="gold" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="228" y="341">Python</text>
+  <line stroke="gold" stroke-width="2" x1="228" x2="310" y1="345" y2="345"/>
+  <circle cx="310" cy="345" fill="white" r="5" stroke="gold" stroke-width="2"/>
+  <path d="M128,315 C178.0,315 178.0,420 228,420" fill="none" stroke="orange" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="228" y="416">PHP</text>
+  <line stroke="orange" stroke-width="2" x1="228" x2="310" y1="420" y2="420"/>
+  <circle cx="310" cy="420" fill="white" r="5" stroke="orange" stroke-width="2"/>
+  <path d="M128,315 C178.0,315 178.0,480 228,480" fill="none" stroke="red" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="228" y="476">C语言</text>
+  <line stroke="red" stroke-width="2" x1="228" x2="310" y1="480" y2="480"/>
+  <circle cx="310" cy="480" fill="white" r="5" stroke="red" stroke-width="2"/>
+  <path d="M128,315 C178.0,315 178.0,540 228,540" fill="none" stroke="gray" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="228" y="536">Rust</text>
+  <line stroke="gray" stroke-width="2" x1="228" x2="310" y1="540" y2="540"/>
+  <circle cx="310" cy="540" fill="white" r="5" stroke="gray" stroke-width="2"/>
+  <line stroke="black" stroke-width="4" x1="2" x2="128" y1="315" y2="315"/>
+  <circle cx="128" cy="315" fill="white" r="4" stroke="black" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="middle" x="64" y="310">计算机语言语言</text>
+</svg>

@@ -20,4 +20,4 @@ Issues = "https://github.com/netkiller/netkiller-chart/issues"
 
 [project.scripts]
 gantt = "netkiller.gantt:main"
-gantt = "netkiller.mindmap:main"
+mindmap = "netkiller.mindmap:main"

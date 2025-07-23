@@ -3,7 +3,7 @@
 ## requirements
 
 ```shell
-brew install cairo pkg-config
+brew install cairo libsvg-cairo pkg-config
 ```
 
 ```shell

@@ -1,0 +1,48 @@
+{
+  "text": "Linux",
+  "children": [
+    {
+      "text": "Redhat",
+      "children": []
+    },
+    {
+      "text": "CentOS",
+      "children": []
+    },
+    {
+      "text": "Rocky Linux",
+      "children": [
+        {
+          "text": "AAA",
+          "children": [
+            {
+              "text": "aaa",
+              "children": []
+            },
+            {
+              "text": "bbb",
+              "children": []
+            },
+            {
+              "text": "ccc",
+              "children": []
+            },
+            {
+              "text": "BBB",
+              "children": []
+            },
+            {
+              "text": "CCC",
+              "children": []
+            },
+            {
+              "text": "AlmaLinux",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "title": "操作系统"
+}

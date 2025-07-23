@@ -1,0 +1,93 @@
+{
+  "title": "操作系统",
+  "children": [
+    {
+      "title": "Linux",
+      "children": [
+        {
+          "title": "Redhat",
+          "children": []
+        },
+        {
+          "title": "CentOS",
+          "children": []
+        },
+        {
+          "title": "Rocky Linux",
+          "children": [
+            {
+              "title": "AAA",
+              "children": [
+                {
+                  "title": "aaa",
+                  "children": []
+                },
+                {
+                  "title": "bbb",
+                  "children": [
+                    {
+                      "title": "11111",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "title": "ccc",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "title": "BBB",
+              "children": []
+            },
+            {
+              "title": "CCC",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "AlmaLinux",
+          "children": []
+        },
+        {
+          "title": "Debian",
+          "children": [
+            {
+              "title": "Ubuntu",
+              "children": [
+                {
+                  "title": "Stable",
+                  "children": []
+                },
+                {
+                  "title": "Unstable",
+                  "children": [
+                    {
+                      "title": "beta",
+                      "children": []
+                    },
+                    {
+                      "title": "preview",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Kyle",
+              "children": [
+                {
+                  "title": "test",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
