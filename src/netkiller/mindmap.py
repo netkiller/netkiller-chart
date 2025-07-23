@@ -7,8 +7,12 @@
 ##############################################
 
 try:
-    import os
-    import random
+    import os, sys, random
+
+    module = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # print(module)
+    sys.path.insert(0, ".")
+    sys.path.insert(1, module)
     import svgwrite
     from PIL import ImageFont, ImageDraw, Image
     import argparse
@@ -43,8 +47,8 @@ class Mindmap:
         self.height = 0
         self.jsonObject = jsonObject
         self.level = {}
-        self.author = 'Design by neo<netkiller@msn.com> - https://www.netkiller.cn'
-        pass
+        self.about = 'Design by neo<netkiller@msn.com> - https://www.netkiller.cn'
+        self.desc = None
 
     def sytle(self):
         # 定义样式（颜色、字体等）
@@ -65,14 +69,23 @@ class Mindmap:
                               font_size='25', font_family='Arial')
         self.dwg.add(title)
 
-        if self.author:
-            author = self.dwg.text(self.author, insert=(self.width / 2, self.charHeight + self.charHeight),
+        if self.about:
+            author = self.dwg.text(self.about, insert=(self.width / 2, self.charHeight + self.charHeight),
+                                   text_anchor='middle',
+                                   font_size='10', font_family='Arial')
+            self.dwg.add(author)
+
+        if self.desc:
+            author = self.dwg.text(self.desc, insert=(self.width / 2, self.height - 2),
                                    text_anchor='middle',
                                    font_size='10', font_family='Arial')
             self.dwg.add(author)
 
     def author(self, value: str):
-        self.author = value
+        self.about = value
+
+    def description(self, value: str):
+        self.desc = value
 
     def center(self, text: str):
         x = self.horizontalPosition
@@ -178,11 +191,6 @@ class Mindmap:
                 self.scan(child['children'], textWidth, level + 1)
             else:
                 self.skipNode = False
-
-                # if self.skipNode:
-                #     self.skipNode = False
-                #     continue
-                # else:
                 self.height += self.charHeight;
 
     def arrange(self, childNode: list, horizontalOffset: int = 0):
@@ -564,6 +572,8 @@ class Mindmap:
 def main():
     try:
         mindmap = Mindmap()
+        # mindmap.author("作者：陈景峰")
+        # mindmap.description("©️版权所有")
         mindmap.main()
     except KeyboardInterrupt as e:
         print(e)

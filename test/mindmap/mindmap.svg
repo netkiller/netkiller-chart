@@ -1,7 +1,193 @@
-<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-  <!-- 平移整个组，使负坐标元素进入视口 -->
-  <g transform="translate(100, 100)">
-    <circle cx="-50" cy="-50" r="30" fill="purple" />
-    <circle cx="-80" cy="30" r="20" fill="orange" />
-  </g>
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="tiny" height="1200" version="1.2" width="1031">
+  <defs/>
+  <text font-family="Arial" font-size="25" text-anchor="middle" x="515.5" y="45">Operating System History</text>
+  <text font-family="Arial" font-size="10" text-anchor="middle" x="515.5" y="60">Design by neo&lt;netkiller@msn.com&gt; - https://www.netkiller.cn</text>
+  <path d="M646,165 C696.0,165 696.0,150 746,150" fill="none" stroke="#bcbd22" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="750" y="146">Rocky Linux</text>
+  <line stroke="#bcbd22" stroke-width="2" x1="746" x2="841" y1="150" y2="150"/>
+  <circle cx="841" cy="150" fill="white" r="5" stroke="#bcbd22" stroke-width="2"/>
+  <path d="M646,165 C696.0,165 696.0,180 746,180" fill="none" stroke="#ff7f0e" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="750" y="176">AlmaLinux</text>
+  <line stroke="#ff7f0e" stroke-width="2" x1="746" x2="841" y1="180" y2="180"/>
+  <circle cx="841" cy="180" fill="white" r="5" stroke="#ff7f0e" stroke-width="2"/>
+  <path d="M488,135 C538.0,135 538.0,90 588,90" fill="none" stroke="#1f77b4" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="592" y="86">Fedora</text>
+  <line stroke="#1f77b4" stroke-width="2" x1="588" x2="651" y1="90" y2="90"/>
+  <circle cx="651" cy="90" fill="white" r="5" stroke="#1f77b4" stroke-width="2"/>
+  <path d="M488,135 C538.0,135 538.0,120 588,120" fill="none" stroke="#8c564b" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="592" y="116">SUSE</text>
+  <line stroke="#8c564b" stroke-width="2" x1="588" x2="651" y1="120" y2="120"/>
+  <circle cx="651" cy="120" fill="white" r="5" stroke="#8c564b" stroke-width="2"/>
+  <path d="M488,135 C538.0,135 538.0,165 588,165" fill="none" stroke="#d62728" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="592" y="161">CentOS</text>
+  <line stroke="#d62728" stroke-width="2" x1="588" x2="651" y1="165" y2="165"/>
+  <circle cx="651" cy="165" fill="white" r="5" stroke="#d62728" stroke-width="2"/>
+  <path d="M488,270 C538.0,270 538.0,270 588,270" fill="none" stroke="#ff7f0e" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="592" y="266">Ubunt</text>
+  <line stroke="#ff7f0e" stroke-width="2" x1="588" x2="641" y1="270" y2="270"/>
+  <circle cx="641" cy="270" fill="white" r="5" stroke="#ff7f0e" stroke-width="2"/>
+  <path d="M308,195 C358.0,195 358.0,135 408,135" fill="none" stroke="#ff7f0e" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="131">Redhat</text>
+  <line stroke="#ff7f0e" stroke-width="2" x1="408" x2="493" y1="135" y2="135"/>
+  <circle cx="493" cy="135" fill="white" r="5" stroke="#ff7f0e" stroke-width="2"/>
+  <path d="M308,195 C358.0,195 358.0,210 408,210" fill="none" stroke="#1f77b4" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="206">Gentoo</text>
+  <line stroke="#1f77b4" stroke-width="2" x1="408" x2="493" y1="210" y2="210"/>
+  <circle cx="493" cy="210" fill="white" r="5" stroke="#1f77b4" stroke-width="2"/>
+  <path d="M308,195 C358.0,195 358.0,240 408,240" fill="none" stroke="#17becf" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="236">Slackware</text>
+  <line stroke="#17becf" stroke-width="2" x1="408" x2="493" y1="240" y2="240"/>
+  <circle cx="493" cy="240" fill="white" r="5" stroke="#17becf" stroke-width="2"/>
+  <path d="M308,195 C358.0,195 358.0,270 408,270" fill="none" stroke="#9467bd" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="266">Debian</text>
+  <line stroke="#9467bd" stroke-width="2" x1="408" x2="493" y1="270" y2="270"/>
+  <circle cx="493" cy="270" fill="white" r="5" stroke="#9467bd" stroke-width="2"/>
+  <path d="M308,195 C358.0,195 358.0,300 408,300" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="296">Arch Linux</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="408" x2="493" y1="300" y2="300"/>
+  <circle cx="493" cy="300" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,330 575,330" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="326">Yosemite</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="575" x2="719" y1="330" y2="330"/>
+  <circle cx="719" cy="330" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,360 575,360" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="356">Capitan</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="575" x2="719" y1="360" y2="360"/>
+  <circle cx="719" cy="360" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,390 575,390" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="386">Sierra / High Sierra</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="575" x2="719" y1="390" y2="390"/>
+  <circle cx="719" cy="390" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,420 575,420" fill="none" stroke="#1f77b4" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="416">Mojave</text>
+  <line stroke="#1f77b4" stroke-width="2" x1="575" x2="719" y1="420" y2="420"/>
+  <circle cx="719" cy="420" fill="white" r="5" stroke="#1f77b4" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,450 575,450" fill="none" stroke="#bcbd22" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="446">Catalina</text>
+  <line stroke="#bcbd22" stroke-width="2" x1="575" x2="719" y1="450" y2="450"/>
+  <circle cx="719" cy="450" fill="white" r="5" stroke="#bcbd22" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,480 575,480" fill="none" stroke="#1f77b4" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="476">Big Sur</text>
+  <line stroke="#1f77b4" stroke-width="2" x1="575" x2="719" y1="480" y2="480"/>
+  <circle cx="719" cy="480" fill="white" r="5" stroke="#1f77b4" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,510 575,510" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="506">Monterry</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="575" x2="719" y1="510" y2="510"/>
+  <circle cx="719" cy="510" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,540 575,540" fill="none" stroke="#1f77b4" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="536">Ventura</text>
+  <line stroke="#1f77b4" stroke-width="2" x1="575" x2="719" y1="540" y2="540"/>
+  <circle cx="719" cy="540" fill="white" r="5" stroke="#1f77b4" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,570 575,570" fill="none" stroke="#ff7f0e" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="566">Sonoma</text>
+  <line stroke="#ff7f0e" stroke-width="2" x1="575" x2="719" y1="570" y2="570"/>
+  <circle cx="719" cy="570" fill="white" r="5" stroke="#ff7f0e" stroke-width="2"/>
+  <path d="M475,465 C525.0,465 525.0,600 575,600" fill="none" stroke="#7f7f7f" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="579" y="596">Sequoia</text>
+  <line stroke="#7f7f7f" stroke-width="2" x1="575" x2="719" y1="600" y2="600"/>
+  <circle cx="719" cy="600" fill="white" r="5" stroke="#7f7f7f" stroke-width="2"/>
+  <path d="M308,525 C358.0,525 358.0,465 408,465" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="461">macOS</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="408" x2="480" y1="465" y2="465"/>
+  <circle cx="480" cy="465" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M308,525 C358.0,525 358.0,630 408,630" fill="none" stroke="#bcbd22" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="626">iPadSO</text>
+  <line stroke="#bcbd22" stroke-width="2" x1="408" x2="480" y1="630" y2="630"/>
+  <circle cx="480" cy="630" fill="white" r="5" stroke="#bcbd22" stroke-width="2"/>
+  <path d="M308,525 C358.0,525 358.0,660 408,660" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="656">tvOS</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="408" x2="480" y1="660" y2="660"/>
+  <circle cx="480" cy="660" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M308,525 C358.0,525 358.0,690 408,690" fill="none" stroke="#8c564b" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="686">iOS</text>
+  <line stroke="#8c564b" stroke-width="2" x1="408" x2="480" y1="690" y2="690"/>
+  <circle cx="480" cy="690" fill="white" r="5" stroke="#8c564b" stroke-width="2"/>
+  <path d="M308,525 C358.0,525 358.0,720 408,720" fill="none" stroke="#17becf" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="716">watchOS</text>
+  <line stroke="#17becf" stroke-width="2" x1="408" x2="480" y1="720" y2="720"/>
+  <circle cx="480" cy="720" fill="white" r="5" stroke="#17becf" stroke-width="2"/>
+  <path d="M474,930 C524.0,930 524.0,900 574,900" fill="none" stroke="#d62728" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="578" y="896">FreeBSD</text>
+  <line stroke="#d62728" stroke-width="2" x1="574" x2="654" y1="900" y2="900"/>
+  <circle cx="654" cy="900" fill="white" r="5" stroke="#d62728" stroke-width="2"/>
+  <path d="M474,930 C524.0,930 524.0,930 574,930" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="578" y="926">NetBSD</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="574" x2="654" y1="930" y2="930"/>
+  <circle cx="654" cy="930" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M474,930 C524.0,930 524.0,960 574,960" fill="none" stroke="#7f7f7f" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="578" y="956">OpenBSD</text>
+  <line stroke="#7f7f7f" stroke-width="2" x1="574" x2="654" y1="960" y2="960"/>
+  <circle cx="654" cy="960" fill="white" r="5" stroke="#7f7f7f" stroke-width="2"/>
+  <path d="M308,855 C358.0,855 358.0,750 408,750" fill="none" stroke="#9467bd" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="746">Solaris</text>
+  <line stroke="#9467bd" stroke-width="2" x1="408" x2="479" y1="750" y2="750"/>
+  <circle cx="479" cy="750" fill="white" r="5" stroke="#9467bd" stroke-width="2"/>
+  <path d="M308,855 C358.0,855 358.0,780 408,780" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="776">Aix</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="408" x2="479" y1="780" y2="780"/>
+  <circle cx="479" cy="780" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M308,855 C358.0,855 358.0,810 408,810" fill="none" stroke="#e377c2" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="806">Hp-Ux</text>
+  <line stroke="#e377c2" stroke-width="2" x1="408" x2="479" y1="810" y2="810"/>
+  <circle cx="479" cy="810" fill="white" r="5" stroke="#e377c2" stroke-width="2"/>
+  <path d="M308,855 C358.0,855 358.0,840 408,840" fill="none" stroke="#17becf" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="836">Sco Unix</text>
+  <line stroke="#17becf" stroke-width="2" x1="408" x2="479" y1="840" y2="840"/>
+  <circle cx="479" cy="840" fill="white" r="5" stroke="#17becf" stroke-width="2"/>
+  <path d="M308,855 C358.0,855 358.0,870 408,870" fill="none" stroke="#ff7f0e" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="866">Irix</text>
+  <line stroke="#ff7f0e" stroke-width="2" x1="408" x2="479" y1="870" y2="870"/>
+  <circle cx="479" cy="870" fill="white" r="5" stroke="#ff7f0e" stroke-width="2"/>
+  <path d="M308,855 C358.0,855 358.0,930 408,930" fill="none" stroke="#ff7f0e" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="926">BSD</text>
+  <line stroke="#ff7f0e" stroke-width="2" x1="408" x2="479" y1="930" y2="930"/>
+  <circle cx="479" cy="930" fill="white" r="5" stroke="#ff7f0e" stroke-width="2"/>
+  <path d="M308,1080 C358.0,1080 358.0,990 408,990" fill="none" stroke="#1f77b4" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="986">MsDos 6.22</text>
+  <line stroke="#1f77b4" stroke-width="2" x1="408" x2="545" y1="990" y2="990"/>
+  <circle cx="545" cy="990" fill="white" r="5" stroke="#1f77b4" stroke-width="2"/>
+  <path d="M308,1080 C358.0,1080 358.0,1020 408,1020" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="1016">Win3.2</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="408" x2="545" y1="1020" y2="1020"/>
+  <circle cx="545" cy="1020" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M308,1080 C358.0,1080 358.0,1050 408,1050" fill="none" stroke="#e377c2" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="1046">Win 95 / 98 / 2000</text>
+  <line stroke="#e377c2" stroke-width="2" x1="408" x2="545" y1="1050" y2="1050"/>
+  <circle cx="545" cy="1050" fill="white" r="5" stroke="#e377c2" stroke-width="2"/>
+  <path d="M308,1080 C358.0,1080 358.0,1080 408,1080" fill="none" stroke="#e377c2" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="1076">Windows Phone</text>
+  <line stroke="#e377c2" stroke-width="2" x1="408" x2="545" y1="1080" y2="1080"/>
+  <circle cx="545" cy="1080" fill="white" r="5" stroke="#e377c2" stroke-width="2"/>
+  <path d="M308,1080 C358.0,1080 358.0,1110 408,1110" fill="none" stroke="#17becf" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="1106">Windows Vista</text>
+  <line stroke="#17becf" stroke-width="2" x1="408" x2="545" y1="1110" y2="1110"/>
+  <circle cx="545" cy="1110" fill="white" r="5" stroke="#17becf" stroke-width="2"/>
+  <path d="M308,1080 C358.0,1080 358.0,1140 408,1140" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="1136">Windows 10/11</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="408" x2="545" y1="1140" y2="1140"/>
+  <circle cx="545" cy="1140" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M308,1080 C358.0,1080 358.0,1170 408,1170" fill="none" stroke="#2ca02c" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="412" y="1166">Windows NT</text>
+  <line stroke="#2ca02c" stroke-width="2" x1="408" x2="545" y1="1170" y2="1170"/>
+  <circle cx="545" cy="1170" fill="white" r="5" stroke="#2ca02c" stroke-width="2"/>
+  <path d="M135,630 C185.0,630 185.0,195 235,195" fill="none" stroke="#9467bd" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="239" y="191">Linux</text>
+  <line stroke="#9467bd" stroke-width="2" x1="235" x2="313" y1="195" y2="195"/>
+  <circle cx="313" cy="195" fill="white" r="5" stroke="#9467bd" stroke-width="2"/>
+  <path d="M135,630 C185.0,630 185.0,525 235,525" fill="none" stroke="#d62728" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="239" y="521">Apple OS</text>
+  <line stroke="#d62728" stroke-width="2" x1="235" x2="313" y1="525" y2="525"/>
+  <circle cx="313" cy="525" fill="white" r="5" stroke="#d62728" stroke-width="2"/>
+  <path d="M135,630 C185.0,630 185.0,855 235,855" fill="none" stroke="#8c564b" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="239" y="851">Unix</text>
+  <line stroke="#8c564b" stroke-width="2" x1="235" x2="313" y1="855" y2="855"/>
+  <circle cx="313" cy="855" fill="white" r="5" stroke="#8c564b" stroke-width="2"/>
+  <path d="M135,630 C185.0,630 185.0,1080 235,1080" fill="none" stroke="#e377c2" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="start" x="239" y="1076">Microsoft</text>
+  <line stroke="#e377c2" stroke-width="2" x1="235" x2="313" y1="1080" y2="1080"/>
+  <circle cx="313" cy="1080" fill="white" r="5" stroke="#e377c2" stroke-width="2"/>
+  <line stroke="#9467bd" stroke-width="3" x1="2" x2="135" y1="630" y2="630"/>
+  <circle cx="135" cy="630" fill="white" r="3" stroke="#9467bd" stroke-width="2"/>
+  <text fill="#515151" font-family="Songti" font-size="16" text-anchor="middle" x="67" y="625">Operating System</text>
 </svg>
