@@ -1,5 +1,5 @@
-from netkiller.markdown import Markdown
-from netkiller.mindmap import Mindmap
+from src.netkiller import Mindmap
+from src.netkiller.markdown import Markdown
 
 
 def main():

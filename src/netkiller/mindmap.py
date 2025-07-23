@@ -1,28 +1,22 @@
-#! /usr/bin/env python3
+#! /usr/scripts/env python3
 # -*- coding: UTF-8 -*-
 ##############################################
 # Home	: http://netkiller.github.io
 # Author: Neo <netkiller@msn.com>
 # Data: 2025-07-19
 ##############################################
-from netkiller.markdown import Markdown
 
 try:
     import os
     import random
     import svgwrite
     from PIL import ImageFont, ImageDraw, Image
+    import argparse
+    from markdown import Markdown
     # import cairo
     # from cairosvg import svg2png
 except ImportError as err:
     print("Import Error: %s" % (err))
-
-
-# class Point:
-#     def __init__(self, x=0, y=0):
-#         """初始化点的坐标"""
-#         self.x = x
-#         self.y = y
 
 
 class Mindmap:
@@ -49,6 +43,7 @@ class Mindmap:
         self.height = 0
         self.jsonObject = jsonObject
         self.level = {}
+        self.author = 'Design by neo<netkiller@msn.com> - https://www.netkiller.cn'
         pass
 
     def sytle(self):
@@ -70,8 +65,14 @@ class Mindmap:
                               font_size='25', font_family='Arial')
         self.dwg.add(title)
 
-        # self.horizontalPosition = len(text) // 2
-        # self.verticalPosition = self.fontSize * 2
+        if self.author:
+            author = self.dwg.text(self.author, insert=(self.width / 2, self.charHeight + self.charHeight),
+                                   text_anchor='middle',
+                                   font_size='10', font_family='Arial')
+            self.dwg.add(author)
+
+    def author(self, value: str):
+        self.author = value
 
     def center(self, text: str):
         x = self.horizontalPosition
@@ -91,9 +92,9 @@ class Mindmap:
         width = self.horizontalPosition
         color = self.randomColor()
 
-        self.dwg.add(self.dwg.line(start=(2, y), end=(width, y), stroke=f'{color}', stroke_width=4))
+        self.dwg.add(self.dwg.line(start=(2, y), end=(width, y), stroke=f'{color}', stroke_width=3))
 
-        circle = self.dwg.circle(center=(width, y), r=4, fill="white", stroke=f"{color}", stroke_width="2")
+        circle = self.dwg.circle(center=(width, y), r=3, fill="white", stroke=f"{color}", stroke_width="2")
         self.dwg.add(circle)
         self.dwg.add(self.dwg.text(text, insert=(width // 2, y - 5), text_anchor='middle',
                                    font_family=f"{self.fontFamily}",
@@ -124,7 +125,7 @@ class Mindmap:
 
         width = node['x'] + width
 
-        self.dwg.add(self.dwg.text(node['text'], insert=(node["x"], node["y"] - 4), text_anchor='start',
+        self.dwg.add(self.dwg.text(node['text'], insert=(node["x"] + 4, node["y"] - 4), text_anchor='start',
                                    font_family=f"{self.fontFamily}",
                                    font_size=f"{self.fontSize}",
                                    fill=f"{self.fontColor}"))
@@ -155,21 +156,6 @@ class Mindmap:
             fill='none', stroke=f'{color}', stroke_width=2)
 
         self.dwg.add(path)
-
-    def parent(self, text: str):
-        x = self.horizontalPosition
-        y = self.verticalPosition
-
-        width = self.fontSize * len(text)
-        height = self.fontSize * 2
-
-        self.dwg.add(self.dwg.line(start=(0, y), end=(width, y), fill='lightgreen',
-                                   stroke='green',
-                                   stroke_width=2))
-
-        circle = self.dwg.circle(center=(width, y), r=5, fill="white", stroke="green", stroke_width="2")
-        self.dwg.add(circle)
-        self.dwg.add(self.dwg.text(text, insert=(width // 2, y), text_anchor='middle'))
 
     def scan(self, childNode, horizontalOffset: int = 0, level=1):
 
@@ -274,10 +260,128 @@ class Mindmap:
         # 品红：magenta（  # FF00FF）
         # 银色：silver（  # C0C0C0）
         # 金色：gold（  # FFD700）
-        color = [
-            "red", "green", "blue", "black", "gray", "pink", "purple", "orange", "brown", "cyan", "magenta", "gold",
-            "#005588",
-        ]
+
+        # color = [
+        #     "red", "green", "blue", "black", "gray", "pink", "purple", "orange", "brown", "cyan", "magenta", "gold",
+        #     "#005588",
+        # ]
+
+        color = ["#ff7f0e",
+                 "#2ca02c",
+                 "#d62728",
+                 "#9467bd",
+                 "#1f77b4",
+                 "#e377c2",
+                 "#7f7f7f",
+                 "#bcbd22",
+                 "#17becf",
+                 "#8c564b",
+                 "#ff7f0e",
+                 "#2ca02c",
+                 "#d62728",
+                 "#9467bd",
+                 "#8c564b",
+                 "#ff7f0e",
+                 "#7f7f7f",
+                 "#17becf",
+                 "#1f77b4",
+                 "#ff7f0e",
+                 "#bcbd22",
+                 "#d62728",
+                 "#9467bd",
+                 "#2ca02c",
+                 "#e377c2",
+                 "#1f77b4",
+                 "#bcbd22",
+                 "#1f77b4",
+                 "#ff7f0e",
+                 "#2ca02c",
+                 "#d62728",
+                 "#17becf",
+                 "#7f7f7f",
+                 "#8c564b",
+                 "#7f7f7f",
+                 "#bcbd22",
+                 "#1f77b4",
+                 "#ff7f0e",
+                 "#17becf",
+                 "#e377c2",
+                 "#9467bd",
+                 "#d62728",
+                 "#9467bd",
+                 "#2ca02c",
+                 "#7f7f7f",
+                 "#bcbd22",
+                 "#17becf",
+                 "#e377c2",
+                 "#ff7f0e",
+                 "#2ca02c",
+                 "#1f77b4",
+                 "#8c564b",
+                 "#8c564b",
+                 "#e377c2",
+                 "#9467bd",
+                 "#bcbd22",
+                 "#17becf",
+                 "#7f7f7f",
+                 "#d62728",
+                 "#2ca02c",
+                 "#d62728",
+                 "#9467bd",
+                 "#ff7f0e",
+                 "#e377c2",
+                 "#bcbd22",
+                 "#17becf",
+                 "#1f77b4",
+                 "#7f7f7f",
+                 "#8c564b",
+                 "#1f77b4",
+                 "#2ca02c",
+                 "#d62728",
+                 "#ff7f0e",
+                 "#e377c2",
+                 "#7f7f7f",
+                 "#8c564b",
+                 "#17becf",
+                 "#bcbd22",
+                 "#9467bd",
+                 "#ff7f0e",
+                 "#d62728",
+                 "#9467bd",
+                 "#2ca02c",
+                 "#1f77b4",
+                 "#e377c2",
+                 "#7f7f7f",
+                 "#17becf",
+                 "#1f77b4",
+                 "#bcbd22",
+                 "#e377c2",
+                 "#2ca02c",
+                 "#d62728",
+                 "#8c564b",
+                 "#e377c2",
+                 "#7f7f7f",
+                 "#9467bd",
+                 "#ff7f0e",
+                 "#8c564b",
+                 "#8c564b",
+                 "#1f77b4",
+                 "#ff7f0e",
+                 "#2ca02c",
+                 "#17becf",
+                 "#8c564b",
+                 "#e377c2",
+                 "#9467bd",
+                 "#bcbd22",
+                 "#7f7f7f",
+                 "#1f77b4",
+                 "#ff7f0e",
+                 "#17becf",
+                 "#d62728",
+                 "#2ca02c",
+                 "#d62728",
+                 "#bcbd22",
+                 "#1f77b4", ]
         return random.choice(color)
 
     def getTextSize(self, text, size: float = 16):
@@ -347,7 +451,7 @@ class Mindmap:
                                     # preserveAspectRatio="xMidYMid slice"
                                     )
 
-        self.background(self.jsonObject['children'], True)
+        # self.background(self.jsonObject['children'], True)
 
         self.title(self.jsonObject['title'])
 
@@ -363,6 +467,8 @@ class Mindmap:
         self.dwg.save(pretty=True)
 
     def save(self, filepath: str = 'example.svg'):
+        if not self.jsonObject:
+            raise Exception("No data found.")
         self.filepath = filepath
         self.rander()
         # self.dwg.save(pretty=True)
@@ -409,8 +515,7 @@ class Mindmap:
         #                            ))
 
         for child in childNode:
-            print(child['text'])
-
+            # print(child['text'])
             if 'children' in child and len(child['children']) > 0:
                 # self.horizontalPosition += columnWidth
                 self.background(child['children'])
@@ -430,3 +535,41 @@ class Mindmap:
         # self.debug = True
 
         self.rander()
+
+        # self.data(mindmapData)
+        # self.data(jsonData)
+        # self.markdown(data)
+        # self.rectangle("咖啡营销会议")
+        # self.ellipse("咖啡营销会议")
+        # print(mindmapData)
+
+    def main(self):
+
+        self.parser = argparse.ArgumentParser(description='Markdown To Mindmap')
+        self.parser.add_argument("-m", '--markdown', type=str, default='None', metavar='/path/to/yout.md',
+                                 help='Markfown file')
+        self.parser.add_argument('-o', '--output', default=None, type=str, metavar='example.svg', help='output picture')
+
+        args = self.parser.parse_args()
+
+        if args.markdown and args.output:
+            with open(args.markdown) as file:
+                text = file.read()
+                self.markdown(text)
+                self.save(args.output)
+        else:
+            self.parser.print_help()
+
+
+def main():
+    try:
+        mindmap = Mindmap()
+        mindmap.main()
+    except KeyboardInterrupt as e:
+        print(e)
+    except Exception as e:
+        print(e)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,6 +1,6 @@
 [project]
 name = "netkiller-chart"
-version = "0.0.1"
+version = "0.1.1"
 authors = [
     { name = "Neo", email = "netkiller@msn.com" },
 ]
@@ -19,5 +19,5 @@ Homepage = "https://www.netkiller.cn"
 Issues = "https://github.com/netkiller/netkiller-chart/issues"
 
 [project.scripts]
-gantt = "netkiller.gantt:main"
-mindmap = "netkiller.mindmap:main"
+gantt = "scripts.gantt:main"
+mindmap = "scripts.mindmap:main"

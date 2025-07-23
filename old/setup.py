@@ -1,10 +1,13 @@
-from netkiller import __version__, __author__
 import os
 import sys
+
 from setuptools import setup, find_packages
+
+from src.netkiller import __version__, __author__
+
 sys.path.insert(0, os.path.abspath('lib'))
 
-with open("README.md", "r") as fh:
+with open("../README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
@@ -18,23 +21,23 @@ setup(
     url="https://www.netkiller.cn",
     license='CC 3.0',
     classifiers=[
-                # 'Development Status :: 1 - Production/Stable',
-                'Environment :: Console',
-                "Programming Language :: Python :: 3",
-                # "License :: OSI Approved :: CC 2.0",
-                "Operating System :: OS Independent",
+        # 'Development Status :: 1 - Production/Stable',
+        'Environment :: Console',
+        "Programming Language :: Python :: 3",
+        # "License :: OSI Approved :: CC 2.0",
+        "Operating System :: OS Independent",
     ],
-    install_requires=['pillow', 'drawsvg', 'pyproject.toml', 'pycairo','mysql-connector-python'],
+    install_requires=['pillow', 'drawsvg', 'pyproject.toml', 'pycairo', 'mysql-connector-python'],
     #   'opencv-python',
     # package_dir={ '': '..' },
     # packages=find_packages('../netkiller'),
     packages=find_packages(),
 
     scripts=[
-        'bin/gantt',
+        'scripts/gantt',
     ],
     data_files=[
-        ('share/netkiller', ['doc/gantt.svg','doc/by-nc-sa.png','font/Songti.ttc']),
+        ('share/netkiller', ['doc/gantt.svg', 'doc/by-nc-sa.png', 'font/Songti.ttc']),
 
     ]
 )

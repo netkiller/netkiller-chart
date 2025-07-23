@@ -49,7 +49,7 @@ pip install --upgrade pip
 ## pyproject.toml
 
 ```shell
-pip install build
+pip install build -i https://pypi.tuna.tsinghua.edu.cn/simple
 python -m build
 pip install dist/netkiller-chart-0.0.1-py3-none-any.whl --force-reinstall
 

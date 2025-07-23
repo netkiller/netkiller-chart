@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/scripts/env python3
 # -*- coding: UTF-8 -*-
 ##############################################
 # Home	: http://netkiller.github.io
@@ -30,7 +30,8 @@ class Data:
 
     def add(self, id, name, start, finish, resource, predecessor, milestone, parent):
         # duration
-        item = {"id": id, "name": name, "start": start, "finish": finish, "resource": resource, "predecessor": predecessor, "milestone": milestone}
+        item = {"id": id, "name": name, "start": start, "finish": finish, "resource": resource,
+                "predecessor": predecessor, "milestone": milestone}
 
         if parent != "" and int(parent) > 0:
             # print(parent)
@@ -97,13 +98,20 @@ class Calendar(Canvas):
         group.append_title("表格")
         # group.append(draw.Line(1, 80, self.canvasWidth,                               80,  stroke='black'))
         group.append(draw.Text("任务", 20, 5, top + 20 + self.rowHeight * 2, fill="#555555"))
-        group.append(draw.Line(self.nameTextSize, top + self.rowHeight * 2, self.nameTextSize, self.canvasHeight, stroke="grey"))
+        group.append(
+            draw.Line(self.nameTextSize, top + self.rowHeight * 2, self.nameTextSize, self.canvasHeight, stroke="grey"))
         group.append(draw.Text("开始日期", 20, self.nameTextSize + 5, top + 20 + self.rowHeight * 2, fill="#555555"))
-        group.append(draw.Line(self.nameTextSize + 95, top + self.rowHeight * 2, self.nameTextSize + 95, self.canvasHeight, stroke="grey"))
+        group.append(
+            draw.Line(self.nameTextSize + 95, top + self.rowHeight * 2, self.nameTextSize + 95, self.canvasHeight,
+                      stroke="grey"))
         group.append(draw.Text("截止日期", 20, self.nameTextSize + 100, top + 20 + self.rowHeight * 2, fill="#555555"))
-        group.append(draw.Line(self.nameTextSize + 190, top + self.rowHeight * 2, self.nameTextSize + 190, self.canvasHeight, stroke="grey"))
+        group.append(
+            draw.Line(self.nameTextSize + 190, top + self.rowHeight * 2, self.nameTextSize + 190, self.canvasHeight,
+                      stroke="grey"))
         group.append(draw.Text("工时", 20, self.nameTextSize + 195, top + 20 + self.rowHeight * 2, fill="#555555"))
-        group.append(draw.Line(self.nameTextSize + 240, top + self.rowHeight * 2, self.nameTextSize + 240, self.canvasHeight, stroke="grey"))
+        group.append(
+            draw.Line(self.nameTextSize + 240, top + self.rowHeight * 2, self.nameTextSize + 240, self.canvasHeight,
+                      stroke="grey"))
         group.append(draw.Text("资源", 20, self.nameTextSize + 245, top + 20 + self.rowHeight * 2, fill="#555555"))
 
         return group
@@ -126,7 +134,8 @@ class Calendar(Canvas):
         endDay = end.day
         # print(beginDay, endDay)
 
-        weekNumberOfYear = datetime.strptime(str(begin.year) + "-" + str(begin.month) + "-01", "%Y-%m-%d").strftime("%W")
+        weekNumberOfYear = datetime.strptime(str(begin.year) + "-" + str(begin.month) + "-01", "%Y-%m-%d").strftime(
+            "%W")
         # weekNumberOfYear = begin.strftime('%W')
         # weekNumberOfYear = datetime.date(datetime.now().year,month,1).strftime('%W')
         weekGroups = {}
@@ -136,7 +145,8 @@ class Calendar(Canvas):
             # numberOfWeek = self.weekNumberOfMonth(datetime.strptime(str(begin.year)+'-'+str(begin.month)+'-'+str(day), '%Y-%m-%d').date())
             weekday = calendar.weekday(begin.year, begin.month, day)
 
-            currentweekNumberOfYear = datetime.strptime(str(begin.year) + "-" + str(begin.month) + "-" + str(day), "%Y-%m-%d").strftime("%W")
+            currentweekNumberOfYear = datetime.strptime(str(begin.year) + "-" + str(begin.month) + "-" + str(day),
+                                                        "%Y-%m-%d").strftime("%W")
             # print(weekNumberOfYear, currentweekNumberOfYear)
             if currentweekNumberOfYear != weekNumberOfYear:
                 weekNumberOfYear = currentweekNumberOfYear
@@ -155,15 +165,18 @@ class Calendar(Canvas):
             self.dayPosition[date(year=int(begin.year), month=int(begin.month), day=int(day)).strftime("%Y-%m-%d")] = x
 
             if day == beginDay:
-                weekGroups[weekNumberOfYear].append(draw.Text(begin.strftime("%Y年%m月"), 20, x + 4, top + self.rowHeight - 10, fill="#555555"))
+                weekGroups[weekNumberOfYear].append(
+                    draw.Text(begin.strftime("%Y年%m月"), 20, x + 4, top + self.rowHeight - 10, fill="#555555"))
             # 右侧封闭
             if day == endDay:
-                weekGroups[weekNumberOfYear].append(draw.Line(x + self.columeWidth, top, x + self.columeWidth, self.canvasHeight, stroke="black"))
+                weekGroups[weekNumberOfYear].append(
+                    draw.Line(x + self.columeWidth, top, x + self.columeWidth, self.canvasHeight, stroke="black"))
 
             # dayName = ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"]
             dayName = ["一", "二", "三", "四", "五", "六", "日"]
 
-            weekGroups[weekNumberOfYear].append(draw.Text(dayName[weekday], 20, x + 4, top + self.columeWidth * 2 - 10, fill="#555555"))
+            weekGroups[weekNumberOfYear].append(
+                draw.Text(dayName[weekday], 20, x + 4, top + self.columeWidth * 2 - 10, fill="#555555"))
             if day < 10:
                 numberOffsetX = 10
             else:
@@ -171,14 +184,18 @@ class Calendar(Canvas):
 
             # 日栏位
             # print(self.weekdayPosition)
-            r = draw.Rectangle(x, top + self.rowHeight * 2, self.columeWidth, self.canvasHeight - (top + self.rowHeight * 2), fill=color)
+            r = draw.Rectangle(x, top + self.rowHeight * 2, self.columeWidth,
+                               self.canvasHeight - (top + self.rowHeight * 2), fill=color)
             r.append_title(str(day))
             weekGroups[weekNumberOfYear].append(r)
             # 周分割线
             if weekday == 6:
-                weekGroups[weekNumberOfYear].append(draw.Line(x + self.columeWidth, top + self.rowHeight, x + self.columeWidth, self.canvasHeight, stroke="black"))
+                weekGroups[weekNumberOfYear].append(
+                    draw.Line(x + self.columeWidth, top + self.rowHeight, x + self.columeWidth, self.canvasHeight,
+                              stroke="black"))
             # 日期
-            weekGroups[weekNumberOfYear].append(draw.Text(str(day), 20, x + numberOffsetX, top + self.columeWidth * 3 - 10, fill="#555555"))
+            weekGroups[weekNumberOfYear].append(
+                draw.Text(str(day), 20, x + numberOffsetX, top + self.columeWidth * 3 - 10, fill="#555555"))
 
             # if column:
             offsetX += self.splitLine
@@ -265,9 +282,11 @@ class Calendar(Canvas):
         # right = draw.Line(self.canvasWidth, 0,
         #                   self.canvasWidth, self.canvasHeight, stroke='black')
         # 周线
-        background.append(draw.Line(1, top + self.rowHeight * 2, self.canvasWidth, top + self.rowHeight * 2, stroke="grey"))
+        background.append(
+            draw.Line(1, top + self.rowHeight * 2, self.canvasWidth, top + self.rowHeight * 2, stroke="grey"))
         # 日线
-        background.append(draw.Line(1, top + self.rowHeight * 3, self.canvasWidth, top + self.rowHeight * 3, stroke="grey"))
+        background.append(
+            draw.Line(1, top + self.rowHeight * 3, self.canvasWidth, top + self.rowHeight * 3, stroke="grey"))
         # 上边封闭
         background.append(draw.Line(1, top, self.canvasWidth, top, stroke="grey"))
         # 左边封闭
@@ -308,7 +327,9 @@ class Gantt(Calendar):
         if self.isTable:
             return
         top = 10
-        self.draw.append(draw.Text("https://www.netkiller.cn - design by netkiller", 15, self.canvasWidth - 280, top + 30, text_anchor="start", fill="grey"))
+        self.draw.append(
+            draw.Text("https://www.netkiller.cn - design by netkiller", 15, self.canvasWidth - 280, top + 30,
+                      text_anchor="start", fill="grey"))
         self.draw.append(draw.Rectangle(0, 0, self.canvasWidth, self.canvasHeight, fill="none", stroke="black"))
         # fill='#eeeeee'
         license = "/var/tmp/by-nc-sa.png"
@@ -333,7 +354,8 @@ class Gantt(Calendar):
 
         begin = datetime.strptime(line["start"], "%Y-%m-%d").day
         # end = datetime.strptime(line['end'], '%Y-%m-%d').day
-        end = (datetime.strptime(line["finish"], "%Y-%m-%d").date() - datetime.strptime(line["start"], "%Y-%m-%d").date()).days
+        end = (datetime.strptime(line["finish"], "%Y-%m-%d").date() - datetime.strptime(line["start"],
+                                                                                        "%Y-%m-%d").date()).days
 
         # left += self.columeWidth * (begin - 1) + (1 * begin)
         # # 日宽度 + 竖线宽度
@@ -348,19 +370,22 @@ class Gantt(Calendar):
         if not self.isTable:
             table = draw.Group(id="text")
 
-            table.append(draw.Text(line["name"], self.fontSize, 5 + (self.textIndent * self.textIndentSize), top + 20, text_anchor="start"))
+            table.append(draw.Text(line["name"], self.fontSize, 5 + (self.textIndent * self.textIndentSize), top + 20,
+                                   text_anchor="start"))
             # text.append(draw.TSpan(line['begin'], text_anchor='start'))
             # text.append(draw.TSpan(line['end'], text_anchor='start'))
 
             table.append(draw.Text(line["start"], self.fontSize, self.nameTextSize + 5, top + 20, text_anchor="start"))
-            table.append(draw.Text(line["finish"], self.fontSize, self.nameTextSize + 100, top + 20, text_anchor="start"))
+            table.append(
+                draw.Text(line["finish"], self.fontSize, self.nameTextSize + 100, top + 20, text_anchor="start"))
             # if 'progress' in line:
             #     table.append(draw.Text(
             #         str(line['progress']), 20, self.nameTextSize + 200, top + 20, text_anchor='start'))
 
             table.append(draw.Text(str(end + 1), self.fontSize, self.nameTextSize + 205, top + 20, text_anchor="start"))
             if "resource" in line:
-                table.append(draw.Text(str(line["resource"]), self.fontSize, self.nameTextSize + 245, top + 20, text_anchor="start"))
+                table.append(draw.Text(str(line["resource"]), self.fontSize, self.nameTextSize + 245, top + 20,
+                                       text_anchor="start"))
             lineGroup.append(table)
 
         group = draw.Group(id="item")
@@ -405,7 +430,9 @@ class Gantt(Calendar):
                 p = draw.Path(fill="black")
                 p.M(mleft, mtop).L(mleft + 11, top + 15).L(mleft, top + 26).L(mleft - 11, top + 15).L(mleft, mtop).Z()
                 group.append(p)
-                group.append(draw.Text(datetime.strptime(line["start"], "%Y-%m-%d").strftime("%Y年%m月%d日"), 18, left + 30, top + 20, text_anchor="start", fill="black"))
+                group.append(
+                    draw.Text(datetime.strptime(line["start"], "%Y-%m-%d").strftime("%Y年%m月%d日"), 18, left + 30,
+                              top + 20, text_anchor="start", fill="black"))
             else:
                 # 工时
                 r = draw.Rectangle(left, top + 4, right, self.barHeight, fill="#67AAFF", stroke="black")
@@ -420,10 +447,13 @@ class Gantt(Calendar):
                     else:
                         progress = line["progress"]
 
-                    progressBar = draw.Rectangle(left + 2, top + 7, 30 * progress - 2, self.progressHeight, fill="#8AD97A")
+                    progressBar = draw.Rectangle(left + 2, top + 7, 30 * progress - 2, self.progressHeight,
+                                                 fill="#8AD97A")
                     # progressBar.append_title(str(progress))
                     group.append(progressBar)
-                    group.append(draw.Text("%d%%" % ((progress / (end + 1)) * 100), 10, left + 5, top + 18, text_anchor="start", fill="black"))
+                    group.append(
+                        draw.Text("%d%%" % ((progress / (end + 1)) * 100), 10, left + 5, top + 18, text_anchor="start",
+                                  fill="black"))
 
         # 分割线
         group.append(draw.Lines(1, top + self.rowHeight, self.canvasWidth, top + self.rowHeight, stroke="grey"))
@@ -662,9 +692,11 @@ class Workload(Gantt):
         table.append(draw.Text("资源", 20, 5, top + 20, fill="#555555"))
         table.append(draw.Line(self.resourceTextSize, top, self.resourceTextSize, self.canvasHeight, stroke="grey"))
         table.append(draw.Text("开始日期", 20, self.resourceTextSize + +5, top + 20, fill="#555555"))
-        table.append(draw.Line(self.resourceTextSize + 100, top, self.resourceTextSize + 100, self.canvasHeight, stroke="grey"))
+        table.append(
+            draw.Line(self.resourceTextSize + 100, top, self.resourceTextSize + 100, self.canvasHeight, stroke="grey"))
         table.append(draw.Text("截止日期", 20, self.resourceTextSize + 100 + 5, top + 20, fill="#555555"))
-        table.append(draw.Line(self.resourceTextSize + 200, top, self.resourceTextSize + 200, self.canvasHeight, stroke="grey"))
+        table.append(
+            draw.Line(self.resourceTextSize + 200, top, self.resourceTextSize + 200, self.canvasHeight, stroke="grey"))
         table.append(draw.Text("工时", 20, self.resourceTextSize + 200 + 5, top + 20, fill="#555555"))
         # table.append(draw.Line(self.resourceTextSize + 400, top,                               self.resourceTextSize + 400, self.canvasHeight, stroke='grey'))
 
@@ -680,11 +712,16 @@ class Workload(Gantt):
         # for key, value in self.__weekday(top).items():
         #     background.append(value)
         # 月线
-        chart.append(draw.Line(self.startPosition, self.canvasTop + self.rowHeight, self.canvasWidth, self.canvasTop + self.rowHeight, stroke="grey"))
+        chart.append(draw.Line(self.startPosition, self.canvasTop + self.rowHeight, self.canvasWidth,
+                               self.canvasTop + self.rowHeight, stroke="grey"))
         # 周线
-        chart.append(draw.Line(1, self.canvasTop + self.rowHeight * 2, self.canvasWidth, self.canvasTop + self.rowHeight * 2, stroke="grey"))
+        chart.append(
+            draw.Line(1, self.canvasTop + self.rowHeight * 2, self.canvasWidth, self.canvasTop + self.rowHeight * 2,
+                      stroke="grey"))
 
-        chart.append(draw.Line(1, self.canvasTop + self.rowHeight * 3, self.canvasWidth, self.canvasTop + self.rowHeight * 3, stroke="black"))
+        chart.append(
+            draw.Line(1, self.canvasTop + self.rowHeight * 3, self.canvasWidth, self.canvasTop + self.rowHeight * 3,
+                      stroke="black"))
         # 竖线
         chart.append(draw.Line(left, self.canvasTop, left, self.canvasHeight, stroke="grey"))
 
@@ -706,10 +743,15 @@ class Workload(Gantt):
             right = self.columeWidth * (end + 1) + (1 * end)
 
             chart.append(draw.Text(resource, self.fontSize, 5, top + 20, text_anchor="start"))
-            chart.append(draw.Text(row["start"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 5, top + 20, text_anchor="start"))
-            chart.append(draw.Text(row["finish"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 100 + 5, top + 20, text_anchor="start"))
+            chart.append(
+                draw.Text(row["start"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 5, top + 20,
+                          text_anchor="start"))
+            chart.append(
+                draw.Text(row["finish"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 100 + 5, top + 20,
+                          text_anchor="start"))
 
-            chart.append(draw.Text(str(end + 1), self.fontSize, self.resourceTextSize + 200 + 5, top + 20, text_anchor="start"))
+            chart.append(
+                draw.Text(str(end + 1), self.fontSize, self.resourceTextSize + 200 + 5, top + 20, text_anchor="start"))
 
             left = self.dayPosition[row["start"].strftime("%Y-%m-%d")]
             r = draw.Rectangle(left, top + 4, right, self.barHeight, fill="blue")

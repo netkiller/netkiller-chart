@@ -1,0 +1,49 @@
+# Operating System History
+
+- Operating System
+  - Linux
+    - Redhat
+      - Fedora
+      - SUSE
+      - CentOS
+        - Rocky Linux
+        - AlmaLinux
+    - Gentoo
+    - Slackware
+    - Debian
+      - Ubunt
+    - Arch Linux
+  - Apple OS
+    - macOS
+      - Yosemite
+      - Capitan
+      - Sierra / High Sierra
+      - Mojave
+      - Catalina
+      - Big Sur
+      - Monterry
+      - Ventura
+      - Sonoma
+      - Sequoia
+    - iPadSO
+    - tvOS
+    - iOS
+    - watchOS
+  - Unix
+    - Solaris
+    - Aix
+    - Hp-Ux
+    - Sco Unix
+    - Irix
+    - BSD
+      - FreeBSD
+      - NetBSD
+      - OpenBSD
+  - Microsoft
+    - MsDos 6.22
+    - Win3.2
+    - Win 95 / 98 / 2000
+    - Windows Phone
+    - Windows Vista
+    - Windows 10/11
+    - Windows NT
