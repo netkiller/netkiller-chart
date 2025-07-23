@@ -1,6 +1,6 @@
 [project]
 name = "netkiller-chart"
-version = "0.1.1"
+version = "0.1.2"
 authors = [
     { name = "Neo", email = "netkiller@msn.com" },
 ]
@@ -14,10 +14,15 @@ classifiers = [
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
+dependencies = [
+    "svgwrite",
+    "pillow",
+]
+
 [project.urls]
 Homepage = "https://www.netkiller.cn"
 Issues = "https://github.com/netkiller/netkiller-chart/issues"
 
 [project.scripts]
-gantt = "scripts.gantt:main"
-mindmap = "scripts.mindmap:main"
+gantt = "netkiller.gantt:main"
+mindmap = "netkiller.mindmap:main"

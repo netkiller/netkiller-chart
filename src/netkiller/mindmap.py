@@ -12,7 +12,7 @@ try:
     import svgwrite
     from PIL import ImageFont, ImageDraw, Image
     import argparse
-    from markdown import Markdown
+    from netkiller.markdown import Markdown
     # import cairo
     # from cairosvg import svg2png
 except ImportError as err:
