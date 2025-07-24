@@ -63,6 +63,9 @@ class Mindmap:
         """
         self.dwg.defs.add(self.dwg.style(styles))
 
+    def font(self, family: str):
+        self.fontFamily = family
+
     def title(self, text):
         title = self.dwg.text(text, insert=(self.width / 2, self.charHeight + self.charHeight // 2),
                               text_anchor='middle',
@@ -490,7 +493,7 @@ class Mindmap:
     #         svg2png(bytestring=svg_data, write_to=filepath, dpi=300)  # dpi控制清晰度
     #     pass
 
-    def font(self):
+    def fontList(self):
         import matplotlib.font_manager as fm
 
         # 获取所有系统字体
@@ -572,6 +575,7 @@ class Mindmap:
 def main():
     try:
         mindmap = Mindmap()
+        # mindmap.font("DejaVu")
         # mindmap.author("作者：陈景峰")
         # mindmap.description("©️版权所有")
         mindmap.main()
