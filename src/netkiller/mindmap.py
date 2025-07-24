@@ -557,17 +557,24 @@ class Mindmap:
     def main(self):
 
         self.parser = argparse.ArgumentParser(description='Markdown To Mindmap')
-        self.parser.add_argument("-m", '--markdown', type=str, default='None', metavar='/path/to/yout.md',
+        self.parser.add_argument("-m", '--markdown', type=str, default=None, metavar='/path/to/yout.md',
                                  help='Markfown file')
+        self.parser.add_argument("-s", '--stdin', action="store_true", default=False,
+                                 help='Standard input from the terminal')
+
         self.parser.add_argument('-o', '--output', default=None, type=str, metavar='example.svg', help='output picture')
 
         args = self.parser.parse_args()
-
+        print(args)
         if args.markdown and args.output:
             with open(args.markdown) as file:
                 text = file.read()
                 self.markdown(text)
                 self.save(args.output)
+        elif args.stdin and args.output:
+
+            self.markdown(sys.stdin.read())
+            self.save(args.output)
         else:
             self.parser.print_help()
 

@@ -11,7 +11,7 @@
     - Gentoo
     - Slackware
     - Debian
-      - Ubunt
+      - Ubuntu
     - Arch Linux
   - Apple OS
     - macOS

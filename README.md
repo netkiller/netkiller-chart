@@ -21,7 +21,7 @@ pip install netkiller-chart
 ### 命令行
 
 ```shell
-usage: mindmap.py [-h] [-m /path/to/yout.md] [-o example.svg]
+usage: mindmap.py [-h] [-m /path/to/yout.md] [-s] [-o example.svg]
 
 Markdown To Mindmap
 
@@ -29,6 +29,7 @@ options:
   -h, --help            show this help message and exit
   -m, --markdown /path/to/yout.md
                         Markfown file
+  -s, --stdin           Standard input from the terminal
   -o, --output example.svg
                         output picture
 ```
@@ -68,5 +69,65 @@ markdown = """
 """
 mindmap = Mindmap(markdown)
 mindmap.save('example.svg')
+
+```
+
+### 从标准输入创建思维导图
+
+```shell
+(.venv) neo@netkiller netkiller-chart % cat test/mindmap/os.md 
+# Operating System History
+
+- Operating System
+  - Linux
+    - Redhat
+      - Fedora
+      - SUSE
+      - CentOS
+        - Rocky Linux
+        - AlmaLinux
+    - Gentoo
+    - Slackware
+    - Debian
+      - Ubuntu
+    - Arch Linux
+  - Apple OS
+    - macOS
+      - Yosemite
+      - Capitan
+      - Sierra / High Sierra
+      - Mojave
+      - Catalina
+      - Big Sur
+      - Monterry
+      - Ventura
+      - Sonoma
+      - Sequoia
+    - iPadSO
+    - tvOS
+    - iOS
+    - watchOS
+  - Unix
+    - Solaris
+    - Aix
+    - Hp-Ux
+    - Sco Unix
+    - Irix
+    - BSD
+      - FreeBSD
+      - NetBSD
+      - OpenBSD
+  - Microsoft
+    - MsDos 6.22
+    - Win3.2
+    - Win 95 / 98 / 2000
+    - Windows Phone
+    - Windows Vista
+    - Windows 10/11
+    - Windows NT%    
+```
+
+```shell
+(.venv) neo@netkiller netkiller-chart % cat test/mindmap/os.md | mindmap -o test/mindmap/os.svg -s
 
 ```
