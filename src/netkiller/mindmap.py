@@ -110,7 +110,7 @@ class Mindmap:
 
         self.dwg.add(self.dwg.line(start=(2, y), end=(width, y), stroke=f'{color}', stroke_width=3))
 
-        circle = self.dwg.circle(center=(width, y), r=3, fill="white", stroke=f"{color}", stroke_width="2")
+        circle = self.dwg.circle(center=(width, y), r=5, fill="white", stroke=f"{color}", stroke_width="2")
         self.dwg.add(circle)
         self.dwg.add(self.dwg.text(text, insert=(width // 2, y - 5), text_anchor='middle',
                                    font_family=f"{self.fontFamily}",
