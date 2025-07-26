@@ -17,6 +17,8 @@ license-files = ["LICEN[CS]E*"]
 dependencies = [
     "svgwrite",
     "pillow",
+    # Gantt
+    "drawsvg"
 ]
 
 [project.urls]

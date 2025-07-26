@@ -1,9 +1,9 @@
-#! /usr/scripts/env python3
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 ##############################################
 # Home	: http://netkiller.github.io
 # Author: Neo <netkiller@msn.com>
-# Data: 2023-03-09
+# Data: 2025-07-25
 ##############################################
 try:
     import calendar
@@ -13,6 +13,7 @@ try:
     import requests
     import os
     import platform
+    from PIL import ImageFont, ImageDraw, Image
 except ImportError as err:
     print("Error: %s" % (err))
 
@@ -20,6 +21,9 @@ except ImportError as err:
 class Canvas:
     width = 1980
     height = 1080
+    fontFamily = "Songti"
+    fontSize = 20
+    lineColor = "grey"
 
 
 class Data:
@@ -67,7 +71,7 @@ class Data:
         pass
 
 
-class Calendar(Canvas):
+class Calendar():
     draw = None
     canvasWidth = 0
     canvasHeight = 0
@@ -102,17 +106,17 @@ class Calendar(Canvas):
             draw.Line(self.nameTextSize, top + self.rowHeight * 2, self.nameTextSize, self.canvasHeight, stroke="grey"))
         group.append(draw.Text("开始日期", 20, self.nameTextSize + 5, top + 20 + self.rowHeight * 2, fill="#555555"))
         group.append(
-            draw.Line(self.nameTextSize + 95, top + self.rowHeight * 2, self.nameTextSize + 95, self.canvasHeight,
-                      stroke="grey"))
-        group.append(draw.Text("截止日期", 20, self.nameTextSize + 100, top + 20 + self.rowHeight * 2, fill="#555555"))
+            draw.Line(self.nameTextSize + 110, top + self.rowHeight * 2, self.nameTextSize + 110, self.canvasHeight,
+                      stroke=self.lineColor))
+        group.append(draw.Text("截止日期", 20, self.nameTextSize + 120, top + 20 + self.rowHeight * 2, fill="#555555"))
         group.append(
-            draw.Line(self.nameTextSize + 190, top + self.rowHeight * 2, self.nameTextSize + 190, self.canvasHeight,
+            draw.Line(self.nameTextSize + 220, top + self.rowHeight * 2, self.nameTextSize + 220, self.canvasHeight,
                       stroke="grey"))
-        group.append(draw.Text("工时", 20, self.nameTextSize + 195, top + 20 + self.rowHeight * 2, fill="#555555"))
+        group.append(draw.Text("工时", 20, self.nameTextSize + 225, top + 20 + self.rowHeight * 2, fill="#555555"))
         group.append(
-            draw.Line(self.nameTextSize + 240, top + self.rowHeight * 2, self.nameTextSize + 240, self.canvasHeight,
-                      stroke="grey"))
-        group.append(draw.Text("资源", 20, self.nameTextSize + 245, top + 20 + self.rowHeight * 2, fill="#555555"))
+            draw.Line(self.nameTextSize + 270, top + self.rowHeight * 2, self.nameTextSize + 270, self.canvasHeight,
+                      stroke=self.lineColor))
+        group.append(draw.Text("资源", 20, self.nameTextSize + 275, top + 20 + self.rowHeight * 2, fill="#555555"))
 
         return group
 
@@ -294,7 +298,7 @@ class Calendar(Canvas):
         self.draw.append(background)
 
 
-class Gantt(Calendar):
+class Gantt(Calendar, Canvas):
     data = {}
     textIndent = 0
     textIndentSize = 19
@@ -305,11 +309,11 @@ class Gantt(Calendar):
         self.canvasHeight = self.height
         self.workweeks = 5
         self.firstsd = None
-        self.fontSize = 18
+        self.name = ""
 
         pass
 
-    def name(self, name):
+    def author(self, name):
         self.name = name
 
     def title(self, text):
@@ -320,7 +324,8 @@ class Gantt(Calendar):
 
         group = draw.Group(id="title", onclick="this.style.stroke = 'green'; ")
         group.append(draw.Text(text, 30, self.canvasWidth / 2, 25, center=True, text_anchor="middle"))
-        group.append(draw.Text(self.name, 20, 5, self.rowHeight * 3 + 12))
+        if self.name:
+            group.append(draw.Text(self.name, 20, 5, self.rowHeight * 3 + 12))
         self.draw.append(group)
 
     def legend(self):
@@ -375,16 +380,16 @@ class Gantt(Calendar):
             # text.append(draw.TSpan(line['begin'], text_anchor='start'))
             # text.append(draw.TSpan(line['end'], text_anchor='start'))
 
-            table.append(draw.Text(line["start"], self.fontSize, self.nameTextSize + 5, top + 20, text_anchor="start"))
+            table.append(draw.Text(line["start"], self.fontSize, self.nameTextSize + 10, top + 20, text_anchor="start"))
             table.append(
-                draw.Text(line["finish"], self.fontSize, self.nameTextSize + 100, top + 20, text_anchor="start"))
+                draw.Text(line["finish"], self.fontSize, self.nameTextSize + 120, top + 20, text_anchor="start"))
             # if 'progress' in line:
             #     table.append(draw.Text(
             #         str(line['progress']), 20, self.nameTextSize + 200, top + 20, text_anchor='start'))
 
-            table.append(draw.Text(str(end + 1), self.fontSize, self.nameTextSize + 205, top + 20, text_anchor="start"))
+            table.append(draw.Text(str(end + 1), self.fontSize, self.nameTextSize + 225, top + 20, text_anchor="start"))
             if "resource" in line:
-                table.append(draw.Text(str(line["resource"]), self.fontSize, self.nameTextSize + 245, top + 20,
+                table.append(draw.Text(str(line["resource"]), self.fontSize, self.nameTextSize + 275, top + 20,
                                        text_anchor="start"))
             lineGroup.append(table)
 
@@ -502,29 +507,44 @@ class Gantt(Calendar):
             except KeyError as err:
                 print("KeyError: predecessor=%s, %s" % (err, task))
 
-    def getTextSize(self, text, size=21):
-        # # fontFace = cv2.FONT_HERSHEY_SIMPLEX
-        # fontFace = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
-        # # fontFace = cv2.FONT_HERSHEY_PLAIN
-        # fontScale = 0.55
-        # thickness = 2
+    def getTextSize(self, text):
+        #   if platform.system() == "Linux":
+        #     font = r"/usr/local/share/netkiller/Songti.ttc"
+        # elif platform.system() == "Darwin":
+        #     font = r"/System/Library/Fonts/Supplemental/Songti.ttc"
+        # else:
+        #     font = r"Songti.ttc"
 
-        # size = cv2.getTextSize(text, fontFace, fontScale, thickness)
-        # width, height = size[0]
+        # 创建一个临时图像用于测量
+        img = Image.new('RGB', (1, 1))
+        draw = ImageDraw.Draw(img)
 
-        # font = 'AdobeFangsongStd-Regular.otf'
-        # font = r'Apple Symbols.ttf'
+        # import matplotlib.font_manager as fm
+        # font_path = fm.findfont(fm.FontProperties())  # 获取默认字体路径
+        # print(f"查看字体文件：{self.fontFamily} {self.fontSize}")
 
-        if platform.system() == "Linux":
-            font = r"/usr/local/share/netkiller/Songti.ttc"
-        elif platform.system() == "Darwin":
-            font = r"/System/Library/Fonts/Supplemental/Songti.ttc"
-        else:
-            font = r"Songti.ttc"
+        try:
+            font = ImageFont.truetype(self.fontFamily, size=self.fontSize, encoding="utf-8")
+        except IOError:
+            # raise FileNotFoundError(f"字体文件不存在：{font_path}，请替换为系统中实际存在的字体路径")
+            if self.fontSize > 0:
+                font = ImageFont.load_default(self.fontSize)
+            else:
+                font = ImageFont.load_default()
+                # print()
 
-        font = ImageFont.truetype(font=font, size=size, encoding="utf-8")
-        # font = ImageFont.truetype("symbol.ttf", 16, encoding="symb")
-        width, height = font.getsize(text)
+        # 计算文本尺寸
+        # 使用 textbbox 获取边界框（参数为文本左上角坐标）
+        left, top, right, bottom = draw.textbbox((0, 0), text, font=font,
+                                                 # spacing=0,
+                                                 align="left")
+
+        # 计算宽度和高度
+        width = right - left
+        height = bottom - top
+        # print(f"文本：{text} 宽度：{width}px，高度：{height}px 字体：{font.getname()} ")
+        # return width, height
+
         return width
 
     def load(self, data):
@@ -539,7 +559,7 @@ class Gantt(Calendar):
                 self.textIndent -= 1
 
             # 计算文字宽度
-            length = self.getTextSize(item["name"])
+            length = self.getTextSize(item["name"]) + self.fontSize
 
             # 文本表格所占用的宽度
             if self.textIndent > 0:
@@ -550,7 +570,7 @@ class Gantt(Calendar):
                     self.nameTextSize = length
 
             if "resource" in item and item["resource"]:
-                length = self.getTextSize(item["resource"])
+                length = self.getTextSize(item["resource"]) + self.fontSize * 2
                 if self.resourceTextSize < length:
                     self.resourceTextSize = length
 
@@ -769,3 +789,6 @@ class Workload(Gantt):
 
     def workloadChart(self, title):
         self.workload(title)
+
+    def main(self):
+        pass

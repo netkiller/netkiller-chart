@@ -1,3 +1,7 @@
+mysql
+requests
+drawsvg
+
 svgwrite
 cairosvg
 pillow
