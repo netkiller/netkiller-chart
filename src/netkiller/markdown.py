@@ -17,13 +17,13 @@ class Markdown:
         self.markdown = markdown
         pass
 
-    def parse(self, md_text):
+    def mindmap(self):
         """
         解析Markdown列表为嵌套字典结构，确保同级节点正确识别
         修复AlmaLinux的层级问题
         """
         # 按行分割文本，保留原始缩进信息（不strip()）
-        lines = [line for line in md_text.split('\n') if line.strip()]
+        lines = [line for line in self.markdown.split('\n') if line.strip()]
 
         # 提取根标题（以#开头的行）
         title = ""
@@ -79,16 +79,82 @@ class Markdown:
 
         return root
 
-    def dumps(self):
-        result = self.parse(self.markdown)
-        json_output = json.dumps(result, ensure_ascii=False, indent=2)
-        return json_output
+    def table2csv(self):
+        """从 Markdown 文本中提取第一个表格并转为 DataFrame"""
+        # 按行分割文本
+        lines = [line.strip() for line in self.markdown.split('\n') if line.strip()]
+
+        # 查找表格的起始和结束位置（寻找包含 | 的行）
+        table = []
+        is_table = False
+        for line in lines:
+            if '|' in line and '|-' not in line:
+                table.append(line.replace('|', ',').strip(','))  # 替换 | 为逗号
+
+        if not table:
+            return None  # 未找到表格
+
+        csv_text = '\n'.join(table)
+        # print(table)
+        return csv_text
+
+    def table2list(self):
+        """从 Markdown 文本中提取第一个表格并转为 DataFrame"""
+        # 按行分割文本
+        lines = [line.strip() for line in self.markdown.split('\n') if line.strip()]
+
+        # 查找表格的起始和结束位置（寻找包含 | 的行）
+        table = []
+        is_table = False
+        for line in lines:
+            # if '|' in line:
+            #     is_table = True
+            # if '|-' in line:
+            #     is_table = True
+            #     continue
+            if '|' in line and '|-' not in line:
+                table.append(line.strip('|').split('|'))  # 替换 | 为逗号
+            # elif in_table:
+            #     break  # 表格结束
+
+        if not table:
+            return None  # 未找到表格
+        return table
+
+    def table2dict(self):
+        """从 Markdown 文本中提取第一个表格并转为 DataFrame"""
+        # 按行分割文本
+        lines = [line.strip() for line in self.markdown.split('\n') if line.strip()]
+
+        # 查找表格的起始和结束位置（寻找包含 | 的行）
+        table = []
+        header = []
+        for line in lines:
+            if '|' in line and not header:
+                header = line.strip('|').split('|')
+                header = [item.strip() for item in header]
+                continue
+            # if '|-' in line:
+            #     continue
+            if '|' in line and '|-' not in line:
+                body = line.strip('|').split('|')
+                body = [item.strip() for item in body]
+                table.append(dict(zip(header, body)))  # 替换 | 为逗号
+
+        if not table:
+            return None  # 未找到表格
+        return table
+
+    # def dumps(self):
+    #     result = self.mindmap()
+    #     json_output = json.dumps(result, ensure_ascii=False, indent=2)
+    #     return json_output
+    #
+    def gantt(self):
+        self.table2dict()
 
     def debug(self):
-        print(self.dumps())
-
-    def jsonData(self):
-        return self.parse(self.markdown)
+        pass
 
     def main(self):
         # 示例 Markdown 文本
@@ -119,6 +185,13 @@ class Markdown:
         # json_output = json.dumps(result, ensure_ascii=False, indent=2)
         self.debug()
         # 打印 JSON 输出
+
+        # df = markdown2csv(md_text)
+        # print(df)
+        # print('-' * 50)
+        t = self.table2dict()
+        print(t)
+        # print(self.dumps())
 
 
 if __name__ == "__main__":

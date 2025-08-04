@@ -14,6 +14,11 @@ try:
     import os
     import platform
     from PIL import ImageFont, ImageDraw, Image
+    from optparse import OptionParser, OptionGroup
+    import json
+    import csv
+    import logging
+    import logging.handlers
 except ImportError as err:
     print("Error: %s" % (err))
 
@@ -33,6 +38,11 @@ class Data:
         pass
 
     def add(self, id, name, start, finish, resource, predecessor, milestone, parent):
+
+        if not resource:
+            resource = ""
+        if not parent:
+            parent = 0
         # duration
         item = {"id": id, "name": name, "start": start, "finish": finish, "resource": resource,
                 "predecessor": predecessor, "milestone": milestone}
@@ -631,6 +641,97 @@ class Gantt(Calendar, Canvas):
         if filename:
             self.draw.save_png("example.png")
 
+    def usage(self):
+        self.parser.print_help()
+        print("\nHomepage: https://www.netkiller.cn\tAuthor: Neo <netkiller@msn.com>")
+        print("Help: https://pypi.org/project/netkiller-gantt/")
+        exit()
+
+    def main(self):
+        self.parser = OptionParser("usage: %prog [options] ")
+
+        self.parser.add_option("", "--stdin", action="store_true", dest="stdin",
+                               help="cat gantt.json | gantt -s file.svg")
+        self.parser.add_option("-c", "--csv", dest="csv", help="/path/to/gantt.csv", default=None,
+                               metavar="/path/to/gantt.csv")
+        self.parser.add_option("-l", "--load", dest="load", help="load data from file.", default=None,
+                               metavar="/path/to/gantt.json")
+
+        # group = OptionGroup(self.parser, "loading data from mysql")
+        # group.add_option("-H", "--host", dest="host", help="", default=None, metavar="localhost")
+        # group.add_option("-u", "--username", dest="username", help="", default=None, metavar="root")
+        # group.add_option("-p", "--password", dest="password", help="", default=None, metavar="")
+        # group.add_option("-D", "--database", dest="database", help="", default=None, metavar="test")
+        # self.parser.add_option_group(group)
+
+        group = OptionGroup(self.parser, "Charts")
+        group.add_option("-t", "--title", dest="title", help="甘特图标题", default="甘特图标题", metavar="项目甘特图")
+        group.add_option("-n", "--name", dest="name", help="项目名称", default="Netkiller Python 手札",
+                         metavar="Netkiller Python 手札")
+        group.add_option("-W", "--workweeks", dest="workweeks", help="workweeks default 5", default=5, metavar="5")
+        group.add_option("-o", "--odd-even", action="store_true", dest="oddeven", default=False, help="odd-even weeks")
+        group.add_option("-g", "--gantt", action="store_true", dest="gantt", default=True, help="Gantt chart")
+        group.add_option("-w", "--workload", action="store_true", dest="workload", help="Workload chart")
+        group.add_option("-s", "--save", dest="save", help="save file", default=None, metavar="/path/to/gantt.svg")
+        self.parser.add_option_group(group)
+        self.parser.add_option("-d", "--debug", action="store_true", dest="debug", help="debug mode")
+
+        (options, args) = self.parser.parse_args()
+        if options.stdin:
+            self.data = json.loads(sys.stdin.read())
+        elif options.csv:
+            with open(options.csv) as csvfile:
+                items = csv.DictReader(csvfile)
+                tmp = Data()
+                for item in items:
+                    if item["milestone"] == "TRUE":
+                        item["milestone"] = True
+                    else:
+                        item["milestone"] = False
+
+                    tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
+                            item["predecessor"], item["milestone"], item["parent"])
+                self.data = tmp.data
+        # elif options.host:
+        #     config = {"host": options.host, "user": options.username, "password": options.password,
+        #               "database": options.database, "raise_on_warnings": True}
+        #     self.loadFromMySQL(config)
+        if options.debug:
+            print(options, args)
+            print(json.dumps(self.data, ensure_ascii=False))
+
+        if not self.data:
+            self.usage()
+
+        if options.save:
+            file = options.save
+        else:
+            if options.workload:
+                file = "workload.svg"
+            elif options.gantt:
+                file = "gantt.svg"
+
+        if options.workweeks:
+            workweeks = options.workweeks
+
+        if options.workload:
+            workload = Workload()
+            workload.load(self.data)
+            workload.name(options.name)
+            workload.setWorkweeks(workweeks, False)
+            workload.workloadChart(options.title)
+            workload.save(file)
+
+        elif options.gantt:
+            self.gantt = Gantt()
+            # self.gantt.hideTable()
+            self.gantt.load(self.data)
+            self.gantt.name(options.name)
+            self.gantt.setWorkweeks(workweeks, options.oddeven)
+            self.gantt.ganttChart(options.title)
+            self.gantt.save(file)
+            # self.gantt.export(file)
+
 
 class Workload(Gantt):
     def __init__(self) -> None:
@@ -789,6 +890,3 @@ class Workload(Gantt):
 
     def workloadChart(self, title):
         self.workload(title)
-
-    def main(self):
-        pass

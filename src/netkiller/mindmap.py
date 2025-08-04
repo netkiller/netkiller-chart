@@ -447,7 +447,7 @@ class Mindmap:
 
     def markdown(self, text: str):
         markdown = Markdown(text)
-        self.jsonObject = markdown.jsonData()
+        self.jsonObject = markdown.mindmap()
 
     def rander(self):
 
@@ -565,7 +565,7 @@ class Mindmap:
         self.parser.add_argument('-o', '--output', default=None, type=str, metavar='example.svg', help='output picture')
 
         args = self.parser.parse_args()
-        print(args)
+        # print(args)
         if args.markdown and args.output:
             with open(args.markdown) as file:
                 text = file.read()
