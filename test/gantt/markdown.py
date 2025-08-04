@@ -3,6 +3,7 @@
 ##############################################
 # Home	: https://www.netkiller.cn
 # Author: Neo <netkiller@msn.com>
+# Data: 2025-08-04
 ##############################################
 import os
 import sys
@@ -60,10 +61,6 @@ def main():
         gantt.title("Test")
         gantt.legend(False)
         gantt.save("markdown.svg")
-
-        # gantt.export(file)
-
-        # gantt.main()
     except KeyboardInterrupt as e:
         print(e)
     except Exception as e:
