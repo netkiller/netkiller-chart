@@ -57,8 +57,10 @@ def main():
         gantt.load(data)
         gantt.author("Neo Chen")
         # gantt.setWorkweeks(workweeks, options.oddeven)
-        gantt.ganttChart("Test")
+        gantt.title("Test")
+        gantt.legend(False)
         gantt.save("markdown.svg")
+
         # gantt.export(file)
 
         # gantt.main()
