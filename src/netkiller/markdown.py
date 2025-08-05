@@ -5,11 +5,14 @@
 # Author: Neo <netkiller@msn.com>
 # Data: 2025-07-20
 ##############################################
+
+
 try:
     import re
     import json
+    from netkiller.gantt import Data
 except ImportError as err:
-    print("Import Error: %s" % (err))
+    print("Error: %s" % (err))
     exit()
 
 
@@ -89,7 +92,7 @@ class Markdown:
         table = []
         is_table = False
         for line in lines:
-            if '|' in line and '|-' not in line:
+            if '|' in line and '|-' not in line and '| :-' not in line:
                 table.append(line.replace('|', ',').strip(','))  # 替换 | 为逗号
 
         if not table:
@@ -113,7 +116,7 @@ class Markdown:
             # if '|-' in line:
             #     is_table = True
             #     continue
-            if '|' in line and '|-' not in line:
+            if '|' in line and '|-' not in line and '| :-' not in line:
                 table.append(line.strip('|').split('|'))  # 替换 | 为逗号
             # elif in_table:
             #     break  # 表格结束
@@ -137,7 +140,7 @@ class Markdown:
                 continue
             # if '|-' in line:
             #     continue
-            if '|' in line and '|-' not in line:
+            if '|' in line and '|-' not in line and '| :-' not in line:
                 body = line.strip('|').split('|')
                 body = [item.strip() for item in body]
                 table.append(dict(zip(header, body)))  # 替换 | 为逗号
@@ -146,13 +149,37 @@ class Markdown:
             return None  # 未找到表格
         return table
 
-    # def dumps(self):
-    #     result = self.mindmap()
-    #     json_output = json.dumps(result, ensure_ascii=False, indent=2)
-    #     return json_output
+    def title(self):
+        lines = [line.strip() for line in self.markdown.split('\n') if line.strip()]
+        for line in lines:
+            if line.startswith('# '):
+                return line[2:].strip()
+        return None
+
+        # def dumps(self):
+
     #
     def gantt(self):
-        self.table2dict()
+        items = self.table2dict()
+
+        tmp = Data()
+        no = 1
+        for item in items:
+            # print(item)
+            try:
+                tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
+                        item["predecessor"], item["milestone"], item["parent"])
+            except KeyError as err:
+                print(
+                    "Error: The key %s does not exist. The full details are as follows: | id | name | start | finish | resource | predecessor | milestone | parent | " % (
+                        err))
+                exit()
+            no += 1
+        data = tmp.data
+
+        # json_output = json.dumps(data, ensure_ascii=False, indent=2)
+        # print(json_output)
+        return data
 
     def debug(self):
         pass
