@@ -20,7 +20,8 @@ try:
     # import cairo
     # from cairosvg import svg2png
 except ImportError as err:
-    print("Import Error: %s" % (err))
+    print("Error: %s" % (err))
+    exit()
 
 
 class Mindmap:

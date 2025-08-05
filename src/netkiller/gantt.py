@@ -21,6 +21,7 @@ try:
     import logging.handlers
 except ImportError as err:
     print("Error: %s" % (err))
+    exit()
 
 
 class Canvas:

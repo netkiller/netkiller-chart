@@ -10,6 +10,7 @@ try:
     import json
 except ImportError as err:
     print("Import Error: %s" % (err))
+    exit()
 
 
 class Markdown:
