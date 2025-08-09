@@ -17,7 +17,7 @@ license-files = ["LICEN[CS]E*"]
 dependencies = [
     "svgwrite",
     "pillow",
-    # Gantt
+    #    "cairosvg",
     "drawsvg"
 ]
 
