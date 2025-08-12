@@ -120,10 +120,10 @@ mindmap -m /path/to/neo.md -o /path/to/netkiller.svg
 ### 编程方式
 
 ```python
-
+from netkiller.markdown import Markdown
 from netkiller.mindmap import Mindmap
 
-markdown = """
+data = """
 # 操作系统
 - Operating System
   - Linux
@@ -144,9 +144,12 @@ markdown = """
     - Hp-Ux
     - Sco Unix
 """
-mindmap = Mindmap(markdown)
-mindmap.save('example.svg')
 
+markdown = Markdown(data)
+jsonData = markdown.mindmap()
+
+mindmap = Mindmap(jsonData)
+mindmap.save('example.svg')
 ```
 
 ### 从标准输入创建思维导图
@@ -206,5 +209,66 @@ mindmap.save('example.svg')
 
 ```shell
 (.venv) neo@netkiller netkiller-chart % cat test/mindmap/os.md | mindmap -o test/mindmap/os.svg -s
+
+```
+
+### 生成 Xmind 格式的思维导图
+
+```text
+-x 表示输出 Xmind 格式
+-t 是参考模版
+```
+
+```shell
+usage: mindmap [-h] [-m /path/to/yout.md] [-s] [-o example.svg] [-x example.xmind] [-t /path/to/your/template.xmind]
+
+Markdown To Mindmap
+
+options:
+  -h, --help            show this help message and exit
+  -m, --markdown /path/to/yout.md
+                        Markfown file
+  -s, --stdin           Standard input from the terminal
+  -o, --output example.svg
+                        output picture
+  -x, --xmind example.xmind
+                        output xmind
+  -t, --template /path/to/your/template.xmind
+                        xmind template
+```
+
+命令行
+
+```shell
+(.venv) neo@Mac netkiller-chart % cat test/mindmap/os.md| mindmap -s -x test/test.xmind
+
+```
+
+#### Python 编码方式
+
+```python
+from netkiller.markdown import Markdown
+
+from src.netkiller.mindmap import Mindmap
+
+
+def main():
+    data = """# Netkiller Linux 手札
+- Linux
+  - Redhat
+  - CentOS
+  - Rocky Linux
+  - AlmaLinux
+    """
+
+    markdown = Markdown(data)
+    jsonData = markdown.mindmap()
+
+    mindmap = Mindmap(jsonData)
+    mindmap.xmind('none.xmind', 'test.xmind')
+
+
+if __name__ == "__main__":
+    main()
 
 ```

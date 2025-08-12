@@ -17,7 +17,7 @@ try:
     from PIL import ImageFont, ImageDraw, Image
     import argparse
     from netkiller.markdown import Markdown
-    # import cairo
+    import xmind
     # from cairosvg import svg2png
 except ImportError as err:
     print("Error: %s" % (err))
@@ -39,7 +39,7 @@ class Mindmap:
     charHeight = 30
     level = 0
 
-    def __init__(self, jsonObject: str = None):
+    def __init__(self, jsonObject: dict = None):
         self.coordinate = {}
         self.horizontalPosition = 0
         self.verticalPosition = 0
@@ -538,6 +538,31 @@ class Mindmap:
                                        stroke='grey', stroke_width=1, stroke_dasharray='2,8'
                                        ))
 
+    def __xmindAddSubTopic(self, node, datas):
+
+        for data in datas:
+            sub = node.addSubTopic()
+            sub.setTitle(data['text'])
+            if 'children' in data:
+                self.__xmindAddSubTopic(sub, data['children'])
+
+    def __xmindSheet(self, template, filepath):
+        workbook = xmind.load(template)
+        sheet = workbook.getPrimarySheet()
+
+        sheet.setTitle(self.jsonObject['title'])
+        root = sheet.getRootTopic()
+        root.setTitle(self.jsonObject['text'])
+
+        # self.jsonObject['children']
+        self.__xmindAddSubTopic(root, self.jsonObject['children']);
+
+        # xmind.save(workbook, path="D:/my_map.xmind")
+        xmind.save(workbook, path=filepath)
+
+    def xmind(self, template, filepath):
+        self.__xmindSheet(template, filepath)
+
     def debug(self):
 
         # rect1 = self.dwg.rect(insert=(50, 70), size=(100, 80), rx=15, ry=15,
@@ -564,6 +589,10 @@ class Mindmap:
                                  help='Standard input from the terminal')
 
         self.parser.add_argument('-o', '--output', default=None, type=str, metavar='example.svg', help='output picture')
+        self.parser.add_argument('-x', '--xmind', default=None, type=str, metavar='example.xmind', help='output xmind')
+        self.parser.add_argument('-t', '--template', default="/path/to/your/template.xmind", type=str,
+                                 metavar='/path/to/your/template.xmind',
+                                 help='xmind template')
 
         args = self.parser.parse_args()
         # print(args)
@@ -573,9 +602,12 @@ class Mindmap:
                 self.markdown(text)
                 self.save(args.output)
         elif args.stdin and args.output:
-
             self.markdown(sys.stdin.read())
             self.save(args.output)
+
+        elif args.stdin and args.xmind:
+            self.markdown(sys.stdin.read())
+            self.xmind(args.template, args.xmind)
         else:
             self.parser.print_help()
 

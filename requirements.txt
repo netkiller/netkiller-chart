@@ -4,3 +4,4 @@ drawsvg
 svgwrite
 pillow
 pycairo
+xmind
