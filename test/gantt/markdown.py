@@ -13,7 +13,7 @@ sys.path.insert(0, ".")
 sys.path.insert(1, module)
 
 try:
-    from src.netkiller.gantt import Gantt, Data, Workload
+    from src.netkiller.gantt import Gantt, Data
     from src.netkiller.markdown import Markdown
 
 except ImportError as err:
@@ -85,7 +85,7 @@ def main():
 
     markdown = Markdown(text2)
     items = markdown.table2dict()
-    print(items)
+    # print(items)
     tmp = Data()
     no = 1
     for item in items:
@@ -96,7 +96,7 @@ def main():
                 None, None, None)
         no += 1
     data = tmp.data
-
+    print(data)
     try:
 
         gantt = Gantt()

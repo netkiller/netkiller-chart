@@ -5,15 +5,20 @@
 # Author: Neo <netkiller@msn.com>
 # Data: 2025-07-25
 ##############################################
+import os
 import sys
 
 try:
+    # module = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # print(module)
+    # sys.path.insert(0, ".")
+    # sys.path.insert(1, module)
+
     import calendar
     import drawsvg as draw
     from datetime import datetime, date
     from PIL import ImageFont
     import requests
-    import os
     import platform
     from PIL import ImageFont, ImageDraw, Image
     from optparse import OptionParser, OptionGroup
@@ -21,6 +26,7 @@ try:
     import csv
     import logging
     import logging.handlers
+    from netkiller.markdown import Markdown
 except ImportError as err:
     print("Error: %s" % (err))
     exit()
@@ -40,13 +46,17 @@ class Data:
     def __init__(self) -> None:
         pass
 
-    def add(self, id, name, start, finish, resource, predecessor, milestone, parent):
+    def add(self, id: int, name: str, start: str, finish: str, resource: str, predecessor: int, milestone: bool,
+            parent: int):
 
         if not resource:
             resource = ""
         if not parent:
             parent = 0
-        # duration
+        if not milestone:
+            milestone = False
+        if not predecessor:
+            predecessor = 0
         item = {"id": id, "name": name, "start": start, "finish": finish, "resource": resource,
                 "predecessor": predecessor, "milestone": milestone}
 
@@ -521,11 +531,11 @@ class Gantt(Calendar, Canvas):
         linkGroup.append(path)
         return linkGroup
 
-    def predecessor(self, data):
+    def __predecessor(self, data):
         for id, task in data.items():
             try:
                 if "subitem" in task:
-                    self.predecessor(task["subitem"])
+                    self.__predecessor(task["subitem"])
                 elif "predecessor" in task and task["predecessor"] and int(task["predecessor"]) > 0:
                     # print(self.linkPosition)
                     link = self.link(self.linkPosition[task["predecessor"]], self.linkPosition[task["id"]])
@@ -608,6 +618,7 @@ class Gantt(Calendar, Canvas):
     def rander(self):
         self.maxDate = []
         self.minDate = []
+
         self.lineNumber = len(self.data)
 
         self.__initialize(self.data)
@@ -642,37 +653,41 @@ class Gantt(Calendar, Canvas):
         self.draw.append(self.taskGroup)
 
         self.handover = draw.Group(id="handover")
-        self.predecessor(self.data)
+        self.__predecessor(self.data)
         self.draw.append(self.handover)
 
         self.__legend()
 
-    def save(self, filename=None):
+    def save(self, filename: str):
         self.rander()
-        if filename:
-            # d.set_pixel_scale(2)  # Set number of pixels per geometry unit
-            # d.set_render_size(400, 200)  # Alternative to set_pixel_scale
-            self.draw.save_svg(filename)
-        # self.draw.save_png('example.png')
-        # self.draw.rasterize()
+        self.draw.save_svg(filename)
 
-    def export(self, filename=None):
-        if filename:
-            self.draw.save_png("example.png")
+    # self.draw.save_png('example.png')
+    # self.draw.rasterize()
 
+    def export(self, filename):
+        self.rander()
+        self.draw.save_png(filename)
 
-class GanttCommand():
-    def __init__(self) -> None:
+    def usage(self):
+        self.parser.print_help()
+        print("\nHomepage: https://www.netkiller.cn\tAuthor: Neo <netkiller@msn.com>")
+        print("Help: https://pypi.org/project/netkiller-gantt/")
+        exit()
+
+    def main(self):
+
         self.parser = OptionParser("usage: %prog [options] ")
-
         self.parser.add_option("", "--stdin", action="store_true", dest="stdin",
                                help="cat gantt.json | gantt -s file.svg")
-        self.parser.add_option("-c", "--csv", dest="csv", help="/path/to/gantt.csv", default=None,
-                               metavar="/path/to/gantt.csv")
-        self.parser.add_option("-j", "--json", dest="load", help="load data from file.", default=None,
-                               metavar="/path/to/gantt.json")
-        self.parser.add_option("-m", "--markdown", dest="markdown", help="load data from file.", default=None,
-                               metavar="/path/to/gantt.json")
+        group = OptionGroup(self.parser, "loading data from file")
+        group.add_option("-c", "--csv", dest="csv", help="/path/to/gantt.csv", default=None,
+                         metavar="/path/to/gantt.csv")
+        group.add_option("-j", "--json", dest="load", help="load data from file.", default=None,
+                         metavar="/path/to/gantt.json")
+        group.add_option("-m", "--markdown", dest="markdown", help="load data from file.", default=None,
+                         metavar="/path/to/gantt.md")
+        self.parser.add_option_group(group)
         # group = OptionGroup(self.parser, "loading data from mysql")
         # group.add_option("-H", "--host", dest="host", help="", default=None, metavar="localhost")
         # group.add_option("-u", "--username", dest="username", help="", default=None, metavar="root")
@@ -684,26 +699,24 @@ class GanttCommand():
         group.add_option("-t", "--title", dest="title", help="甘特图标题", default="甘特图标题", metavar="项目甘特图")
         group.add_option("-n", "--name", dest="name", help="项目名称", default="Netkiller Python 手札",
                          metavar="Netkiller Python 手札")
-        group.add_option("-W", "--workweeks", dest="workweeks", help="workweeks default 5", default=5, metavar="5")
+        group.add_option("-w", "--workweeks", dest="workweeks", help="workweeks default 5", default=5, metavar="5")
         group.add_option("-o", "--odd-even", action="store_true", dest="oddeven", default=False, help="odd-even weeks")
         # group.add_option("-g", "--gantt", action="store_true", dest="gantt", default=True, help="Gantt chart")
         # group.add_option("-w", "--workload", action="store_true", dest="workload", help="Workload chart")
-        group.add_option("-s", "--save", dest="save", help="save file", default=None, metavar="/path/to/gantt.svg")
         self.parser.add_option_group(group)
+        self.parser.add_option("-s", "--save", dest="save", help="save file", default=None,
+                               metavar="/path/to/gantt.svg")
+        self.parser.add_option("-e", "--export", dest="save", help="export png file", default=None,
+                               metavar="/path/to/gantt.png")
         self.parser.add_option("-d", "--debug", action="store_true", dest="debug", help="debug mode")
-
-    def usage(self):
-        self.parser.print_help()
-        print("\nHomepage: https://www.netkiller.cn\tAuthor: Neo <netkiller@msn.com>")
-        print("Help: https://pypi.org/project/netkiller-gantt/")
-        exit()
-
-    def main(self):
 
         (options, args) = self.parser.parse_args()
         # exit()
+
+        data: dict = {}
+
         if options.stdin:
-            self.data = json.loads(sys.stdin.read())
+            data = json.loads(sys.stdin.read())
         elif options.csv:
             with open(options.csv) as csvfile:
                 items = csv.DictReader(csvfile)
@@ -716,43 +729,63 @@ class GanttCommand():
 
                     tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
                             item["predecessor"], item["milestone"], item["parent"])
-                self.data = tmp.data
+                data = tmp.data
+        elif options.markdown:
+            with open(options.markdown) as file:
+                markdown = Markdown(file.read())
+                items = markdown.table2dict()
+                # print(items)
+                tmp = Data()
+                for item in items:
+                    # print(item)
+                    tmp.add(int(item["id"]), item["name"], item["start"], item["finish"], item["resource"],
+                            int(item["predecessor"]), bool(item["milestone"]), int(item["parent"]))
+                data = tmp.data
+                # print(data)
+
         # elif options.host:
         #     config = {"host": options.host, "user": options.username, "password": options.password,
         #               "database": options.database, "raise_on_warnings": True}
         #     self.loadFromMySQL(config)
         if options.debug:
             print(options, args)
-            print(json.dumps(self.data, ensure_ascii=False))
+            print(json.dumps(data, ensure_ascii=False))
 
-        # if not self.data:
-        #     self.usage()
+        if not data:
+            self.usage()
 
         if options.save:
-            file = options.save
-        # else:
-        #     if options.workload:
-        #         file = "workload.svg"
-        #     elif options.gantt:
-        #         file = "gantt.svg"
+            #     file = options.save
+            # else:
+            #     if options.workload:
+            #         file = "workload.svg"
 
-        if options.workweeks:
-            workweeks = options.workweeks
+            # if options.workweeks:
+            #     workweeks = options.workweeks
 
-        # elif options.gantt:
-        self.gantt = Gantt()
-        # self.gantt.hideTable()
-        self.gantt.load(self.data)
-        self.gantt.name(options.name)
-        self.gantt.setWorkweeks(workweeks, options.oddeven)
-        self.gantt.ganttChart(options.title)
-        self.gantt.save(file)
-        # self.gantt.export(file)
+            # # elif options.gantt:
+            # gantt = Gantt()
+            # self.gantt.hideTable()
+            self.load(data)
+            self.title(options.title)
+            self.author(options.name)
+            self.setWorkweeks(options.workweeks, options.oddeven)
+            # self.gantt.ganttChart(options.title)
+            self.save(options.save)
+
+        elif options.export:
+            self.load(data)
+            self.title(options.title)
+            self.author(options.name)
+            self.setWorkweeks(options.workweeks, options.oddeven)
+            # self.gantt.ganttChart(options.title)
+            self.gantt.export(options.export)
+            #         file = "gantt.svg"
 
 
 def main():
     try:
-        gantt = GanttCommand()
+        gantt = Gantt()
         gantt.main()
     except KeyboardInterrupt as e:
         print(e)

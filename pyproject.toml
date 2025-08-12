@@ -4,7 +4,7 @@ version = "0.2.0"
 authors = [
     { name = "Neo", email = "netkiller@msn.com" },
 ]
-description = "Netkiller Chart"
+description = "Netkiller Chart(Mindmap,Gantt,Xmind)"
 readme = "README.md"
 requires-python = ">=3.12"
 classifiers = [

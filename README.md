@@ -32,8 +32,8 @@ sys.path.insert(0, ".")
 sys.path.insert(1, module)
 
 try:
-    from src.netkiller.gantt import Gantt, Data, Workload
-    from src.netkiller.markdown import Markdown
+    from netkiller.gantt import Gantt, Data, Workload
+    from netkiller.markdown import Markdown
 
 except ImportError as err:
     print("Error: %s" % (err))
@@ -249,7 +249,7 @@ options:
 ```python
 from netkiller.markdown import Markdown
 
-from src.netkiller.mindmap import Mindmap
+from netkiller.mindmap import Mindmap
 
 
 def main():
