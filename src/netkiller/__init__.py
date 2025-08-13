@@ -19,7 +19,7 @@ class Data:
         elif lower_s in ('false', '0', 'no', 'n'):
             return False
         else:
-            raise ValueError(f"无法将字符串 '{s}' 转换为布尔值")
+            raise ValueError(f"无法将字符串 '{lower_s}' 转换为布尔值")
 
     def add(self, id: int, name: str, start: str, finish: str, resource: str, progress: int, predecessor: int,
             milestone: bool,
