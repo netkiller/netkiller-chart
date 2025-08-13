@@ -9,10 +9,10 @@ import os
 import sys
 
 try:
-    # module = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    module = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     # print(module)
     # sys.path.insert(0, ".")
-    # sys.path.insert(1, module)
+    sys.path.insert(1, module)
 
     import calendar
     import drawsvg as draw
@@ -26,9 +26,10 @@ try:
     import csv
     import logging
     import logging.handlers
+    from netkiller import Data
     from netkiller.markdown import Markdown
 except ImportError as err:
-    print("Error: %s" % (err))
+    print("Gantt Error: %s" % (err))
     exit()
 
 
@@ -36,6 +37,12 @@ class Canvas:
     draw = None
     width = 1980
     height = 1080
+    canvasWidth = 0
+    canvasHeight = 0
+    splitLine = 1
+    canvasTop = 0
+    canvasLeft = 0
+
     # fontFamily = "Songti"
     fontFamily = "SourceHanSansSC-Normal"
     # fontFamily = "DejaVuSans"
@@ -80,66 +87,7 @@ class Canvas:
         return width
 
 
-class Data:
-    data = {}
-
-    def __init__(self) -> None:
-        pass
-
-    def add(self, id: int, name: str, start: str, finish: str, resource: str, predecessor: int, milestone: bool,
-            parent: int):
-
-        if not resource:
-            resource = ""
-        if not parent:
-            parent = 0
-        if not milestone:
-            milestone = False
-        if not predecessor:
-            predecessor = 0
-        item = {"id": id, "name": name, "start": start, "finish": finish, "resource": resource,
-                "predecessor": predecessor, "milestone": milestone}
-
-        if parent != "" and int(parent) > 0:
-            # print(parent)
-            if not "subitem" in self.data[parent]:
-                self.data[parent]["subitem"] = {}
-            self.data[parent]["subitem"][id] = item
-
-        else:
-            self.data[id] = item
-
-    def addFromMySQL(self, row):
-        # if row['milestone'] == 'TRUE':
-        #     row['milestone'] = True
-        # else:
-        #     row['milestone'] = False
-
-        id = row["id"]
-        parent = row["parent"]
-        row["start"] = row["start"].strftime("%Y-%m-%d")
-        row["finish"] = row["finish"].strftime("%Y-%m-%d")
-        if not row["resource"]:
-            row["resource"] = ""
-        # print(type(parent))
-        if parent and parent > 0:
-            if not "subitem" in self.data[parent]:
-                self.data[parent]["subitem"] = {}
-            self.data[parent]["subitem"][id] = row
-
-        else:
-            self.data[id] = row
-
-    def addDict(self, item):
-        pass
-
-
 class Calendar(Canvas):
-    canvasWidth = 0
-    canvasHeight = 0
-    splitLine = 1
-    canvasTop = 0
-    canvasLeft = 0
     startPosition = 0
     itemLine = 0
     rowHeight = 30

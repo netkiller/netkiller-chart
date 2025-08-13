@@ -3,14 +3,13 @@
 ##############################################
 # Home	: http://netkiller.github.io
 # Author: Neo <netkiller@msn.com>
-# Data: 2025-07-20
+# Data: 2025-08-13
 ##############################################
-
-
 try:
     import re
     import json
-    from netkiller.gantt import Data
+    # from netkiller.gantt import Data
+    from netkiller import Data
 except ImportError as err:
     print("Error: %s" % (err))
     exit()
@@ -167,11 +166,12 @@ class Markdown:
         for item in items:
             # print(item)
             try:
-                tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
-                        item["predecessor"], item["milestone"], item["parent"])
+                tmp.add(int(item["id"]), item["name"], item["start"], item["finish"], item["resource"],
+                        int(item["progress"]),
+                        int(item["predecessor"]), tmp.str2bool(item["milestone"]), int(item["parent"]))
             except KeyError as err:
                 print(
-                    "Error: The key %s does not exist. The full details are as follows: | id | name | start | finish | resource | predecessor | milestone | parent | " % (
+                    "Error: The key %s does not exist. The full details are as follows: | id | name | start | finish | resource | progress | predecessor | milestone | parent | " % (
                         err))
                 exit()
             no += 1

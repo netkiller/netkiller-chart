@@ -24,7 +24,7 @@ except ImportError as err:
 def main():
     text = """
     # Table
-    | id | name | start | finish | resource | predecessor | milestone | parent |
+    | id | name | start | finish | resource | progress | predecessor | milestone | parent |
     |------|------|--------|
     | 1 | 测试麦克风 | 2025-07-01 | 2025-07-02 | 工程师 |
     | 2 | 设备送检 | 2025-07-03 | 2025-07-04   | 设计师 |
@@ -93,7 +93,7 @@ def main():
         # tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
         #         item["predecessor"], item["milestone"], item["parent"])
         tmp.add(item["序号"], item["任务名称"], item["开始日期"], item["结束日期"], item["执行人"],
-                None, None, None)
+                0, None, None, None)
         no += 1
     data = tmp.data
     # print(data)
