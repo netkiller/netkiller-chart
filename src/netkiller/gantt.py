@@ -33,11 +33,51 @@ except ImportError as err:
 
 
 class Canvas:
+    draw = None
     width = 1980
     height = 1080
-    fontFamily = "Songti"
+    # fontFamily = "Songti"
+    fontFamily = "SourceHanSansSC-Normal"
+    # fontFamily = "DejaVuSans"
     fontSize = 20
     lineColor = "grey"
+
+    def getTextSize(self, text):
+        #   if platform.system() == "Linux":
+        #     font = r"/usr/local/share/netkiller/Songti.ttc"
+        # elif platform.system() == "Darwin":
+        #     font = r"/System/Library/Fonts/Supplemental/Songti.ttc"
+        # else:
+        #     font = r"Songti.ttc"
+
+        # 创建一个临时图像用于测量
+        img = Image.new('RGB', (1, 1))
+        draw = ImageDraw.Draw(img)
+
+        # try:
+        # font = ImageFont.truetype(r"Songti.ttc", size=self.fontSize, encoding="utf-8")
+        font = ImageFont.truetype(self.fontFamily, size=self.fontSize, encoding="utf-8")
+        # except IOError:
+        #     raise FileNotFoundError(f"字体文件不存在：{font_path}，请替换为系统中实际存在的字体路径")
+        # if self.fontSize > 0:
+        #     font = ImageFont.load_default(self.fontSize)
+        # else:
+        # font = ImageFont.load_default()
+        # print()
+
+        # 计算文本尺寸
+        # 使用 textbbox 获取边界框（参数为文本左上角坐标）
+        left, top, right, bottom = draw.textbbox((0, 0), text, font=font,
+                                                 # spacing=0,
+                                                 align="left")
+
+        # 计算宽度和高度
+        width = right - left
+        height = bottom - top
+        # print(f"文本：{text} 宽度：{width}px，高度：{height}px 字体：{font.getname()} ")
+        # return width, height
+        print(f"文本: {text} 字体: {self.fontFamily} 尺寸: {self.fontSize} 宽度：{width}")
+        return width
 
 
 class Data:
@@ -94,8 +134,7 @@ class Data:
         pass
 
 
-class Calendar():
-    draw = None
+class Calendar(Canvas):
     canvasWidth = 0
     canvasHeight = 0
     splitLine = 1
@@ -354,7 +393,8 @@ class Gantt(Calendar, Canvas):
             self.canvasTop += 50
 
         group = draw.Group(id="title", onclick="this.style.stroke = 'green'; ")
-        group.append(draw.Text(self.ganttTitle, 30, self.canvasWidth / 2, 25, center=True, text_anchor="middle"))
+        group.append(draw.Text(self.ganttTitle, 30, self.canvasWidth / 2, 25, center=True, text_anchor="middle",
+                               font_family=self.fontFamily))
         if self.name:
             group.append(draw.Text(self.name, 20, 5, self.rowHeight * 3 + 12))
         self.draw.append(group)
@@ -543,46 +583,6 @@ class Gantt(Calendar, Canvas):
             except KeyError as err:
                 print("KeyError: predecessor=%s, %s" % (err, task))
 
-    def getTextSize(self, text):
-        #   if platform.system() == "Linux":
-        #     font = r"/usr/local/share/netkiller/Songti.ttc"
-        # elif platform.system() == "Darwin":
-        #     font = r"/System/Library/Fonts/Supplemental/Songti.ttc"
-        # else:
-        #     font = r"Songti.ttc"
-
-        # 创建一个临时图像用于测量
-        img = Image.new('RGB', (1, 1))
-        draw = ImageDraw.Draw(img)
-
-        # import matplotlib.font_manager as fm
-        # font_path = fm.findfont(fm.FontProperties())  # 获取默认字体路径
-        # print(f"查看字体文件：{self.fontFamily} {self.fontSize}")
-
-        try:
-            font = ImageFont.truetype(self.fontFamily, size=self.fontSize, encoding="utf-8")
-        except IOError:
-            # raise FileNotFoundError(f"字体文件不存在：{font_path}，请替换为系统中实际存在的字体路径")
-            if self.fontSize > 0:
-                font = ImageFont.load_default(self.fontSize)
-            else:
-                font = ImageFont.load_default()
-                # print()
-
-        # 计算文本尺寸
-        # 使用 textbbox 获取边界框（参数为文本左上角坐标）
-        left, top, right, bottom = draw.textbbox((0, 0), text, font=font,
-                                                 # spacing=0,
-                                                 align="left")
-
-        # 计算宽度和高度
-        width = right - left
-        height = bottom - top
-        # print(f"文本：{text} 宽度：{width}px，高度：{height}px 字体：{font.getname()} ")
-        # return width, height
-
-        return width
-
     def load(self, data):
         self.data = data
 
@@ -642,6 +642,27 @@ class Gantt(Calendar, Canvas):
         self.canvasHeight = self.canvasTop + self.rowHeight * 5 + self.rowHeight * self.lineNumber + self.lineNumber + 20
 
         self.draw = draw.Drawing(self.canvasWidth, self.canvasHeight)
+        style = """<style><![CDATA[
+            /* 全局默认字体设置 */
+            * {
+              font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
+              font-size: 16px;
+            }
+
+            /* 标题样式可以继承默认字体并修改大小 */
+            .title {
+              font-size: 24px;
+              font-weight: bold;
+            }
+
+            .subtitle {
+              font-size: 20px;
+              fill: #666;
+            }
+        ]]></style>
+                """
+
+        self.draw.append(draw.Raw(style))
 
         # self.draw.append(draw.Rectangle(0, 0, self.canvasWidth, self.canvasHeight, fill="none", stroke="black"))
 

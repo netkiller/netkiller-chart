@@ -73,7 +73,7 @@ def main():
     ## 工作计划
     | 序号 | 任务名称 | 执行人 | 开始日期 | 结束日期 | 工时 |
     | :-----| :---- | :----: | :----: | :----: | :----: |
-    | 1 | 居家办公试行方案细则 | 发言人4 | 2025-08-06 | 2025-08-07 | 1.5天 |
+    | 1 | 1居家办公试行方案细则 | 发言人4 | 2025-08-06 | 2025-08-07 | 1.5天 |
     | 2 | 虚拟白板系统操作指南 | 技术部张磊 | 2025-08-07 | 2025-08-09 | 2天 |
     | 3 | 每日站会制度设计 | 周经理 | 2025-08-06 | 2025-08-06 | 0.5天 |
     | 4 | 行政支持清单 | 行政部门 | 2025-08-06 | 2025-08-07 | 1天 |
@@ -89,14 +89,14 @@ def main():
     tmp = Data()
     no = 1
     for item in items:
-        print(item)
+        # print(item)
         # tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
         #         item["predecessor"], item["milestone"], item["parent"])
         tmp.add(item["序号"], item["任务名称"], item["开始日期"], item["结束日期"], item["执行人"],
                 None, None, None)
         no += 1
     data = tmp.data
-    print(data)
+    # print(data)
     try:
 
         gantt = Gantt()
