@@ -53,7 +53,7 @@ def main():
         gantt.setWorkweeks(6, 1)
         gantt.title("Test")
         # gantt.legend(False)
-        gantt.blank(True)
+        # gantt.blank(True)
         gantt.save("markdown1.svg")
     except KeyboardInterrupt as e:
         print(e)

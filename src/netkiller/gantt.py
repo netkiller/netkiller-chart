@@ -46,7 +46,7 @@ class Canvas:
     height = 0
 
     splitLineHeight = 1
-    rowHeight = 30
+    rowHeight = 29
 
     margin = 0
     padding = 0
@@ -102,6 +102,7 @@ class Calendar(Canvas):
     progressHeight = 14
 
     nameTextSize = 1
+    dateTextSize = 0
     resourceTextSize = 90
 
     beginDate = datetime.now().date()
@@ -123,22 +124,34 @@ class Calendar(Canvas):
         # 画布最左边
         # group.append(draw.Line(1, top, 1, self.canvasHeight, stroke='black'))
 
-        group.append(draw.Text("任务", 20, 5, top + 20 + self.rowHeight * 2, fill="#555555"))
+        left = 5
+
+        group.append(draw.Text("任务", 20, left, top + 20 + self.rowHeight * 2, fill="#555555"))
+        left += self.nameTextSize + 5
         group.append(
-            draw.Line(self.nameTextSize, top + self.rowHeight * 2, self.nameTextSize, self.canvasHeight, stroke="grey"))
-        group.append(draw.Text("开始日期", 20, self.nameTextSize + 5, top + 20 + self.rowHeight * 2, fill="#555555"))
+            draw.Line(left, top + self.rowHeight * 2, left, self.canvasHeight, stroke="grey"))
+        group.append(draw.Text("开始日期", 20, left + 5, top + 20 + self.rowHeight * 2, fill="#555555"))
+        left += self.dateTextSize + 20
         group.append(
-            draw.Line(self.nameTextSize + 110, top + self.rowHeight * 2, self.nameTextSize + 110, self.canvasHeight,
+            draw.Line(left, top + self.rowHeight * 2,
+                      left, self.canvasHeight,
                       stroke=self.lineColor))
-        group.append(draw.Text("截止日期", 20, self.nameTextSize + 115, top + 20 + self.rowHeight * 2, fill="#555555"))
+        left += 5
         group.append(
-            draw.Line(self.nameTextSize + 220, top + self.rowHeight * 2, self.nameTextSize + 220, self.canvasHeight,
+            draw.Text("截止日期", 20, left, top + 20 + self.rowHeight * 2,
+                      fill="#555555"))
+        left += self.dateTextSize + 20
+        group.append(
+            draw.Line(left, top + self.rowHeight * 2, left, self.canvasHeight,
                       stroke="grey"))
-        group.append(draw.Text("工时", 20, self.nameTextSize + 225, top + 20 + self.rowHeight * 2, fill="#555555"))
+        left += 5
+        group.append(draw.Text("工时", 20, left, top + 20 + self.rowHeight * 2, fill="#555555"))
+        left += 45
         group.append(
-            draw.Line(self.nameTextSize + 270, top + self.rowHeight * 2, self.nameTextSize + 270, self.canvasHeight,
+            draw.Line(left, top + self.rowHeight * 2, left, self.canvasHeight,
                       stroke=self.lineColor))
-        group.append(draw.Text("资源", 20, self.nameTextSize + 275, top + 20 + self.rowHeight * 2, fill="#555555"))
+        left += 5
+        group.append(draw.Text("资源", 20, left, top + 20 + self.rowHeight * 2, fill="#555555"))
 
         return group
 
@@ -334,7 +347,7 @@ class Calendar(Canvas):
         # 日历边框
         self.draw.append(
             draw.Rectangle(self.canvasLeft, self.canvasTop, self.canvasWidth,
-                           top - self.rowHeight * 2 + self.splitLineHeight * self.lineNumber + 3,
+                           top - self.rowHeight * 2 + self.splitLineHeight * self.lineNumber + 1,
                            fill="none",
                            stroke="black"))
 
@@ -432,22 +445,27 @@ class Gantt(Calendar, Canvas):
         if not self.isTable:
             table = draw.Group(id="text")
 
-            table.append(draw.Text(line["name"], self.fontSize, 5 + (self.textIndent * self.textIndentSize), top + 20,
+            table.append(draw.Text(line["name"], self.fontSize, 10 + (self.textIndent * self.textIndentSize), top + 20,
                                    text_anchor="start"))
             # text.append(draw.TSpan(line['begin'], text_anchor='start'))
             # text.append(draw.TSpan(line['end'], text_anchor='start'))
 
-            table.append(draw.Text(line["start"], self.fontSize, self.nameTextSize + 5, top + 20, text_anchor="start"))
+            table.append(draw.Text(line["start"], self.fontSize, self.nameTextSize + 15, top + 20, text_anchor="start"))
             table.append(
-                draw.Text(line["finish"], self.fontSize, self.nameTextSize + 115, top + 20, text_anchor="start"))
+                draw.Text(line["finish"], self.fontSize, self.nameTextSize + self.dateTextSize + 35, top + 20,
+                          text_anchor="start"))
             # if 'progress' in line:
             #     table.append(draw.Text(
             #         str(line['progress']), 20, self.nameTextSize + 200, top + 20, text_anchor='start'))
 
-            table.append(draw.Text(str(end + 1), self.fontSize, self.nameTextSize + 225, top + 20, text_anchor="start"))
+            table.append(
+                draw.Text(str(end + 1), self.fontSize, self.nameTextSize + self.dateTextSize * 2 + 60, top + 20,
+                          text_anchor="start"))
             if "resource" in line:
-                table.append(draw.Text(str(line["resource"]), self.fontSize, self.nameTextSize + 275, top + 20,
-                                       text_anchor="start"))
+                table.append(
+                    draw.Text(str(line["resource"]), self.fontSize, self.nameTextSize + self.dateTextSize * 2 + 110,
+                              top + 20,
+                              text_anchor="start"))
             lineGroup.append(table)
 
         group = draw.Group(id="item")
@@ -497,7 +515,7 @@ class Gantt(Calendar, Canvas):
                               top + 20, text_anchor="start", fill="black"))
             else:
                 # 工时
-                r = draw.Rectangle(left, top + 4, right, self.barHeight, fill="#67AAFF", stroke="grey")
+                r = draw.Rectangle(left, top + 5, right, self.barHeight, fill="#67AAFF", stroke="grey")
                 r.append_title(line["name"])
                 group.append(r)
 
@@ -509,13 +527,13 @@ class Gantt(Calendar, Canvas):
                     else:
                         progress = line["progress"]
 
-                    progressBar = draw.Rectangle(left + 2, top + 7, 30 * progress - 2, self.progressHeight,
+                    progressBar = draw.Rectangle(left + 2, top + 8, 30 * progress - 2, self.progressHeight,
                                                  fill="#8AD97A")
                     # progressBar.append_title(str(progress))
                     group.append(progressBar)
                     group.append(
-                        draw.Text("%d%%" % ((progress / (end + 1)) * 100), 10, left + 5, top + 18, text_anchor="start",
-                                  fill="black"))
+                        draw.Text("%d%%" % ((progress / (end + 1)) * 100), 8, left + 5, top + 18, text_anchor="start",
+                                  fill="black", font_family=self.fontFamily))
 
         # 分割线
         # group.append(draw.Lines(1, top + self.rowHeight, self.canvasWidth, top + self.rowHeight, stroke="grey"))
@@ -587,6 +605,8 @@ class Gantt(Calendar, Canvas):
                 if self.nameTextSize < length:
                     self.nameTextSize = length
 
+            self.dateTextSize = self.getTextSize(" 9999-99-99 ")
+
             if "resource" in item and item["resource"]:
                 length = self.getTextSize(item["resource"])
                 if self.resourceTextSize < length:
@@ -617,7 +637,7 @@ class Gantt(Calendar, Canvas):
         self.nameTextSize += 10
 
         if not self.isTable:
-            self.startPosition = self.nameTextSize + self.resourceTextSize + 240
+            self.startPosition = self.nameTextSize + self.dateTextSize + self.resourceTextSize + 240
 
         days = self.endDate - self.beginDate
 
@@ -631,23 +651,27 @@ class Gantt(Calendar, Canvas):
 
         self.draw = draw.Drawing(self.width, self.height)
         style = """<style><![CDATA[
-            /* 全局默认字体设置 */
-            * {
-              font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
-              font-size: 16px;
-            }
+/* 全局默认字体设置 */
+* {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
+  /* font-size: 16px;*/
+}
 
-            /* 标题样式可以继承默认字体并修改大小 */
-            .title {
-              font-size: 24px;
-              font-weight: bold;
-            }
+/* 标题样式可以继承默认字体并修改大小 */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
 
-            .subtitle {
-              font-size: 20px;
-              fill: #666;
-            }
-        ]]></style>
+.subtitle {
+  font-size: 20px;
+  fill: #666;
+}
+.percentage{
+font-size: 8px;
+font-color:red;
+}
+]]></style>
                 """
 
         self.draw.append(draw.Raw(style))
