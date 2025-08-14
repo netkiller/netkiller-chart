@@ -23,7 +23,6 @@ try:
     from PIL import ImageFont, ImageDraw, Image
     from optparse import OptionParser, OptionGroup
     import json
-    import csv
     import logging
     import logging.handlers
     from netkiller import Data
@@ -104,6 +103,7 @@ class Calendar(Canvas):
     nameTextSize = 1
     dateTextSize = 0
     resourceTextSize = 90
+    textIndentSize = 40
 
     beginDate = datetime.now().date()
     endDate = datetime.now().date()
@@ -357,7 +357,6 @@ class Calendar(Canvas):
 class Gantt(Calendar, Canvas):
     data = {}
     textIndent = 0
-    textIndentSize = 0
     isBlank = False
 
     def __init__(self) -> None:
@@ -460,6 +459,8 @@ class Gantt(Calendar, Canvas):
             leftOffset = 0
             if end + 1 < 10:
                 leftOffset = 10
+            elif end + 1 < 100:
+                leftOffset = 5
             table.append(
                 draw.Text(str(end + 1), self.fontSize, self.nameTextSize + self.dateTextSize * 2 + 60 + leftOffset,
                           top + 20,
@@ -518,7 +519,7 @@ class Gantt(Calendar, Canvas):
                               top + 20, text_anchor="start", fill="black"))
             else:
                 # 工时
-                r = draw.Rectangle(left, top + 5, right, self.barHeight, fill="#67AAFF", stroke="grey")
+                r = draw.Rectangle(left, top + 5, right, self.barHeight, fill="#00C7C1", stroke="grey")
                 r.append_title(line["name"])
                 group.append(r)
 
@@ -531,7 +532,7 @@ class Gantt(Calendar, Canvas):
                         progress = line["progress"]
 
                     progressBar = draw.Rectangle(left + 2, top + 8, 30 * progress - 2, self.progressHeight,
-                                                 fill="#8AD97A")
+                                                 fill="#E6E6E6")
                     # progressBar.append_title(str(progress))
                     group.append(progressBar)
                     group.append(
@@ -568,7 +569,7 @@ class Gantt(Calendar, Canvas):
         y = fromTask["y"] + 15
         arrow = draw.Marker(-0.1, -0.51, 0.9, 0.5, scale=4, orient="auto")
         arrow.append(draw.Lines(-0.1, 0.5, -0.1, -0.5, 0.9, 0, fill="black", close=True))
-        path = draw.Path(stroke="red", stroke_width=2, fill="none", marker_end=arrow)
+        path = draw.Path(stroke="black", stroke_width=2, fill="none", marker_end=arrow)
         path.M(x, y).H(toTask["x"] + 15).V(toTask["y"] - 5)
         linkGroup.append(path)
         return linkGroup
@@ -598,7 +599,7 @@ class Gantt(Calendar, Canvas):
 
             # 计算文字宽度
             length = self.getTextSize(item["name"])
-            print(f"{item["name"]} {length}")
+            # print(f"{item["name"]} {length}")
 
             # 文本表格所占用的宽度
             if self.textIndent > 0:
@@ -658,21 +659,6 @@ class Gantt(Calendar, Canvas):
 * {
   font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
   /* font-size: 16px;*/
-}
-
-/* 标题样式可以继承默认字体并修改大小 */
-.title {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.subtitle {
-  font-size: 20px;
-  fill: #666;
-}
-.percentage{
-font-size: 8px;
-font-color:red;
 }
 ]]></style>
                 """
@@ -756,18 +742,8 @@ font-color:red;
         if options.stdin:
             data = json.loads(sys.stdin.read())
         elif options.csv:
-            with open(options.csv) as csvfile:
-                items = csv.DictReader(csvfile)
-                tmp = Data()
-                for item in items:
-                    if item["milestone"] == "TRUE":
-                        item["milestone"] = True
-                    else:
-                        item["milestone"] = False
-
-                    tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
-                            item["predecessor"], item["milestone"], item["parent"])
-                data = tmp.data
+            csv = Data()
+            data = csv.csvfile(options.csv)
         elif options.markdown:
             with open(options.markdown) as file:
                 markdown = Markdown(file.read())

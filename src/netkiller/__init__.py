@@ -2,6 +2,8 @@ __version__ = '0.0.6'
 __author__ = 'Neo Chen'
 __all__ = ['docker', '.']
 
+import csv
+
 
 class Data:
     data = {}
@@ -68,3 +70,21 @@ class Data:
 
     def addDict(self, item):
         pass
+
+    def csvfile(self, filepath):
+        with open(filepath) as csvfile:
+            items = csv.DictReader(csvfile)
+
+            for item in items:
+
+                if item["milestone"] == "TRUE":
+                    item["milestone"] = True
+                else:
+                    item["milestone"] = False
+                # print(item)
+                # tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
+                #         item["predecessor"], item["milestone"], item["parent"])
+                self.add(int(item["id"]), item["name"], item["start"], item["finish"], item["resource"],
+                         int(item['progress']),
+                         int(item["predecessor"]), bool(item["milestone"]), int(item["parent"]))
+        return self.data
