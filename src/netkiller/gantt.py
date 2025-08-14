@@ -53,7 +53,7 @@ class Canvas:
     # fontFamily = "Songti"
     fontFamily = "SourceHanSansSC-Normal"
     # fontFamily = "DejaVuSans"
-    fontSize = 20
+    fontSize = 18
     lineColor = "grey"
 
     def getTextSize(self, text):
@@ -140,7 +140,7 @@ class Calendar(Canvas):
         group.append(
             draw.Text("截止日期", 20, left, top + 20 + self.rowHeight * 2,
                       fill="#555555"))
-        left += self.dateTextSize + 20
+        left += self.dateTextSize + 15
         group.append(
             draw.Line(left, top + self.rowHeight * 2, left, self.canvasHeight,
                       stroke="grey"))
@@ -457,13 +457,16 @@ class Gantt(Calendar, Canvas):
             # if 'progress' in line:
             #     table.append(draw.Text(
             #         str(line['progress']), 20, self.nameTextSize + 200, top + 20, text_anchor='start'))
-
+            leftOffset = 0
+            if end + 1 < 10:
+                leftOffset = 10
             table.append(
-                draw.Text(str(end + 1), self.fontSize, self.nameTextSize + self.dateTextSize * 2 + 60, top + 20,
+                draw.Text(str(end + 1), self.fontSize, self.nameTextSize + self.dateTextSize * 2 + 60 + leftOffset,
+                          top + 20,
                           text_anchor="start"))
             if "resource" in line:
                 table.append(
-                    draw.Text(str(line["resource"]), self.fontSize, self.nameTextSize + self.dateTextSize * 2 + 110,
+                    draw.Text(str(line["resource"]), self.fontSize, self.nameTextSize + self.dateTextSize * 2 + 105,
                               top + 20,
                               text_anchor="start"))
             lineGroup.append(table)
@@ -532,7 +535,7 @@ class Gantt(Calendar, Canvas):
                     # progressBar.append_title(str(progress))
                     group.append(progressBar)
                     group.append(
-                        draw.Text("%d%%" % ((progress / (end + 1)) * 100), 8, left + 5, top + 18, text_anchor="start",
+                        draw.Text("%d%%" % ((progress / (end + 1)) * 100), 10, left + 5, top + 18, text_anchor="start",
                                   fill="black", font_family=self.fontFamily))
 
         # 分割线
@@ -564,7 +567,7 @@ class Gantt(Calendar, Canvas):
         x = fromTask["x"] + fromTask["width"] + 1
         y = fromTask["y"] + 15
         arrow = draw.Marker(-0.1, -0.51, 0.9, 0.5, scale=4, orient="auto")
-        arrow.append(draw.Lines(-0.1, 0.5, -0.1, -0.5, 0.9, 0, fill="red", close=True))
+        arrow.append(draw.Lines(-0.1, 0.5, -0.1, -0.5, 0.9, 0, fill="black", close=True))
         path = draw.Path(stroke="red", stroke_width=2, fill="none", marker_end=arrow)
         path.M(x, y).H(toTask["x"] + 15).V(toTask["y"] - 5)
         linkGroup.append(path)
@@ -637,7 +640,7 @@ class Gantt(Calendar, Canvas):
         self.nameTextSize += 10
 
         if not self.isTable:
-            self.startPosition = self.nameTextSize + self.dateTextSize + self.resourceTextSize + 240
+            self.startPosition = self.nameTextSize + self.dateTextSize * 2 + self.resourceTextSize + 80
 
         days = self.endDate - self.beginDate
 
