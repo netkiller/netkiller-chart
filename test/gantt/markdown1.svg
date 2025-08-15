@@ -15,21 +15,6 @@
   font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
   /* font-size: 16px;*/
 }
-
-/* 标题样式可以继承默认字体并修改大小 */
-.title {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.subtitle {
-  font-size: 20px;
-  fill: #666;
-}
-.percentage{
-font-size: 8px;
-font-color:red;
-}
 ]]></style>
                 
 <g id="title" onclick="this.style.stroke = 'green'; ">
@@ -159,10 +144,10 @@ font-color:red;
 <text x="405" y="158" font-size="18" text-anchor="start">工程师</text>
 </g>
 <g id="item">
-<rect x="471" y="143" width="61" height="20" fill="#67AAFF" stroke="grey">
+<rect x="471" y="143" width="61" height="20" fill="#00C7C1" stroke="grey">
 <title>测试麦克风</title>
 </rect>
-<rect x="473" y="146" width="28" height="14" fill="#8AD97A" />
+<rect x="473" y="146" width="28" height="14" fill="#E6E6E6" />
 <text x="476" y="156" font-size="10" text-anchor="start" fill="black" font-family="SourceHanSansSC-Normal">50%</text>
 </g>
 </g>
@@ -175,10 +160,10 @@ font-color:red;
 <text x="405" y="188" font-size="18" text-anchor="start">设计师</text>
 </g>
 <g id="item">
-<rect x="533" y="173" width="61" height="20" fill="#67AAFF" stroke="grey">
+<rect x="533" y="173" width="61" height="20" fill="#00C7C1" stroke="grey">
 <title>设备送检</title>
 </rect>
-<rect x="535" y="176" width="28" height="14" fill="#8AD97A" />
+<rect x="535" y="176" width="28" height="14" fill="#E6E6E6" />
 <text x="538" y="186" font-size="10" text-anchor="start" fill="black" font-family="SourceHanSansSC-Normal">50%</text>
 </g>
 </g>
@@ -191,10 +176,10 @@ font-color:red;
 <text x="405" y="218" font-size="18" text-anchor="start">设计师</text>
 </g>
 <g id="item">
-<rect x="595" y="203" width="185" height="20" fill="#67AAFF" stroke="grey">
+<rect x="595" y="203" width="185" height="20" fill="#00C7C1" stroke="grey">
 <title>完成包装</title>
 </rect>
-<rect x="597" y="206" width="28" height="14" fill="#8AD97A" />
+<rect x="597" y="206" width="28" height="14" fill="#E6E6E6" />
 <text x="600" y="216" font-size="10" text-anchor="start" fill="black" font-family="SourceHanSansSC-Normal">16%</text>
 </g>
 </g>
@@ -220,10 +205,10 @@ font-color:red;
 <text x="405" y="278" font-size="18" text-anchor="start">设计师</text>
 </g>
 <g id="item">
-<rect x="688" y="263" width="247" height="20" fill="#67AAFF" stroke="grey">
+<rect x="688" y="263" width="247" height="20" fill="#00C7C1" stroke="grey">
 <title>分析报告</title>
 </rect>
-<rect x="690" y="266" width="28" height="14" fill="#8AD97A" />
+<rect x="690" y="266" width="28" height="14" fill="#E6E6E6" />
 <text x="693" y="276" font-size="10" text-anchor="start" fill="black" font-family="SourceHanSansSC-Normal">12%</text>
 </g>
 </g>
@@ -236,20 +221,20 @@ font-color:red;
 <text x="405" y="308" font-size="18" text-anchor="start">设计师</text>
 </g>
 <g id="item">
-<rect x="471" y="293" width="185" height="20" fill="#67AAFF" stroke="grey">
+<rect x="471" y="293" width="185" height="20" fill="#00C7C1" stroke="grey">
 <title>集成测试</title>
 </rect>
-<rect x="473" y="296" width="28" height="14" fill="#8AD97A" />
+<rect x="473" y="296" width="28" height="14" fill="#E6E6E6" />
 <text x="476" y="306" font-size="10" text-anchor="start" fill="black" font-family="SourceHanSansSC-Normal">16%</text>
 </g>
 </g>
 </g>
 <g id="handover">
 <g id="link">
-<path d="M533,153 H548 V163" stroke="red" stroke-width="2" fill="none" marker-end="url(#d0)" />
+<path d="M533,153 H548 V163" stroke="black" stroke-width="2" fill="none" marker-end="url(#d0)" />
 </g>
 <g id="link">
-<path d="M533,153 H610 V193" stroke="red" stroke-width="2" fill="none" marker-end="url(#d1)" />
+<path d="M533,153 H610 V193" stroke="black" stroke-width="2" fill="none" marker-end="url(#d1)" />
 </g>
 </g>
 <text x="584" y="343" font-size="12" text-anchor="start" fill="grey">https://www.netkiller.cn - design by netkiller</text>

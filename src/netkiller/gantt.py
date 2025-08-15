@@ -123,7 +123,6 @@ class Calendar(Canvas):
         group.append_title("表格")
         # 画布最左边
         # group.append(draw.Line(1, top, 1, self.canvasHeight, stroke='black'))
-
         left = 5
 
         group.append(draw.Text("任务", 20, left, top + 20 + self.rowHeight * 2, fill="#555555"))
@@ -368,6 +367,7 @@ class Gantt(Calendar, Canvas):
         self.name = ""
         self.ganttTitle = None
         self.isLegend = True
+        self.__department = None
 
         pass
 
@@ -380,6 +380,9 @@ class Gantt(Calendar, Canvas):
     def title(self, text):
         self.ganttTitle = text
 
+    def department(self, text):
+        self.__department = text
+
     def __title(self):
         if self.isTable:
             return
@@ -388,7 +391,7 @@ class Gantt(Calendar, Canvas):
         group.append(draw.Text(self.ganttTitle, 30, self.canvasWidth / 2, 25, center=True, text_anchor="middle",
                                font_family=self.fontFamily))
         if self.name:
-            group.append(draw.Text(self.name, 20, 5, self.rowHeight * 3 + 12))
+            group.append(draw.Text(self.name, 16, 5, self.height - 5))
         self.draw.append(group)
 
     def legend(self, enable: bool):
@@ -401,7 +404,7 @@ class Gantt(Calendar, Canvas):
             return
         top = 10
         self.draw.append(
-            draw.Text("https://www.netkiller.cn - design by netkiller", 12, self.canvasWidth - 350,
+            draw.Text("https://www.netkiller.cn - design by netkiller", 12, self.canvasWidth - 250,
                       self.canvasHeight + 25,
                       text_anchor="start", fill="grey"))
 
@@ -430,7 +433,6 @@ class Gantt(Calendar, Canvas):
         # end = datetime.strptime(line['end'], '%Y-%m-%d').day
         end = (datetime.strptime(line["finish"], "%Y-%m-%d").date() - datetime.strptime(line["start"],
                                                                                         "%Y-%m-%d").date()).days
-
         # left += self.columeWidth * (begin - 1) + (1 * begin)
         # # 日宽度 + 竖线宽度
         right = self.columeWidth * (end + 1) + (1 * end)
@@ -515,7 +517,7 @@ class Gantt(Calendar, Canvas):
                 p.M(mleft, mtop).L(mleft + 11, top + 15).L(mleft, top + 26).L(mleft - 11, top + 15).L(mleft, mtop).Z()
                 group.append(p)
                 group.append(
-                    draw.Text(datetime.strptime(line["start"], "%Y-%m-%d").strftime("%Y年%m月%d日"), 18, left + 30,
+                    draw.Text(datetime.strptime(line["start"], "%Y-%m-%d").strftime("%Y年%m月%d日"), 16, left + 30,
                               top + 20, text_anchor="start", fill="black"))
             else:
                 # 工时
@@ -638,7 +640,7 @@ class Gantt(Calendar, Canvas):
         # print(self.beginDate, self.endDate)
 
         # 行首加5像素美化
-        self.nameTextSize += 10
+        self.nameTextSize += 5
 
         if not self.isTable:
             self.startPosition = self.nameTextSize + self.dateTextSize * 2 + self.resourceTextSize + 80
@@ -672,6 +674,10 @@ class Gantt(Calendar, Canvas):
         self.calendar()
 
         if not self.isBlank:
+            if self.__department:
+                self.draw.append(
+                    draw.Text(self.__department, 30, 10, self.canvasTop + self.rowHeight + 10, fill="#555555"))
+
             self.taskGroup = draw.Group(id="tasks")
             self.tasks(self.data)
             self.draw.append(self.taskGroup)
@@ -723,6 +729,7 @@ class Gantt(Calendar, Canvas):
         group.add_option("-t", "--title", dest="title", help="甘特图标题", default="甘特图标题", metavar="项目甘特图")
         group.add_option("-n", "--name", dest="name", help="项目名称", default="Netkiller Python 手札",
                          metavar="Netkiller Python 手札")
+        group.add_option("-d", "--department", dest="department", help="部门", default="研发部", metavar="研发部")
         group.add_option("-w", "--workweeks", dest="workweeks", help="workweeks default 5", default=5, metavar="5")
         group.add_option("-o", "--odd-even", action="store_true", dest="oddeven", default=False, help="odd-even weeks")
         # group.add_option("-g", "--gantt", action="store_true", dest="gantt", default=True, help="Gantt chart")
@@ -732,7 +739,7 @@ class Gantt(Calendar, Canvas):
                                metavar="/path/to/gantt.svg")
         self.parser.add_option("-e", "--export", dest="save", help="export png file", default=None,
                                metavar="/path/to/gantt.png")
-        self.parser.add_option("-d", "--debug", action="store_true", dest="debug", help="debug mode")
+        self.parser.add_option("", "--debug", action="store_true", dest="debug", help="debug mode")
 
         (options, args) = self.parser.parse_args()
         # exit()
@@ -784,6 +791,7 @@ class Gantt(Calendar, Canvas):
             self.load(data)
             self.title(options.title)
             self.author(options.name)
+            self.department(options.department)
             self.setWorkweeks(options.workweeks, options.oddeven)
             # self.gantt.ganttChart(options.title)
             self.save(options.save)
