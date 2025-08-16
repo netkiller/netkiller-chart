@@ -8,10 +8,6 @@ class Svg:
         for key, value in kwargs.items():
             self.attribute.append(f'{key}="{value}"')
 
-    # width = "600px"
-    # height = "600px"
-    # viewBox = "-300 -300 600 600"
-
     def __attribute(self, kwargs) -> str:
         attrs = []
         for key, value in kwargs.items():
@@ -132,6 +128,107 @@ class Rectangle(Element):
         return f'<rect x="{self.x}" y="{self.y}" width="{self.width}" height="{self.height}" {self.attrs} />'
 
 
+class Path(Element):
+    def __init__(self, d: str = None, stroke: str = None, fill: str = None, **kwargs):
+        self.d = d
+        if stroke:
+            kwargs['stroke'] = stroke
+        if fill:
+            kwargs['fill'] = fill
+        self.attrs = super().attribute(kwargs)
+        self.drawn = []
+
+    def D(self):
+        # https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d
+        self.d = None
+        return self
+
+    def M(self, x, y):
+        self.drawn.append(f'M {x},{y}')
+        return self
+
+    def m(self, dx, dy):
+        self.drawn.append(f'M {dx},{dy}')
+        return self
+
+    def L(self, x, y):
+        self.drawn.append(f'L {x},{y}')
+        return self
+
+    def l(self, dx, dy):
+        self.drawn.append(f'l {dx},{dy}')
+        return self
+
+    def H(self, x: int):
+        self.drawn.append(f'H {x}')
+        return self
+
+    def H(self, dx: int):
+        self.drawn.append(f'H {dx}')
+        return self
+
+    def V(self, y: int):
+        self.drawn.append(f'H {y}')
+        return self
+
+    def v(self, dy: int):
+        self.drawn.append(f'H {dy}')
+        return self
+
+    def C(self, x1, y1, x2, y2, x, y):
+        self.drawn.append(f'C {x1},{y1},{x2},{y2},{x},{y}')
+        return self
+
+    def c(self, dx1, dy1, dx2, dy2, dx, dy):
+        self.drawn.append(f'c {dx1},{dy1},{dx2},{dy2},{dx},{dy}')
+        return self
+
+    def S(self, x2, y2, x, y):
+        self.drawn.append(f'S {x2},{y2},{x},{y}')
+        return self
+
+    def s(self, dx2, dy2, dx, dy):
+        self.drawn.append(f's {dx2},{dy2},{dx},{dy}')
+        return self
+
+    def Q(self, x1, y1, x, y):
+        self.drawn.append(f'Q {x1},{y1},{x},{y}')
+        return self
+
+    def q(self, dx1, dy1, dx, dy):
+        self.drawn.append(f'q {dx1},{dy1},{dx},{dy}')
+        return self
+
+    def T(self, x, y):
+        self.drawn.append(f'T {x},{y}')
+        return self
+
+    def t(self, dx, dy):
+        self.drawn.append(f't {dx},{dy}')
+        return self
+
+    def A(self, rx, ry, angle, large_arc_flag, sweep_flag, x, y):
+        self.drawn.append(f'A {rx}, {ry}, {angle}, {large_arc_flag}, {sweep_flag}, {x}, {y}')
+        return self
+
+    def a(self, rx, ry, angle, large_arc_flag, sweep_flag, dx, dy):
+        self.drawn.append(f'A {rx}, {ry}, {angle}, {large_arc_flag}, {sweep_flag}, {dx}, {dy}')
+        return self
+
+    def Z(self):
+        self.drawn.append(f'Z')
+        return self
+
+    def z(self):
+        self.drawn.append(f'z')
+        return self
+
+    def __str__(self):
+        if not self.d:
+            self.d = " ".join(self.drawn)
+        return f'<path d="{self.d}" {self.attrs} />'
+
+
 svg = Svg(600, 600)
 # svg.link("style.css")
 svg.title("Test")
@@ -145,5 +242,6 @@ svg.append(Rectangle(200, 200, 100, 100, style="stroke:#009900; fill: #00cc00"))
 svg.use(10, 10, "shape1")
 svg.use(100, 50, "shape1", style="stroke: #00ff00; fill: none;")
 svg.group(Text(10, 100, "Hello world", klass="test"))
-
+svg.append(Path('M100,100 L150,100 L150,150 Z'))
+svg.append(Path().D().M(10, 10).L(10, 15).L(20, 26).H(11).V(30).Z())
 svg.main()
