@@ -39,6 +39,7 @@ def main():
     svg.append(Path().D().M(10, 10).L(10, 15).L(20, 26).H(11).V(30).Z())
     svg.append(Line(100, 200, 300, 300, stroke="#006600"))
     svg.append(Ellipse(30, 30, 30, 15, style="stroke:#006600; fill:#00cc00"))
+
     svg.save('test.svg')
 
 

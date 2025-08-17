@@ -69,7 +69,6 @@ class Circle(Element):
         self.attrs = super().attribute(kwargs)
 
     def __str__(self):
-        # return f'<circle cx="{self.cx}" cy="{self.cy}" r="{self.r}" stroke="{self.stroke}" fill="{self.fill}" {self.attrs} />'
         return f'<circle cx="{self.cx}" cy="{self.cy}" r="{self.r}" {self.attrs} />'
 
 
@@ -87,6 +86,46 @@ class Ellipse(Element):
 
     def __str__(self):
         return f'<ellipse cx="{self.cx}" cy="{self.cy}" rx="{self.rx}" ry="{self.ry}" {self.attrs} />'
+
+
+class Polyline(Element):
+    def __init__(self, *points, stroke: str = None, fill: str = None, **kwargs):
+        # tuple[int, int]
+        self.p = []
+        if type(points[0]) == str:
+            self.points = points[0]
+        else:
+            for x, y in points:
+                self.p.append(f'{x},{y}')
+            self.points = " ".join(self.p)
+        if stroke:
+            kwargs['stroke'] = stroke
+        if fill:
+            kwargs['fill'] = fill
+        self.attrs = super().attribute(kwargs)
+
+    def __str__(self):
+        return f'<polyline points="{self.points}" {self.attrs} />'
+
+
+class Polygon(Element):
+    def __init__(self, *points, stroke: str = None, fill: str = None, **kwargs):
+        # tuple[int, int]
+        self.p = []
+        if type(points[0]) == str:
+            self.points = points[0]
+        else:
+            for x, y in points:
+                self.p.append(f'{x},{y}')
+            self.points = " ".join(self.p)
+        if stroke:
+            kwargs['stroke'] = stroke
+        if fill:
+            kwargs['fill'] = fill
+        self.attrs = super().attribute(kwargs)
+
+    def __str__(self):
+        return f'<polygon points="{self.points}" {self.attrs} />'
 
 
 class Rectangle(Element):
