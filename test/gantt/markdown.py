@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
-##############################################
-# Home	: https://www.netkiller.cn
-# Author: Neo <netkiller@msn.com>
-# Data: 2025-08-04
-##############################################
 import os
 import sys
 
