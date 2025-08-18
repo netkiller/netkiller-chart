@@ -1,10 +1,10 @@
 [project]
 name = "netkiller-chart"
-version = "0.2.1"
+version = "0.3.0"
 authors = [
     { name = "Neo", email = "netkiller@msn.com" },
 ]
-description = "Netkiller Chart(Mindmap,Gantt,Xmind)"
+description = "Netkiller Chart(Mindmap,Gantt,SVG)"
 readme = "README.md"
 requires-python = ">=3.12"
 classifiers = [

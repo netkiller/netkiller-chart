@@ -13,6 +13,7 @@ class Svg:
         self.height = height
         self.elements = []
         self.__defs = []
+        self.__style = None
         self.attribute = []
         for key, value in kwargs.items():
             self.attribute.append(f'{key}="{value}"')
@@ -38,6 +39,9 @@ class Svg:
         for element in elements:
             self.__defs.append(element.__str__())
 
+    def style(self, text):
+        self.__style = text
+
     def symbol(self, id: str, element):
         self.elements.append(f'<symbol id="{id}">{element.__str__()}</symbol>')
 
@@ -56,7 +60,9 @@ class Svg:
     def render(self):
         self.elements.insert(0,
                              f'<svg width="{self.width}px"   height="{self.height}px" {" ".join(self.attribute)} xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
-        self.elements.insert(1, f'<defs>{" ".join(self.__defs)}</defs>')
+        self.elements.insert(1, f'<defs>\n{"\n".join(self.__defs)}\n</defs>')
+        if self.__style:
+            self.elements.insert(1, f'<style type="text/css"><![CDATA[\n{self.__style}\n]]></style>')
         self.elements.append("</svg>")
         return "\n".join(self.elements)
 

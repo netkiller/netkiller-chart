@@ -1,3 +1,6 @@
+from .ScalableVectorGraphics import Svg
+
+
 def attribute(kwargs):
     attrs = []
     for key, value in kwargs.items():
