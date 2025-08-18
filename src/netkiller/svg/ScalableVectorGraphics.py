@@ -45,8 +45,9 @@ class Svg:
     def symbol(self, id: str, element):
         self.elements.append(f'<symbol id="{id}">{element.__str__()}</symbol>')
 
-    def use(self, x: int, y: int, id: str, **kwargs):
-        self.elements.append(f'<use xlink:href="#{id}" x="{x}" y="{y}" {self.__attribute(kwargs)}/>')
+    def use(self, id: str, **kwargs):
+
+        self.elements.append(f'<use xlink:href="#{id}" {self.__attribute(kwargs)}/>')
 
     def group(self, element, **kwargs):
         self.elements.append(f'<g {self.__attribute(kwargs)}>{element.__str__()}</g>')

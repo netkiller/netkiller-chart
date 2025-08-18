@@ -15,6 +15,8 @@ class Element:
         for key, value in kwargs.items():
             if key in ['klass', 'clazz']:
                 key = 'class'
+            elif '_' in key:
+                key = key.replace('_', '-')
             attrs.append(f'{key}="{value}"')
         return " ".join(attrs)
 
@@ -28,7 +30,7 @@ class Title:
 
 
 class Text(Element):
-    def __init__(self, x: int, y: int, text: str, **kwargs):
+    def __init__(self, x: int, y: int, text: str = None, **kwargs):
         super().__init__()
         self.x = x
         self.y = y
