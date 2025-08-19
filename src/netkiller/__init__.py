@@ -1,8 +1,17 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+##############################################
+# Home	: https://www.netkiller.cn
+# Author: Neo <netkiller@msn.com>
+# Data: 2025-08-19
+##############################################
+
 __version__ = '0.0.6'
 __author__ = 'Neo Chen'
-__all__ = ['docker', '.']
 
+# __all__ = ['docker', '.']
 import csv
+import io
 
 
 class Data:
@@ -84,6 +93,22 @@ class Data:
                 # print(item)
                 # tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
                 #         item["predecessor"], item["milestone"], item["parent"])
+                self.add(int(item["id"]), item["name"], item["start"], item["finish"], item["resource"],
+                         int(item['progress']),
+                         int(item["predecessor"]), bool(item["milestone"]), int(item["parent"]))
+        return self.data
+
+    def csvtext(self, text):
+
+        with io.StringIO(text) as buffer:
+            items = csv.DictReader(buffer)
+            for item in items:
+                # print(item)
+                if item["milestone"] == "TRUE":
+                    item["milestone"] = True
+                else:
+                    item["milestone"] = False
+
                 self.add(int(item["id"]), item["name"], item["start"], item["finish"], item["resource"],
                          int(item['progress']),
                          int(item["predecessor"]), bool(item["milestone"]), int(item["parent"]))
