@@ -18,6 +18,7 @@ class Data:
     data = {}
 
     def __init__(self) -> None:
+        self.data = {}
         pass
 
     def str2bool(self, string: str):
@@ -86,7 +87,7 @@ class Data:
 
             for item in items:
 
-                if item["milestone"] == "TRUE":
+                if item["milestone"].lower() == "true":
                     item["milestone"] = True
                 else:
                     item["milestone"] = False
@@ -104,7 +105,7 @@ class Data:
             items = csv.DictReader(buffer)
             for item in items:
                 # print(item)
-                if item["milestone"] == "TRUE":
+                if item["milestone"].lower() == "true":
                     item["milestone"] = True
                 else:
                     item["milestone"] = False
