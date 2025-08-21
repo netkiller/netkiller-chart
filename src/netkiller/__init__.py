@@ -82,6 +82,7 @@ class Data:
         pass
 
     def csvfile(self, filepath):
+        self.data = {}
         with open(filepath) as csvfile:
             items = csv.DictReader(csvfile)
 
@@ -100,7 +101,7 @@ class Data:
         return self.data
 
     def csvtext(self, text):
-
+        self.data = {}
         with io.StringIO(text) as buffer:
             items = csv.DictReader(buffer)
             for item in items:

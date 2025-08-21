@@ -1,0 +1,8 @@
+<svg width="800px"   height="600px"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<filter id="blurMe" ><feGaussianBlur in="SourceGraphic" stdDeviation="5" /></filter>
+</defs>
+<title>Test</title>
+<desc>https://www.netkiller.cn</desc>
+<circle cx="170" cy="60" r="50" filter="url(#blurMe)" fill="green" />
+</svg>

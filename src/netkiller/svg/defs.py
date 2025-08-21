@@ -17,6 +17,7 @@ class Marker:
 
     def append(self, element):
         self.elements.append(element.__str__())
+        return self
 
     def __str__(self):
         return f'<marker id="{self.id}" {self.attrs}>{" ".join(self.elements)}</marker>'
@@ -31,6 +32,7 @@ class Mask:
 
     def append(self, element):
         self.elements.append(element.__str__())
+        return self
 
     def __str__(self):
         return f'<mask id="{self.id}" {self.attrs}>{" ".join(self.elements)}</mask>'

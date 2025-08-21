@@ -5,7 +5,7 @@
 # Author: Neo <netkiller@msn.com>
 # Data: 2025-08-18
 ##############################################
-
+# https://developer.mozilla.org/en-US/docs/Web/SVG
 class Svg:
     # https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorials/SVG_from_scratch/SVG_and_CSS
     def __init__(self, width, height, **kwargs):
