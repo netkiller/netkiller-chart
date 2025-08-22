@@ -1,0 +1,12 @@
+<svg width="120px" height="120px" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<linearGradient id="linearGradient" gradientTransform="rotate(90)"><stop offset="5%" stop-color="gold" /> <stop offset="95%" stop-color="red" /></linearGradient>
+<radialGradient id="radialGradient" ><stop offset="10%" stop-color="gold" /> <stop offset="95%" stop-color="red" /></radialGradient>
+</defs>
+<title>Svg 图形库</title>
+<desc>https://www.netkiller.cn</desc>
+<!-- using my linear gradient -->
+<circle cx="5" cy="5" r="4" fill="url('#linearGradient')" />
+<!-- using my radial gradient -->
+<circle cx="5" cy="20" r="4" fill="url('#radialGradient')" />
+</svg>
