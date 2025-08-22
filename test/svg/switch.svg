@@ -1,0 +1,17 @@
+<svg viewBox="0 -20 100 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Svg 图形库</title>
+<desc>https://www.netkiller.cn</desc>
+<switch><text x="0" y="0" >@</text>
+<text x="0" y="0" systemLanguage="ar">مرحبا</text>
+<text x="0" y="0" systemLanguage="de,nl">Hallo!</text>
+<text x="0" y="0" systemLanguage="en-us">Howdy!</text>
+<text x="0" y="0" systemLanguage="en-gb">Wotcha! </text>
+<text x="0" y="0" systemLanguage="en-au">G'day!</text>
+<text x="0" y="0" systemLanguage="en">Hello!</text>
+<text x="0" y="0" systemLanguage="es">Hola!</text>
+<text x="0" y="0" systemLanguage="fr">Bonjour!</text>
+<text x="0" y="0" systemLanguage="ja">こんにちは</text>
+<text x="0" y="0" systemLanguage="ru">zПривет! </text>
+<text x="0" y="0" systemLanguage="zh">你好！ </text>
+</switch>
+</svg>

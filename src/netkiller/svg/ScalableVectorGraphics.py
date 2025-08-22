@@ -8,9 +8,11 @@
 # https://developer.mozilla.org/en-US/docs/Web/SVG
 class Svg:
     # https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorials/SVG_from_scratch/SVG_and_CSS
-    def __init__(self, width, height, **kwargs):
-        self.width = width
-        self.height = height
+    def __init__(self, width: int = 0, height: int = 0, **kwargs):
+        if width:
+            kwargs['width'] = width
+        if height:
+            kwargs['height'] = height
         self.elements = []
         self.__defs = []
         self.__style = None
@@ -66,7 +68,7 @@ class Svg:
 
     def render(self):
         self.elements.insert(0,
-                             f'<svg width="{self.width}" height="{self.height}" {" ".join(self.attribute)} xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
+                             f'<svg {" ".join(self.attribute)} xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
         if self.__defs:
             self.elements.insert(1, f'<defs>\n{"\n".join(self.__defs)}\n</defs>')
         if self.__style:

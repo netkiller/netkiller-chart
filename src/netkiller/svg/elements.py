@@ -30,7 +30,7 @@ class Title:
 
 
 class Text(Element):
-    def __init__(self, x: int, y: int, text: str = None, **kwargs):
+    def __init__(self, text: str, x: int = 0, y: int = 0, **kwargs):
         super().__init__()
         self.x = x
         self.y = y
@@ -259,3 +259,17 @@ class Path(Element):
         if not self.d:
             self.d = " ".join(self.drawn)
         return f'<path d="{self.d}" {self.attrs} />'
+
+
+class Switch(Element):
+    def __init__(self, element=None):
+        self.elements = []
+        if element:
+            self.elements.append(element.__str__())
+
+    def append(self, element):
+        self.elements.append(element.__str__())
+        return self
+
+    def __str__(self):
+        return f'<switch>{"\n".join(self.elements)}\n</switch>'

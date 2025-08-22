@@ -84,17 +84,23 @@ class Data:
     def csvfile(self, filepath):
         self.data = {}
         with open(filepath) as csvfile:
-            items = csv.DictReader(csvfile)
+            dictReader = csv.DictReader(csvfile)
 
+            items = []
+            ids = []
+            for item in dictReader:
+                items.append(item)
+                ids.append(int(item["id"]))
             for item in items:
 
                 if item["milestone"].lower() == "true":
                     item["milestone"] = True
                 else:
                     item["milestone"] = False
-                # print(item)
-                # tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
-                #         item["predecessor"], item["milestone"], item["parent"])
+
+                if int(item["parent"]) not in ids:
+                    item["parent"] = 0
+                    
                 self.add(int(item["id"]), item["name"], item["start"], item["finish"], item["resource"],
                          int(item['progress']),
                          int(item["predecessor"]), bool(item["milestone"]), int(item["parent"]))
@@ -103,13 +109,21 @@ class Data:
     def csvtext(self, text):
         self.data = {}
         with io.StringIO(text) as buffer:
-            items = csv.DictReader(buffer)
+            dictReader = csv.DictReader(buffer)
+            items = []
+            ids = []
+            for item in dictReader:
+                items.append(item)
+                ids.append(int(item["id"]))
+            # print(ids)
             for item in items:
                 # print(item)
                 if item["milestone"].lower() == "true":
                     item["milestone"] = True
                 else:
                     item["milestone"] = False
+                if int(item["parent"]) not in ids:
+                    item["parent"] = 0
 
                 self.add(int(item["id"]), item["name"], item["start"], item["finish"], item["resource"],
                          int(item['progress']),
