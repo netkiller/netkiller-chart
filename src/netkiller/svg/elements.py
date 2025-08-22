@@ -21,7 +21,7 @@ class Element:
         return " ".join(attrs)
 
 
-class Title:
+class Title(Element):
     def __init__(self, value):
         self.title = value
 
@@ -30,15 +30,34 @@ class Title:
 
 
 class Text(Element):
-    def __init__(self, text: str, x: int = 0, y: int = 0, **kwargs):
+    def __init__(self, text: str = None, x: int = 0, y: int = 0, **kwargs):
         super().__init__()
         self.x = x
         self.y = y
         self.text = text
         self.attrs = super().attribute(kwargs)
+        self.elements = []
+
+    def append(self, element):
+        self.elements.append(element.__str__())
+        return self
 
     def __str__(self):
-        return f'<text x="{self.x}" y="{self.y}" {self.attrs}>{self.text}</text>'
+        if self.text:
+            return f'<text x="{self.x}" y="{self.y}" {self.attrs}>{self.text}</text>'
+        else:
+            return f'<text>{"\n".join(self.elements)}</text>'
+
+
+class TextPath(Element):
+    def __init__(self, href: str, text: str, **kwargs):
+        if href:
+            kwargs['href'] = f"#{href}"
+        self.text = text
+        self.attrs = super().attribute(kwargs)
+
+    def __str__(self):
+        return f"<textPath {self.attrs}>{self.text}</textPath>"
 
 
 class Line(Element):
