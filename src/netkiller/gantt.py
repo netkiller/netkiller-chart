@@ -341,15 +341,14 @@ class Calendar(Canvas):
             background.append(
                 draw.Lines(self.canvasLeft, top, self.canvasWidth, top,
                            stroke="grey"))
-            # top += self.rowHeight
 
         # 日历边框
-        self.draw.append(
+        background.append(
             draw.Rectangle(self.canvasLeft, self.canvasTop, self.canvasWidth,
-                           top - self.rowHeight * 2 + self.splitLineHeight * self.lineNumber + 1,
+                           self.canvasHeight - self.canvasTop,
                            fill="none",
                            stroke="black"))
-
+        print(f"calendar: {self.canvasHeight}, top:{top}")
         self.draw.append(background)
 
 
@@ -391,7 +390,7 @@ class Gantt(Calendar, Canvas):
         group.append(draw.Text(self.ganttTitle, 30, self.canvasWidth / 2, 25, center=True, text_anchor="middle",
                                font_family=self.fontFamily))
         if self.name:
-            group.append(draw.Text(self.name, 16, 5, self.height - 5))
+            group.append(draw.Text(self.name, 16, 5, self.height - self.rowHeight / 2))
         self.draw.append(group)
 
     def legend(self, enable: bool):
@@ -405,7 +404,7 @@ class Gantt(Calendar, Canvas):
         top = 10
         self.draw.append(
             draw.Text("https://www.netkiller.cn - design by netkiller", 12, self.canvasWidth - 250,
-                      self.canvasHeight + 25,
+                      self.height - self.rowHeight / 2,
                       text_anchor="start", fill="grey"))
 
         # fill='#eeeeee'
@@ -423,8 +422,8 @@ class Gantt(Calendar, Canvas):
 
         self.draw.append(draw.Image(8, 8, 100, 34.99, license, embed=True))
 
-    def hideTable(self):
-        self.isTable = True
+    def table(self, status: bool = False):
+        self.isTable = status
 
     def items(self, line, subitem=False):
         top = self.canvasTop + self.rowHeight * 3 + self.itemLine * self.rowHeight + self.splitLineHeight * self.itemLine
@@ -505,20 +504,20 @@ class Gantt(Calendar, Canvas):
                     # # 闭合竖线
                     left,
                     top + offsetY,
-                    fill="black",
-                    stroke="black",
+                    fill="#333333",
+                    stroke="none",
                 )
             )
         else:
             if "milestone" in line and line["milestone"]:
                 mleft = left + 15
                 mtop = top + 4
-                p = draw.Path(fill="black")
+                p = draw.Path(fill="#333333")
                 p.M(mleft, mtop).L(mleft + 11, top + 15).L(mleft, top + 26).L(mleft - 11, top + 15).L(mleft, mtop).Z()
                 group.append(p)
                 group.append(
                     draw.Text(datetime.strptime(line["start"], "%Y-%m-%d").strftime("%Y年%m月%d日"), 16, left + 30,
-                              top + 20, text_anchor="start", fill="black"))
+                              top + 20, text_anchor="start", fill="#333333"))
             else:
                 # 工时
                 r = draw.Rectangle(left, top + 5, right, self.barHeight, fill="#00C7C1", stroke="grey")
@@ -534,7 +533,7 @@ class Gantt(Calendar, Canvas):
                         progress = line["progress"]
 
                     progressBar = draw.Rectangle(left + 2, top + 8, 30 * progress - 2, self.progressHeight,
-                                                 fill="#E6E6E6")
+                                                 fill="#B2F2EA")
                     # progressBar.append_title(str(progress))
                     group.append(progressBar)
                     group.append(
@@ -648,10 +647,11 @@ class Gantt(Calendar, Canvas):
         days = self.endDate - self.beginDate
 
         if self.ganttTitle:
-            self.canvasTop += 50
+            self.canvasTop = 50
 
         self.canvasWidth = self.startPosition + self.columeWidth * days.days + days.days + self.columeWidth
-        self.canvasHeight = self.canvasTop + self.rowHeight * 3 + self.rowHeight * self.lineNumber + self.splitLineHeight * self.lineNumber
+        self.canvasHeight = self.canvasTop + self.rowHeight * 3 + self.rowHeight * self.lineNumber + self.splitLineHeight * (
+                self.lineNumber - 1)
         self.width = self.canvasWidth + 2
         self.height = self.canvasHeight + 2 + self.rowHeight
 
@@ -669,7 +669,7 @@ class Gantt(Calendar, Canvas):
 
         # 大边框
         # self.draw.append(draw.Rectangle(1, 1, self.width - 2, self.height - 2, fill="none", stroke="black"))
-
+        print(f"rander: {self.canvasHeight}")
         self.__title()
         self.calendar()
 

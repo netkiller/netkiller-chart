@@ -162,11 +162,11 @@ def main():
     try:
 
         gantt = Gantt()
-        # gantt.hideTable()
+        # gantt.table(True)
         gantt.load(data)
         gantt.author("Neo Chen")
         # gantt.setWorkweeks(workweeks, options.oddeven)
-        gantt.ganttChart("Test")
+        gantt.title("Test")
         gantt.save("test.svg")
         # gantt.export(file)
 
