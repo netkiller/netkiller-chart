@@ -667,8 +667,6 @@ class Gantt(Calendar, Canvas):
 
         self.draw.append(draw.Raw(style))
 
-        # 大边框
-        # self.draw.append(draw.Rectangle(1, 1, self.width - 2, self.height - 2, fill="none", stroke="black"))
         print(f"rander: {self.canvasHeight}")
         self.__title()
         self.calendar()

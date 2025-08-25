@@ -5,23 +5,36 @@
 # Author: Neo <netkiller@msn.com>
 # Data: 2025-08-06
 ##############################################
-import csv
+
 import json
+import os
 import sys
+from datetime import datetime
 from optparse import OptionParser, OptionGroup
 
-from netkiller.gantt import Gantt
+module = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# print(module)
+sys.path.insert(0, ".")
+sys.path.insert(1, module)
 
-from src.netkiller.gantt import Data
+import drawsvg as draw
+
+from netkiller import Data
+from netkiller.gantt import Gantt, Calendar
 
 
-class Workload(Gantt):
-    def __init__(self) -> None:
+class Workload(Calendar):
+    def __init__(self, data: list = None) -> None:
         super().__init__()
         self.workloadData = {}
         self.minDate = []
         self.maxDate = []
         self.resourceTextSize = 0
+        self.data = data
+        self.workweeks = 5
+        self.firstsd = None
+        self.canvasTop = 0
+        self.splitLine = 1
 
     def __gantt2workload(self, data):
         # self.workloadData = dict()
@@ -66,6 +79,7 @@ class Workload(Gantt):
         return self.workloadData
 
     def workload(self, title):
+
         self.data = self.__gantt2workload(self.data)
 
         self.startPosition = self.resourceTextSize + 300
@@ -78,14 +92,17 @@ class Workload(Gantt):
 
         days = self.endDate - self.beginDate
         self.canvasWidth = self.startPosition + self.columeWidth * days.days + days.days + self.columeWidth + 2
-        self.canvasHeight = self.canvasTop + self.rowHeight * 5 + self.rowHeight * lineNumber + lineNumber + 15
+        self.canvasHeight = self.canvasTop + self.rowHeight * 3 + self.rowHeight * lineNumber + (
+                    lineNumber - 1) * self.splitLine
+        self.width = self.canvasWidth + 1
+        self.height = self.canvasHeight + 1
         # print(self.canvasTop, self.canvasHeight)
 
-        self.draw = draw.Drawing(self.canvasWidth, self.canvasHeight)
+        self.draw = draw.Drawing(self.width, self.height)
 
-        self.title(title)
+        # self.__title(title)
 
-        top = self.rowHeight * 4 - 10
+        top = self.canvasTop + self.rowHeight * 2
         chart = draw.Group(id="workload")
 
         table = draw.Group(id="table")
@@ -134,7 +151,7 @@ class Workload(Gantt):
 
         # left += self.columeWidth * (begin - 1) + (1 * begin)
         # # 日宽度 + 竖线宽度
-        self.canvasTop = self.rowHeight * 5 - 10
+        self.canvasTop = self.rowHeight * 3
         for resource, row in self.data.items():
             # # 工时
             top = self.canvasTop + self.itemLine * self.rowHeight + self.splitLine * self.itemLine
@@ -166,12 +183,21 @@ class Workload(Gantt):
             self.itemLine += 1
 
         self.draw.append(chart)
-        # self.draw.append(draw.Rectangle(1, 1, self.canvasWidth,
-        #                                 self.canvasHeight, fill='none', stroke='black'))
-        self.legend()
+        self.draw.append(draw.Rectangle(1, 1, self.canvasWidth,
+                                        self.canvasHeight, fill='none', stroke='black'))
 
-    def workloadChart(self, title):
-        self.workload(title)
+        # 大边框
+        # self.draw.append(draw.Rectangle(1, 1, self.width - 2, self.height - 2, fill="none", stroke="black"))
+        # self.legend()
+
+    def title(self, title):
+        self.__title = title
+
+    def save(self, filename: str):
+
+        # self.rander()
+        self.workload(self.__title)
+        self.draw.save_svg(filename)
 
     def main(self):
         self.parser = OptionParser("usage: %prog [options] ")
@@ -198,26 +224,20 @@ class Workload(Gantt):
         group.add_option("-o", "--odd-even", action="store_true", dest="oddeven", default=False, help="odd-even weeks")
         # group.add_option("-g", "--gantt", action="store_true", dest="gantt", default=True, help="Gantt chart")
         # group.add_option("-w", "--workload", action="store_true", dest="workload", help="Workload chart")
-        group.add_option("-s", "--save", dest="save", help="save file", default=None, metavar="/path/to/gantt.svg")
+        group.add_option("-s", "--save", dest="save", help="save file", default=None, metavar="/path/to/workload.svg")
         self.parser.add_option_group(group)
         self.parser.add_option("-d", "--debug", action="store_true", dest="debug", help="debug mode")
 
         (options, args) = self.parser.parse_args()
+
+        data = []
+
         if options.stdin:
             self.data = json.loads(sys.stdin.read())
         elif options.csv:
-            with open(options.csv) as csvfile:
-                items = csv.DictReader(csvfile)
-                tmp = Data()
-                for item in items:
-                    if item["milestone"] == "TRUE":
-                        item["milestone"] = True
-                    else:
-                        item["milestone"] = False
+            csv = Data()
+            data = csv.csvfile(options.csv)
 
-                    tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
-                            item["predecessor"], item["milestone"], item["parent"])
-                self.data = tmp.data
         # elif options.host:
         #     config = {"host": options.host, "user": options.username, "password": options.password,
         #               "database": options.database, "raise_on_warnings": True}
@@ -226,37 +246,22 @@ class Workload(Gantt):
             print(options, args)
             print(json.dumps(self.data, ensure_ascii=False))
 
-        if not self.data:
+        # if not self.data:
+        #     self.usage()
+
+        if not options.save:
             self.usage()
 
-        if options.save:
-            file = options.save
-        else:
-            if options.workload:
-                file = "workload.svg"
-            elif options.gantt:
-                file = "gantt.svg"
+        # if options.workweeks:
+        #     workweeks = options.workweeks
 
-        if options.workweeks:
-            workweeks = options.workweeks
-
-        if options.workload:
-            workload = Workload()
-            workload.load(self.data)
-            workload.name(options.name)
-            workload.setWorkweeks(workweeks, False)
-            workload.workloadChart(options.title)
-            workload.save(file)
-
-        elif options.gantt:
-            self.gantt = Gantt()
-            # self.gantt.hideTable()
-            self.gantt.load(self.data)
-            self.gantt.name(options.name)
-            self.gantt.setWorkweeks(workweeks, options.oddeven)
-            self.gantt.ganttChart(options.title)
-            self.gantt.save(file)
-            # self.gantt.export(file)
+        # print(data)
+        workload = Workload(data)
+        # workload.data = data
+        # workload.name(options.name)
+        # workload.setWorkweeks(options.workweeks, False)
+        workload.title(options.title)
+        workload.save(options.save)
 
 
 def main():
