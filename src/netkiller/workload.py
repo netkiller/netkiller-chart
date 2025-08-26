@@ -12,7 +12,7 @@ import json
 import os
 import sys
 from datetime import datetime
-from optparse import OptionParser, OptionGroup
+from optparse import OptionParser
 
 module = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # print(module)
@@ -26,19 +26,20 @@ from netkiller.gantt import Gantt, Calendar
 
 
 class Workload(Calendar):
-    def __init__(self, data: list = None) -> None:
+    def __init__(self, data: dict = None) -> None:
         super().__init__()
         self.data = {}
         self.minDate = []
         self.maxDate = []
         self.resourceTextSize = 0
-        # self.data = data
         self.workweeks = 5
         self.firstsd = None
         self.canvasTop = 0
         self.splitLine = 1
         self.fontSize = 16
         self.__department = None
+        if data:
+            self.data = data
 
     def gantt2workload(self, data):
         # self.data = dict()
@@ -106,10 +107,10 @@ class Workload(Calendar):
                     self.data[item["resource"]]["start"] = start
                 if self.data[item["resource"]]["finish"] < finish:
                     self.data[item["resource"]]["finish"] = finish
-                self.data[item["resource"]]["task"].append((start, finish))
+                self.data[item["resource"]]["task"].append((start, finish, item["name"]))
             else:
                 self.data[item["resource"]] = {"resource": item["resource"], "start": start, "finish": finish,
-                                               "task": [(start, finish)]}
+                                               "task": [(start, finish, item["name"])]}
 
         return self.data
 
@@ -194,7 +195,7 @@ class Workload(Calendar):
 
         chart.append(
             draw.Line(1, self.canvasTop + self.rowHeight * 3, self.canvasWidth, self.canvasTop + self.rowHeight * 3,
-                      stroke="black"))
+                      stroke="grey"))
         # 竖线
         chart.append(draw.Line(left, self.canvasTop, left, self.canvasHeight, stroke="grey"))
 
@@ -215,15 +216,17 @@ class Workload(Calendar):
             # end = (row['finish'] - row['start']).days
             right = self.columeWidth * (end + 1) + (1 * end)
 
-            chart.append(draw.Text(resource, self.fontSize, 10, top + 20, text_anchor="start"))
-            chart.append(
+            group = draw.Group(id=resource)
+
+            group.append(draw.Text(resource, self.fontSize, 10, top + 20, text_anchor="start"))
+            group.append(
                 draw.Text(row["start"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 10, top + 20,
                           text_anchor="start"))
-            chart.append(
+            group.append(
                 draw.Text(row["finish"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 125, top + 20,
                           text_anchor="start"))
 
-            chart.append(
+            group.append(
                 draw.Text(str(end + 1), self.fontSize, self.resourceTextSize + 235, top + 20, text_anchor="start"))
 
             # left = self.dayPosition[row["start"].strftime("%Y-%m-%d")]
@@ -231,16 +234,16 @@ class Workload(Calendar):
             # r.append_title(resource)
             # chart.append(r)
 
-            for start, finish in row['task']:
+            for start, finish, name in row['task']:
                 left = self.dayPosition[start.strftime("%Y-%m-%d")]
                 end = (finish - start).days
                 # end = (row['finish'] - row['start']).days
                 right = self.columeWidth * (end + 1) + (1 * end)
 
                 r = draw.Rectangle(left, top + 4, right, self.barHeight, fill="blue")
-                r.append_title(resource)
-                chart.append(r)
-
+                r.append_title(name)
+                group.append(r)
+            chart.append(group)
             chart.append(draw.Line(1, top + self.rowHeight, self.canvasWidth, top + self.rowHeight, stroke="grey"))
 
             self.itemLine += 1
@@ -264,6 +267,7 @@ class Workload(Calendar):
         self.draw.save_svg(filename)
 
     def main(self):
+
         self.parser = OptionParser("usage: %prog [options] ")
 
         self.parser.add_option("", "--stdin", action="store_true", dest="stdin",
@@ -280,59 +284,60 @@ class Workload(Calendar):
         # group.add_option("-D", "--database", dest="database", help="", default=None, metavar="test")
         # self.parser.add_option_group(group)
 
-        group = OptionGroup(self.parser, "Workload")
-        group.add_option("-t", "--title", dest="title", help="标题", default="Netkiller Python 手札",
-                         metavar="项目标题")
-        group.add_option("-d", "--department", dest="department", help="项目名称", default="技术部",
-                         metavar="Netkiller Python 手札")
-        group.add_option("-W", "--workweeks", dest="workweeks", help="workweeks default 5", default=5, metavar="5")
-        group.add_option("-o", "--odd-even", action="store_true", dest="oddeven", default=False, help="odd-even weeks")
+        # group = OptionGroup(self.parser, "Workload")
+        self.parser.add_option("-t", "--title", dest="title", help="标题", default="Netkiller Python 手札",
+                               metavar="项目标题")
+        self.parser.add_option("-d", "--department", dest="department", help="项目名称", default="技术部",
+                               metavar="技术部")
+        self.parser.add_option("-W", "--workweeks", dest="workweeks", help="workweeks default 5", default=5,
+                               metavar="5")
+        self.parser.add_option("-o", "--odd-even", action="store_true", dest="oddeven", default=False,
+                               help="odd-even weeks")
         # group.add_option("-g", "--gantt", action="store_true", dest="gantt", default=True, help="Gantt chart")
         # group.add_option("-w", "--workload", action="store_true", dest="workload", help="Workload chart")
-        group.add_option("-s", "--save", dest="save", help="save file", default=None, metavar="/path/to/workload.svg")
-        self.parser.add_option_group(group)
+        self.parser.add_option("-s", "--save", dest="save", help="save file", default=None,
+                               metavar="/path/to/workload.svg")
+        # self.parser.add_option_group(group)
         self.parser.add_option("--debug", action="store_true", dest="debug", help="debug mode")
 
         (options, args) = self.parser.parse_args()
-
-        workload = Workload()
+        # self.parser.print_usage()
 
         if options.debug:
             print(options, args)
             print(json.dumps(self.data, ensure_ascii=False))
 
         if not options.save:
-            self.usage()
+            self.parser.print_help()
+            exit()
 
         if options.stdin:
             json.loads(sys.stdin.read())
             # self.gantt2workload(data)
         elif options.csv:
             with open(options.csv) as file:
-                tmp = workload.csv2workload(file)
+                tmp = self.csv2workload(file)
                 # print(workload.minDate)
         elif options.json:
             with open(options.json) as file:
                 data = json.dumps(file.read(), ensure_ascii=False)
-                workload.gantt2workload(data)
+                self.gantt2workload(data)
+        else:
+            self.parser.print_help()
+            exit()
         # elif options.host:
         #     config = {"host": options.host, "user": options.username, "password": options.password,
         #               "database": options.database, "raise_on_warnings": True}
         #     self.loadFromMySQL(config)
 
-        # if not self.data:
-        #     self.usage()
         # if options.workweeks:
         #     workweeks = options.workweeks
 
         # print(data)
-
-        # workload.data = data
-
         # workload.setWorkweeks(options.workweeks, False)
-        workload.title(options.title)
-        workload.department(options.department)
-        workload.save(options.save)
+        self.title(options.title)
+        self.department(options.department)
+        self.save(options.save)
 
 
 def main():

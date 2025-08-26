@@ -30,7 +30,7 @@ def main():
 6,提示词优化,2023-03-15,2023-03-20,neo,2,0,0,FALSE
 7,Android适配,2023-03-02,2023-03-03,jam,0,1,0,TRUE
 8,安卓接口开发,2023-03-10,2023-03-13,jam,4,0,0,TRUE
-9,主任务,2023-03-10,2023-03-19,陈景峰,0,0,0,FALSE
+9,主任务,2023-03-10,2023-03-17,陈景峰,0,0,0,FALSE
 10,子任务1,2023-03-01,2023-03-04,test,0,9,5,FALSE
 11,子任务2,2023-03-07,2023-03-09,test,0,9,10,FALSE
 12,子任务3,2023-03-16,2023-03-17,test,0,9,11,FALSE
@@ -40,7 +40,7 @@ def main():
         with io.StringIO(text) as csv:
             workload = Workload()
             data = workload.csv2workload(csv)
-            print(data)
+            # print(data)
             workload.title("工作负载图")
             workload.department("技术研发部")
             workload.setWorkweeks(6, 1)

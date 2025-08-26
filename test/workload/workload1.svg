@@ -143,76 +143,88 @@
 </g>
 <path d="M368,79 L989,79" stroke="grey" />
 <path d="M1,108 L989,108" stroke="grey" />
-<path d="M1,137 L989,137" stroke="black" />
+<path d="M1,137 L989,137" stroke="grey" />
 <path d="M368,50 L368,316" stroke="grey" />
+<g id="tom">
 <text x="10" y="157" font-size="16" text-anchor="start">tom</text>
 <text x="78" y="157" font-size="16" text-anchor="start">2023-03-01</text>
 <text x="193" y="157" font-size="16" text-anchor="start">2023-03-10</text>
 <text x="303" y="157" font-size="16" text-anchor="start">10</text>
 <rect x="369" y="141" width="309" height="20" fill="blue">
-<title>tom</title>
+<title>任务组</title>
 </rect>
+</g>
 <path d="M1,166 L989,166" stroke="grey" />
+<g id="neo">
 <text x="10" y="187" font-size="16" text-anchor="start">neo</text>
 <text x="78" y="187" font-size="16" text-anchor="start">2023-03-03</text>
 <text x="193" y="187" font-size="16" text-anchor="start">2023-03-20</text>
 <text x="303" y="187" font-size="16" text-anchor="start">18</text>
 <rect x="431" y="171" width="61" height="20" fill="blue">
-<title>neo</title>
+<title>UI设计</title>
 </rect>
 <rect x="586" y="171" width="92" height="20" fill="blue">
-<title>neo</title>
+<title>后台开发</title>
 </rect>
 <rect x="803" y="171" width="185" height="20" fill="blue">
-<title>neo</title>
+<title>提示词优化</title>
 </rect>
+</g>
 <path d="M1,196 L989,196" stroke="grey" />
+<g id="jerry">
 <text x="10" y="217" font-size="16" text-anchor="start">jerry</text>
 <text x="78" y="217" font-size="16" text-anchor="start">2023-03-05</text>
 <text x="193" y="217" font-size="16" text-anchor="start">2023-03-10</text>
 <text x="303" y="217" font-size="16" text-anchor="start">6</text>
 <rect x="493" y="201" width="92" height="20" fill="blue">
-<title>jerry</title>
+<title>测试环境部署</title>
 </rect>
 <rect x="586" y="201" width="92" height="20" fill="blue">
-<title>jerry</title>
+<title>生产环境部署</title>
 </rect>
+</g>
 <path d="M1,226 L989,226" stroke="grey" />
+<g id="jam">
 <text x="10" y="247" font-size="16" text-anchor="start">jam</text>
 <text x="78" y="247" font-size="16" text-anchor="start">2023-03-02</text>
 <text x="193" y="247" font-size="16" text-anchor="start">2023-03-13</text>
 <text x="303" y="247" font-size="16" text-anchor="start">12</text>
 <rect x="400" y="231" width="61" height="20" fill="blue">
-<title>jam</title>
+<title>Android适配</title>
 </rect>
 <rect x="648" y="231" width="123" height="20" fill="blue">
-<title>jam</title>
+<title>安卓接口开发</title>
 </rect>
+</g>
 <path d="M1,256 L989,256" stroke="grey" />
+<g id="陈景峰">
 <text x="10" y="277" font-size="16" text-anchor="start">陈景峰</text>
 <text x="78" y="277" font-size="16" text-anchor="start">2023-03-10</text>
-<text x="193" y="277" font-size="16" text-anchor="start">2023-03-19</text>
-<text x="303" y="277" font-size="16" text-anchor="start">10</text>
-<rect x="648" y="261" width="309" height="20" fill="blue">
-<title>陈景峰</title>
+<text x="193" y="277" font-size="16" text-anchor="start">2023-03-17</text>
+<text x="303" y="277" font-size="16" text-anchor="start">8</text>
+<rect x="648" y="261" width="247" height="20" fill="blue">
+<title>主任务</title>
 </rect>
+</g>
 <path d="M1,286 L989,286" stroke="grey" />
+<g id="test">
 <text x="10" y="307" font-size="16" text-anchor="start">test</text>
 <text x="78" y="307" font-size="16" text-anchor="start">2023-03-01</text>
 <text x="193" y="307" font-size="16" text-anchor="start">2023-03-19</text>
 <text x="303" y="307" font-size="16" text-anchor="start">19</text>
 <rect x="369" y="291" width="123" height="20" fill="blue">
-<title>test</title>
+<title>子任务1</title>
 </rect>
 <rect x="555" y="291" width="92" height="20" fill="blue">
-<title>test</title>
+<title>子任务2</title>
 </rect>
 <rect x="834" y="291" width="61" height="20" fill="blue">
-<title>test</title>
+<title>子任务3</title>
 </rect>
 <rect x="803" y="291" width="154" height="20" fill="blue">
-<title>test</title>
+<title>任务3</title>
 </rect>
+</g>
 <path d="M1,316 L989,316" stroke="grey" />
 </g>
 <rect x="1" y="1" width="989" height="316" fill="none" stroke="black" />
