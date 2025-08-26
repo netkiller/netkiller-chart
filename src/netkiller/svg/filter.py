@@ -38,13 +38,15 @@ class Filter:
         return self
 
     def __str__(self):
-        return f'<filter id="{self.id}" {self.__attrs}>{" ".join(self.elements)}</filter>'
+        return f'<filter id="{self.id}" {self.__attrs}>\n{"\n".join(self.elements)}\n</filter>'
 
 
 class feGaussianBlur:
-    def __init__(self, inn: str, stdDeviation: str, edgeMode: str = None, **kwargs):
-        kwargs['in'] = inn
-        kwargs['stdDeviation'] = stdDeviation
+    def __init__(self, inn: str = None, stdDeviation: str = None, edgeMode: str = None, **kwargs):
+        if inn:
+            kwargs['in'] = inn
+        if stdDeviation:
+            kwargs['stdDeviation'] = stdDeviation
         if edgeMode:
             kwargs['edgeMode'] = edgeMode
         self.attrs = attribute(kwargs)
@@ -59,15 +61,44 @@ class feGaussianBlur:
 
 
 class feOffset:
-    def __init__(self, inn: str, dx: int, dy: int, **kwargs):
-        kwargs['in'] = inn
-        kwargs['dx'] = dx
-        kwargs['dy'] = dy
-        self.attrs = attribute(kwargs)
-        # self.elements = []
-
-    # def append(self, element):
-    #     self.elements.append(element.__str__())
+    def __init__(self, inn: str = None, dx: int = 0, dy: int = 0, **kwargs):
+        if inn:
+            kwargs['in'] = inn
+        if dx:
+            kwargs['dx'] = dx
+        if dy:
+            kwargs['dy'] = dy
+        self.__attrs = attribute(kwargs)
 
     def __str__(self):
-        return f'<feOffset {self.attrs} />'
+        return f'<feOffset {self.__attrs} />'
+
+
+class feComposite:
+    def __init__(self, inn: str = None, dx: int = 0, dy: int = 0, **kwargs):
+        if inn:
+            kwargs['in'] = inn
+        if dx:
+            kwargs['dx'] = dx
+        if dy:
+            kwargs['dy'] = dy
+        self.__attrs = attribute(kwargs)
+
+    def __str__(self):
+        return f'<feComposite {self.__attrs} />'
+
+
+class feColorMatrix:
+    def __init__(self, **kwargs):
+        self.__attrs = attribute(kwargs)
+
+    def __str__(self):
+        return f'<feColorMatrix {self.__attrs} />'
+
+
+class feBlend:
+    def __init__(self, **kwargs):
+        self.__attrs = attribute(kwargs)
+
+    def __str__(self):
+        return f'<feBlend {self.__attrs} />'

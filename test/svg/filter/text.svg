@@ -1,0 +1,10 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<filter id="text1" ><feGaussianBlur result="blur" in="SourceGraphic" stdDeviation="2" /> <feColorMatrix mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="text1" in="blur" /> <feComposite in2="text1" operator="atop" in="SourceGraphic" /></filter>
+</defs>
+<title>Netkiller Python 手札</title>
+<desc>https://www.netkiller.cn</desc>
+<g filter="url(#text1)">
+<text x="100" y="200" font-size="40" stroke="none" fill="red">Hello world</text>
+</g>
+</svg>

@@ -15,6 +15,8 @@ class Element:
         for key, value in kwargs.items():
             if key in ['klass', 'clazz']:
                 key = 'class'
+            elif key == "inn":
+                key = 'in'
             elif '_' in key:
                 key = key.replace('_', '-')
             attrs.append(f'{key}="{value}"')
@@ -278,6 +280,19 @@ class Path(Element):
         if not self.d:
             self.d = " ".join(self.drawn)
         return f'<path d="{self.d}" {self.attrs} />'
+
+
+class Group(Element):
+    def __init__(self, **kwargs):
+        self.__attrs = super().attribute(kwargs)
+        self.elements = []
+
+    def append(self, element):
+        self.elements.append(element.__str__())
+        return self
+
+    def __str__(self):
+        return f'<g {self.__attrs}>\n{"\n".join(self.elements)}\n</g>'
 
 
 class Switch(Element):
