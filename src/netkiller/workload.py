@@ -6,6 +6,8 @@
 # Data: 2025-08-06
 ##############################################
 
+
+import csv
 import json
 import os
 import sys
@@ -26,18 +28,20 @@ from netkiller.gantt import Gantt, Calendar
 class Workload(Calendar):
     def __init__(self, data: list = None) -> None:
         super().__init__()
-        self.workloadData = {}
+        self.data = {}
         self.minDate = []
         self.maxDate = []
         self.resourceTextSize = 0
-        self.data = data
+        # self.data = data
         self.workweeks = 5
         self.firstsd = None
         self.canvasTop = 0
         self.splitLine = 1
+        self.fontSize = 16
+        self.__department = None
 
-    def __gantt2workload(self, data):
-        # self.workloadData = dict()
+    def gantt2workload(self, data):
+        # self.data = dict()
         for key, item in data.items():
             if "subitem" in item:
                 self.__gantt2workload(item["subitem"])
@@ -58,29 +62,58 @@ class Workload(Calendar):
             if self.resourceTextSize < length:
                 self.resourceTextSize = length
 
-            if item["resource"] in self.workloadData.keys():
+            if item["resource"] in self.data.keys():
                 # if data.has_key(item['resource']):
 
-                # if not 'start' in self.workloadData[item['resource']]:
-                # self.workloadData[item['resource']]['start']=''
+                # if not 'start' in self.data[item['resource']]:
+                # self.data[item['resource']]['start']=''
                 # if datetime.strptime(self.data[item['resource']]['start'], '%Y-%m-%d').date() > start:
-                #     self.workloadData[item['resource']]['start'] = item['start']
+                #     self.data[item['resource']]['start'] = item['start']
                 # if datetime.strptime(self.data[item['resource']]['finish'], '%Y-%m-%d').date() < finish:
-                #     self.workloadData[item['resource']]['finish'] = item['finish']
+                #     self.data[item['resource']]['finish'] = item['finish']
 
-                # print(self.workloadData)
+                # print(self.data)
 
-                if self.workloadData[item["resource"]]["start"] > start:
-                    self.workloadData[item["resource"]]["start"] = start
-                if self.workloadData[item["resource"]]["finish"] < finish:
-                    self.workloadData[item["resource"]]["finish"] = finish
+                if self.data[item["resource"]]["start"] > start:
+                    self.data[item["resource"]]["start"] = start
+                if self.data[item["resource"]]["finish"] < finish:
+                    self.data[item["resource"]]["finish"] = finish
             else:
-                self.workloadData[item["resource"]] = {"resource": item["resource"], "start": start, "finish": finish}
-        return self.workloadData
+                self.data[item["resource"]] = {"resource": item["resource"], "start": start, "finish": finish}
+        return self.data
 
-    def workload(self, title):
+    def csv2workload(self, file):
+        dictReader = csv.DictReader(file)
+        for item in dictReader:
 
-        self.data = self.__gantt2workload(self.data)
+            if not item["resource"]:
+                # item["resource"] = "未知员工"
+                continue
+            # print(item["start"])
+            start = datetime.strptime(item["start"], "%Y-%m-%d").date()
+            finish = datetime.strptime(item["finish"], "%Y-%m-%d").date()
+
+            self.minDate.append(start)
+            self.maxDate.append(finish)
+
+            length = self.getTextSize(item["resource"]) + 20
+            # print(self.resourceTextSize,length)
+            if self.resourceTextSize < length:
+                self.resourceTextSize = length
+
+            if item["resource"] in self.data.keys():
+                if self.data[item["resource"]]["start"] > start:
+                    self.data[item["resource"]]["start"] = start
+                if self.data[item["resource"]]["finish"] < finish:
+                    self.data[item["resource"]]["finish"] = finish
+                self.data[item["resource"]]["task"].append((start, finish))
+            else:
+                self.data[item["resource"]] = {"resource": item["resource"], "start": start, "finish": finish,
+                                               "task": [(start, finish)]}
+
+        return self.data
+
+    def workload(self):
 
         self.startPosition = self.resourceTextSize + 300
         left = self.startPosition
@@ -90,17 +123,37 @@ class Workload(Calendar):
 
         lineNumber = len(self.data)
 
+        if self.__title:
+            self.canvasTop = 50
+
         days = self.endDate - self.beginDate
         self.canvasWidth = self.startPosition + self.columeWidth * days.days + days.days + self.columeWidth + 2
         self.canvasHeight = self.canvasTop + self.rowHeight * 3 + self.rowHeight * lineNumber + (
-                    lineNumber - 1) * self.splitLine
+                lineNumber - 1) * self.splitLine
         self.width = self.canvasWidth + 1
         self.height = self.canvasHeight + 1
         # print(self.canvasTop, self.canvasHeight)
 
         self.draw = draw.Drawing(self.width, self.height)
 
-        # self.__title(title)
+        style = """<style><![CDATA[
+        /* 全局默认字体设置 */
+        * {
+          font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
+          /* font-size: 16px;*/
+        }
+        ]]></style>
+                        """
+
+        self.draw.append(draw.Raw(style))
+
+        if self.__title:
+            self.draw.append(draw.Text(self.__title, 30, self.canvasWidth / 2, 25, center=True, text_anchor="middle",
+                                       font_family=self.fontFamily))
+
+        if self.__department:
+            self.draw.append(
+                draw.Text(self.__department, 30, 10, self.canvasTop + self.rowHeight + 10, fill="#555555"))
 
         top = self.canvasTop + self.rowHeight * 2
         chart = draw.Group(id="workload")
@@ -109,15 +162,15 @@ class Workload(Calendar):
         table.append_title("表格")
         # 封顶
         table.append(draw.Line(1, self.canvasTop, self.canvasWidth, self.canvasTop, stroke="black"))
-        table.append(draw.Text("资源", 20, 5, top + 20, fill="#555555"))
+        table.append(draw.Text("资源", 20, 10, top + 20, fill="#555555"))
         table.append(draw.Line(self.resourceTextSize, top, self.resourceTextSize, self.canvasHeight, stroke="grey"))
-        table.append(draw.Text("开始日期", 20, self.resourceTextSize + +5, top + 20, fill="#555555"))
+        table.append(draw.Text("开始日期", 20, self.resourceTextSize + 10, top + 20, fill="#555555"))
         table.append(
-            draw.Line(self.resourceTextSize + 100, top, self.resourceTextSize + 100, self.canvasHeight, stroke="grey"))
-        table.append(draw.Text("截止日期", 20, self.resourceTextSize + 100 + 5, top + 20, fill="#555555"))
+            draw.Line(self.resourceTextSize + 115, top, self.resourceTextSize + 115, self.canvasHeight, stroke="grey"))
+        table.append(draw.Text("截止日期", 20, self.resourceTextSize + 120 + 5, top + 20, fill="#555555"))
         table.append(
-            draw.Line(self.resourceTextSize + 200, top, self.resourceTextSize + 200, self.canvasHeight, stroke="grey"))
-        table.append(draw.Text("工时", 20, self.resourceTextSize + 200 + 5, top + 20, fill="#555555"))
+            draw.Line(self.resourceTextSize + 225, top, self.resourceTextSize + 225, self.canvasHeight, stroke="grey"))
+        table.append(draw.Text("工时", 20, self.resourceTextSize + 235, top + 20, fill="#555555"))
         # table.append(draw.Line(self.resourceTextSize + 400, top,                               self.resourceTextSize + 400, self.canvasHeight, stroke='grey'))
 
         chart.append(table)
@@ -151,7 +204,7 @@ class Workload(Calendar):
 
         # left += self.columeWidth * (begin - 1) + (1 * begin)
         # # 日宽度 + 竖线宽度
-        self.canvasTop = self.rowHeight * 3
+        self.canvasTop += self.rowHeight * 3
         for resource, row in self.data.items():
             # # 工时
             top = self.canvasTop + self.itemLine * self.rowHeight + self.splitLine * self.itemLine
@@ -162,21 +215,31 @@ class Workload(Calendar):
             # end = (row['finish'] - row['start']).days
             right = self.columeWidth * (end + 1) + (1 * end)
 
-            chart.append(draw.Text(resource, self.fontSize, 5, top + 20, text_anchor="start"))
+            chart.append(draw.Text(resource, self.fontSize, 10, top + 20, text_anchor="start"))
             chart.append(
-                draw.Text(row["start"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 5, top + 20,
+                draw.Text(row["start"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 10, top + 20,
                           text_anchor="start"))
             chart.append(
-                draw.Text(row["finish"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 100 + 5, top + 20,
+                draw.Text(row["finish"].strftime("%Y-%m-%d"), self.fontSize, self.resourceTextSize + 125, top + 20,
                           text_anchor="start"))
 
             chart.append(
-                draw.Text(str(end + 1), self.fontSize, self.resourceTextSize + 200 + 5, top + 20, text_anchor="start"))
+                draw.Text(str(end + 1), self.fontSize, self.resourceTextSize + 235, top + 20, text_anchor="start"))
 
-            left = self.dayPosition[row["start"].strftime("%Y-%m-%d")]
-            r = draw.Rectangle(left, top + 4, right, self.barHeight, fill="blue")
-            r.append_title(resource)
-            chart.append(r)
+            # left = self.dayPosition[row["start"].strftime("%Y-%m-%d")]
+            # r = draw.Rectangle(left, top + 4, right, self.barHeight, fill="blue")
+            # r.append_title(resource)
+            # chart.append(r)
+
+            for start, finish in row['task']:
+                left = self.dayPosition[start.strftime("%Y-%m-%d")]
+                end = (finish - start).days
+                # end = (row['finish'] - row['start']).days
+                right = self.columeWidth * (end + 1) + (1 * end)
+
+                r = draw.Rectangle(left, top + 4, right, self.barHeight, fill="blue")
+                r.append_title(resource)
+                chart.append(r)
 
             chart.append(draw.Line(1, top + self.rowHeight, self.canvasWidth, top + self.rowHeight, stroke="grey"))
 
@@ -193,10 +256,10 @@ class Workload(Calendar):
     def title(self, title):
         self.__title = title
 
-    def save(self, filename: str):
+    def department(self, text):
+        self.__department = text
 
-        # self.rander()
-        self.workload(self.__title)
+    def save(self, filename: str):
         self.draw.save_svg(filename)
 
     def main(self):
@@ -204,9 +267,9 @@ class Workload(Calendar):
 
         self.parser.add_option("", "--stdin", action="store_true", dest="stdin",
                                help="cat gantt.json | gantt -s file.svg")
-        self.parser.add_option("-c", "--csv", dest="csv", help="/path/to/gantt.csv", default=None,
-                               metavar="/path/to/gantt.csv")
-        self.parser.add_option("-l", "--load", dest="load", help="load data from file.", default=None,
+        self.parser.add_option("-c", "--csv", dest="csv", help="/path/to/workload.csv", default=None,
+                               metavar="/path/to/workload.csv")
+        self.parser.add_option("-j", "--json", dest="json", help="load data from file.", default=None,
                                metavar="/path/to/gantt.json")
 
         # group = OptionGroup(self.parser, "loading data from mysql")
@@ -217,8 +280,9 @@ class Workload(Calendar):
         # self.parser.add_option_group(group)
 
         group = OptionGroup(self.parser, "Workload")
-        group.add_option("-t", "--title", dest="title", help="标题", default="标题", metavar="项目标题")
-        group.add_option("-n", "--name", dest="name", help="项目名称", default="Netkiller Python 手札",
+        group.add_option("-t", "--title", dest="title", help="标题", default="Netkiller Python 手札",
+                         metavar="项目标题")
+        group.add_option("-d", "--department", dest="department", help="项目名称", default="技术部",
                          metavar="Netkiller Python 手札")
         group.add_option("-W", "--workweeks", dest="workweeks", help="workweeks default 5", default=5, metavar="5")
         group.add_option("-o", "--odd-even", action="store_true", dest="oddeven", default=False, help="odd-even weeks")
@@ -226,41 +290,48 @@ class Workload(Calendar):
         # group.add_option("-w", "--workload", action="store_true", dest="workload", help="Workload chart")
         group.add_option("-s", "--save", dest="save", help="save file", default=None, metavar="/path/to/workload.svg")
         self.parser.add_option_group(group)
-        self.parser.add_option("-d", "--debug", action="store_true", dest="debug", help="debug mode")
+        self.parser.add_option("--debug", action="store_true", dest="debug", help="debug mode")
 
         (options, args) = self.parser.parse_args()
 
-        data = []
+        workload = Workload()
 
-        if options.stdin:
-            self.data = json.loads(sys.stdin.read())
-        elif options.csv:
-            csv = Data()
-            data = csv.csvfile(options.csv)
-
-        # elif options.host:
-        #     config = {"host": options.host, "user": options.username, "password": options.password,
-        #               "database": options.database, "raise_on_warnings": True}
-        #     self.loadFromMySQL(config)
         if options.debug:
             print(options, args)
             print(json.dumps(self.data, ensure_ascii=False))
 
-        # if not self.data:
-        #     self.usage()
-
         if not options.save:
             self.usage()
 
+        if options.stdin:
+            json.loads(sys.stdin.read())
+            # self.gantt2workload(data)
+        elif options.csv:
+            with open(options.csv) as file:
+                tmp = workload.csv2workload(file)
+                # print(workload.minDate)
+        elif options.json:
+            with open(options.json) as file:
+                data = json.dumps(file.read(), ensure_ascii=False)
+                workload.gantt2workload(data)
+        # elif options.host:
+        #     config = {"host": options.host, "user": options.username, "password": options.password,
+        #               "database": options.database, "raise_on_warnings": True}
+        #     self.loadFromMySQL(config)
+
+        # if not self.data:
+        #     self.usage()
         # if options.workweeks:
         #     workweeks = options.workweeks
 
         # print(data)
-        workload = Workload(data)
+
         # workload.data = data
-        # workload.name(options.name)
+
         # workload.setWorkweeks(options.workweeks, False)
         workload.title(options.title)
+        workload.department(options.department)
+        workload.workload()
         workload.save(options.save)
 
 

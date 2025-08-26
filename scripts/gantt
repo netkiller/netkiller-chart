@@ -33,8 +33,8 @@ class GanttChart:
 
         self.parser.add_option("", "--stdin", action="store_true", dest="stdin",
                                help="cat gantt.json | gantt -s file.svg")
-        self.parser.add_option("-c", "--csv", dest="csv", help="/path/to/gantt.csv", default=None,
-                               metavar="/path/to/gantt.csv")
+        self.parser.add_option("-c", "--csv", dest="csv", help="/path/to/workload.csv", default=None,
+                               metavar="/path/to/workload.csv")
         self.parser.add_option("-l", "--load", dest="load", help="load data from file.", default=None,
                                metavar="/path/to/gantt.json")
         group = OptionGroup(self.parser, "loading data from mysql")

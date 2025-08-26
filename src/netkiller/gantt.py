@@ -709,8 +709,8 @@ class Gantt(Calendar, Canvas):
         self.parser.add_option("", "--stdin", action="store_true", dest="stdin",
                                help="cat gantt.json | gantt -s file.svg")
         group = OptionGroup(self.parser, "loading data from file")
-        group.add_option("-c", "--csv", dest="csv", help="/path/to/gantt.csv", default=None,
-                         metavar="/path/to/gantt.csv")
+        group.add_option("-c", "--csv", dest="csv", help="/path/to/workload.csv", default=None,
+                         metavar="/path/to/workload.csv")
         group.add_option("-j", "--json", dest="load", help="load data from file.", default=None,
                          metavar="/path/to/gantt.json")
         group.add_option("-m", "--markdown", dest="markdown", help="load data from file.", default=None,

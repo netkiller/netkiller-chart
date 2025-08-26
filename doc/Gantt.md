@@ -50,8 +50,8 @@ Usage: gantt [options]
 Options:
   -h, --help            show this help message and exit
   --stdin               cat gantt.json | gantt -s file.svg
-  -c /path/to/gantt.csv, --csv=/path/to/gantt.csv
-                        /path/to/gantt.csv
+  -c /path/to/workload.csv, --csv=/path/to/workload.csv
+                        /path/to/workload.csv
   -l /path/to/gantt.json, --load=/path/to/gantt.json
                         load data from file.
   -d, --debug           debug mode
