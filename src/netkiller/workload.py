@@ -260,6 +260,7 @@ class Workload(Calendar):
         self.__department = text
 
     def save(self, filename: str):
+        self.workload()
         self.draw.save_svg(filename)
 
     def main(self):
@@ -331,7 +332,6 @@ class Workload(Calendar):
         # workload.setWorkweeks(options.workweeks, False)
         workload.title(options.title)
         workload.department(options.department)
-        workload.workload()
         workload.save(options.save)
 
 

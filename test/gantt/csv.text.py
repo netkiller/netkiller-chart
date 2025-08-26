@@ -45,7 +45,7 @@ def main():
         # gantt.hideTable()
         gantt.load(data)
         gantt.author("Neo Chen")
-        gantt.setWorkweeks(6, 1)
+        # gantt.setWorkweeks(6, 1)
         gantt.title("甘特图测试")
         # gantt.legend(False)
         # gantt.blank(True)
