@@ -3,12 +3,11 @@
 ##############################################
 # Home	: http://netkiller.github.io
 # Author: Neo <netkiller@msn.com>
-# Data: 2025-08-13
+# Data: 2025-08-29
 ##############################################
 try:
     import re
     import json
-    # from netkiller.gantt import Data
     from netkiller import Data
 except ImportError as err:
     print("Error: %s" % (err))
@@ -181,45 +180,82 @@ class Markdown:
         # print(json_output)
         return data
 
+    def fishbone(self):
+
+        # 解析Markdown文本
+        lines = [line.rstrip() for line in self.markdown.rstrip().split('\n') if line.rstrip()]
+        # print(lines)
+
+        parent = None
+        jsonData = {}
+
+        for line in lines:
+            # 匹配一级目标（无缩进）
+            if line.startswith('- ') and not line.startswith('  - '):
+                # print(line)
+                parent = line[2:].strip()
+                jsonData[parent] = []
+            # 匹配二级目标（有缩进）
+            elif line.startswith('  - '):
+                value = line[4:].strip()
+                jsonData[parent].append(value)
+        # print(jsonData)
+        return jsonData
+
     def debug(self):
+        markdown = """
+        # 石川鱼骨图
+        - 产品目标
+          - 竞品分析
+        - 开发目标
+          - 编码开发
+          - 代码测试
+        - 运营目标
+          - 区域投放
+            """
+        self.markdown = markdown
+        jsonString = self.fishbone()
+        # 打印结果
+        print(json.dumps(jsonString, ensure_ascii=False, indent=2))
         pass
 
     def main(self):
         # 示例 Markdown 文本
-        self.markdown = """# 测试标题
-- 一级标题
-  - 内容段落1
-  - 内容段落2
-  - 列表项1
-  - 列表项2
-    - 子列表项1
-      - 孙列表项1
-  - 三级标题
-    - 更多内容 1
-    - AAA
-    - AAA
-    - 更多内容 1
-  - 另一个二级标题
-    - 列表A
-    - 子列表A1
-    - 列表B
-      - 子列表B1
-        - 孙列表B1-1
-      - 子列表B2
-"""
+        #         self.markdown = """# 测试标题
+        # - 一级标题
+        #   - 内容段落1
+        #   - 内容段落2
+        #   - 列表项1
+        #   - 列表项2
+        #     - 子列表项1
+        #       - 孙列表项1
+        #   - 三级标题
+        #     - 更多内容 1
+        #     - AAA
+        #     - AAA
+        #     - 更多内容 1
+        #   - 另一个二级标题
+        #     - 列表A
+        #     - 子列表A1
+        #     - 列表B
+        #       - 子列表B1
+        #         - 孙列表B1-1
+        #       - 子列表B2
+        # """
 
         # 解析并转换为 JSON
         # result = self.parser(markdown_text)
         # json_output = json.dumps(result, ensure_ascii=False, indent=2)
-        self.debug()
+        # self.debug()
         # 打印 JSON 输出
 
         # df = markdown2csv(md_text)
         # print(df)
         # print('-' * 50)
-        t = self.table2dict()
-        print(t)
+        # t = self.table2dict()
+        # print(t)
         # print(self.dumps())
+        self.debug()
 
 
 if __name__ == "__main__":
