@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="814" height="409" viewBox="0 0 814 409">
+     width="814" height="407" viewBox="0 0 814 407">
 <defs>
 </defs>
 <style><![CDATA[
-/* 全局默认字体设置 */
 * {
   font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
   /* font-size: 16px;*/
@@ -13,195 +12,195 @@
                 
 <g id="title" onclick="this.style.stroke = 'green'; ">
 <text x="406.0" y="25" font-size="30" text-anchor="middle" font-family="SourceHanSansSC-Normal" dominant-baseline="central">Test</text>
-<text x="5" y="404" font-size="16">Neo Chen</text>
+<text x="5" y="392.5" font-size="16">Neo Chen</text>
 </g>
-<rect x="1" y="51" width="812" height="329" fill="none" stroke="black" />
 <g id="calendar">
 <g id="table">
 <title>表格</title>
-<text x="5" y="129" font-size="20" fill="#555555">任务</text>
-<path d="M205,109 L205,378" stroke="grey" />
-<text x="210" y="129" font-size="20" fill="#555555">开始日期</text>
-<path d="M325,109 L325,378" stroke="grey" />
-<text x="330" y="129" font-size="20" fill="#555555">截止日期</text>
-<path d="M445,109 L445,378" stroke="grey" />
-<text x="450" y="129" font-size="20" fill="#555555">工时</text>
-<path d="M495,109 L495,378" stroke="grey" />
-<text x="500" y="129" font-size="20" fill="#555555">资源</text>
+<text x="5" y="128" font-size="20" fill="#555555">任务</text>
+<path d="M205,108 L205,376" stroke="grey" />
+<text x="210" y="128" font-size="20" fill="#555555">开始日期</text>
+<path d="M325,108 L325,376" stroke="grey" />
+<text x="330" y="128" font-size="20" fill="#555555">截止日期</text>
+<path d="M445,108 L445,376" stroke="grey" />
+<text x="450" y="128" font-size="20" fill="#555555">工时</text>
+<path d="M495,108 L495,376" stroke="grey" />
+<text x="500" y="128" font-size="20" fill="#555555">资源</text>
 </g>
 <g id="year2025">
 <g id="month8">
 <g id="week30"></g>
 <g id="week31">
-<text x="570" y="70" font-size="20" fill="#555555">2025年08月</text>
-<text x="570" y="101" font-size="20" fill="#555555">三</text>
-<rect x="566" y="109" width="30" height="269" fill="#cccccc">
+<text x="570" y="69" font-size="20" fill="#555555">2025年08月</text>
+<text x="570" y="100" font-size="20" fill="#555555">三</text>
+<rect x="566" y="108" width="30" height="268" fill="#cccccc">
 <title>6</title>
 </rect>
-<text x="576" y="131" font-size="20" fill="#555555">6</text>
-<text x="601" y="101" font-size="20" fill="#555555">四</text>
-<rect x="597" y="109" width="30" height="269" fill="#cccccc">
+<text x="576" y="130" font-size="20" fill="#555555">6</text>
+<text x="601" y="100" font-size="20" fill="#555555">四</text>
+<rect x="597" y="108" width="30" height="268" fill="#cccccc">
 <title>7</title>
 </rect>
-<text x="607" y="131" font-size="20" fill="#555555">7</text>
-<text x="632" y="101" font-size="20" fill="#555555">五</text>
-<rect x="628" y="109" width="30" height="269" fill="#cccccc">
+<text x="607" y="130" font-size="20" fill="#555555">7</text>
+<text x="632" y="100" font-size="20" fill="#555555">五</text>
+<rect x="628" y="108" width="30" height="268" fill="#cccccc">
 <title>8</title>
 </rect>
-<text x="638" y="131" font-size="20" fill="#555555">8</text>
-<text x="663" y="101" font-size="20" fill="#555555">六</text>
-<rect x="659" y="109" width="30" height="269" fill="#dddddd">
+<text x="638" y="130" font-size="20" fill="#555555">8</text>
+<text x="663" y="100" font-size="20" fill="#555555">六</text>
+<rect x="659" y="108" width="30" height="268" fill="#dddddd">
 <title>9</title>
 </rect>
-<text x="669" y="131" font-size="20" fill="#555555">9</text>
-<text x="694" y="101" font-size="20" fill="#555555">日</text>
-<rect x="690" y="109" width="30" height="269" fill="#dddddd">
+<text x="669" y="130" font-size="20" fill="#555555">9</text>
+<text x="694" y="100" font-size="20" fill="#555555">日</text>
+<rect x="690" y="108" width="30" height="268" fill="#dddddd">
 <title>10</title>
 </rect>
-<path d="M720,80 L720,378" stroke="black" />
-<text x="695" y="131" font-size="20" fill="#555555">10</text>
+<path d="M720,79 L720,376" stroke="black" />
+<text x="695" y="130" font-size="20" fill="#555555">10</text>
 </g>
 <g id="week32">
-<text x="725" y="101" font-size="20" fill="#555555">一</text>
-<rect x="721" y="109" width="30" height="269" fill="#cccccc">
+<text x="725" y="100" font-size="20" fill="#555555">一</text>
+<rect x="721" y="108" width="30" height="268" fill="#cccccc">
 <title>11</title>
 </rect>
-<text x="726" y="131" font-size="20" fill="#555555">11</text>
-<text x="756" y="101" font-size="20" fill="#555555">二</text>
-<rect x="752" y="109" width="30" height="269" fill="#cccccc">
+<text x="726" y="130" font-size="20" fill="#555555">11</text>
+<text x="756" y="100" font-size="20" fill="#555555">二</text>
+<rect x="752" y="108" width="30" height="268" fill="#cccccc">
 <title>12</title>
 </rect>
-<text x="757" y="131" font-size="20" fill="#555555">12</text>
-<text x="787" y="101" font-size="20" fill="#555555">三</text>
-<rect x="783" y="109" width="30" height="269" fill="#cccccc">
+<text x="757" y="130" font-size="20" fill="#555555">12</text>
+<text x="787" y="100" font-size="20" fill="#555555">三</text>
+<rect x="783" y="108" width="30" height="268" fill="#cccccc">
 <title>13</title>
 </rect>
-<text x="788" y="131" font-size="20" fill="#555555">13</text>
+<text x="788" y="130" font-size="20" fill="#555555">13</text>
 </g>
 </g>
 </g>
-<path d="M565,80 L812,80" stroke="grey" />
-<path d="M1,109 L812,109" stroke="grey" />
-<path d="M1,138 L812,138" stroke="grey" />
-<path d="M565,51 L565,378" stroke="grey" />
-<path d="M1,168 L812,168" stroke="grey" />
-<path d="M1,198 L812,198" stroke="grey" />
-<path d="M1,228 L812,228" stroke="grey" />
-<path d="M1,258 L812,258" stroke="grey" />
-<path d="M1,288 L812,288" stroke="grey" />
-<path d="M1,318 L812,318" stroke="grey" />
-<path d="M1,348 L812,348" stroke="grey" />
-<path d="M1,378 L812,378" stroke="grey" />
+<path d="M565,79 L812,79" stroke="grey" />
+<path d="M1,108 L812,108" stroke="grey" />
+<path d="M1,137 L812,137" stroke="grey" />
+<path d="M565,50 L565,376" stroke="grey" />
+<path d="M1,167 L812,167" stroke="grey" />
+<path d="M1,197 L812,197" stroke="grey" />
+<path d="M1,227 L812,227" stroke="grey" />
+<path d="M1,257 L812,257" stroke="grey" />
+<path d="M1,287 L812,287" stroke="grey" />
+<path d="M1,317 L812,317" stroke="grey" />
+<path d="M1,347 L812,347" stroke="grey" />
+<path d="M1,377 L812,377" stroke="grey" />
+<rect x="1" y="50" width="812" height="326" fill="none" stroke="black" />
 </g>
 <g id="tasks">
 <g id="task">
 <g id="text">
-<text x="10" y="158" font-size="18" text-anchor="start">1居家办公试行方案细则</text>
-<text x="210" y="158" font-size="18" text-anchor="start">2025-08-06</text>
-<text x="330" y="158" font-size="18" text-anchor="start">2025-08-07</text>
-<text x="465" y="158" font-size="18" text-anchor="start">2</text>
-<text x="500" y="158" font-size="18" text-anchor="start">发言人4</text>
+<text x="10" y="157" font-size="18" text-anchor="start">1居家办公试行方案细则</text>
+<text x="210" y="157" font-size="18" text-anchor="start">2025-08-06</text>
+<text x="330" y="157" font-size="18" text-anchor="start">2025-08-07</text>
+<text x="465" y="157" font-size="18" text-anchor="start">2</text>
+<text x="500" y="157" font-size="18" text-anchor="start">发言人4</text>
 </g>
 <g id="item">
-<rect x="566" y="143" width="61" height="20" fill="#00C7C1" stroke="grey">
+<rect x="566" y="142" width="61" height="20" fill="#00C7C1" stroke="grey">
 <title>1居家办公试行方案细则</title>
 </rect>
 </g>
 </g>
 <g id="task">
 <g id="text">
-<text x="10" y="188" font-size="18" text-anchor="start">虚拟白板系统操作指南</text>
-<text x="210" y="188" font-size="18" text-anchor="start">2025-08-07</text>
-<text x="330" y="188" font-size="18" text-anchor="start">2025-08-09</text>
-<text x="465" y="188" font-size="18" text-anchor="start">3</text>
-<text x="500" y="188" font-size="18" text-anchor="start">技术部张磊</text>
+<text x="10" y="187" font-size="18" text-anchor="start">虚拟白板系统操作指南</text>
+<text x="210" y="187" font-size="18" text-anchor="start">2025-08-07</text>
+<text x="330" y="187" font-size="18" text-anchor="start">2025-08-09</text>
+<text x="465" y="187" font-size="18" text-anchor="start">3</text>
+<text x="500" y="187" font-size="18" text-anchor="start">技术部张磊</text>
 </g>
 <g id="item">
-<rect x="597" y="173" width="92" height="20" fill="#00C7C1" stroke="grey">
+<rect x="597" y="172" width="92" height="20" fill="#00C7C1" stroke="grey">
 <title>虚拟白板系统操作指南</title>
 </rect>
 </g>
 </g>
 <g id="task">
 <g id="text">
-<text x="10" y="218" font-size="18" text-anchor="start">每日站会制度设计</text>
-<text x="210" y="218" font-size="18" text-anchor="start">2025-08-06</text>
-<text x="330" y="218" font-size="18" text-anchor="start">2025-08-06</text>
-<text x="465" y="218" font-size="18" text-anchor="start">1</text>
-<text x="500" y="218" font-size="18" text-anchor="start">周经理</text>
+<text x="10" y="217" font-size="18" text-anchor="start">每日站会制度设计</text>
+<text x="210" y="217" font-size="18" text-anchor="start">2025-08-06</text>
+<text x="330" y="217" font-size="18" text-anchor="start">2025-08-06</text>
+<text x="465" y="217" font-size="18" text-anchor="start">1</text>
+<text x="500" y="217" font-size="18" text-anchor="start">周经理</text>
 </g>
 <g id="item">
-<rect x="566" y="203" width="30" height="20" fill="#00C7C1" stroke="grey">
+<rect x="566" y="202" width="30" height="20" fill="#00C7C1" stroke="grey">
 <title>每日站会制度设计</title>
 </rect>
 </g>
 </g>
 <g id="task">
 <g id="text">
-<text x="10" y="248" font-size="18" text-anchor="start">行政支持清单</text>
-<text x="210" y="248" font-size="18" text-anchor="start">2025-08-06</text>
-<text x="330" y="248" font-size="18" text-anchor="start">2025-08-07</text>
-<text x="465" y="248" font-size="18" text-anchor="start">2</text>
-<text x="500" y="248" font-size="18" text-anchor="start">行政部门</text>
+<text x="10" y="247" font-size="18" text-anchor="start">行政支持清单</text>
+<text x="210" y="247" font-size="18" text-anchor="start">2025-08-06</text>
+<text x="330" y="247" font-size="18" text-anchor="start">2025-08-07</text>
+<text x="465" y="247" font-size="18" text-anchor="start">2</text>
+<text x="500" y="247" font-size="18" text-anchor="start">行政部门</text>
 </g>
 <g id="item">
-<rect x="566" y="233" width="61" height="20" fill="#00C7C1" stroke="grey">
+<rect x="566" y="232" width="61" height="20" fill="#00C7C1" stroke="grey">
 <title>行政支持清单</title>
 </rect>
 </g>
 </g>
 <g id="task">
 <g id="text">
-<text x="10" y="278" font-size="18" text-anchor="start">效率对比分析表</text>
-<text x="210" y="278" font-size="18" text-anchor="start">2025-08-08</text>
-<text x="330" y="278" font-size="18" text-anchor="start">2025-08-09</text>
-<text x="465" y="278" font-size="18" text-anchor="start">2</text>
-<text x="500" y="278" font-size="18" text-anchor="start">数据分析组</text>
+<text x="10" y="277" font-size="18" text-anchor="start">效率对比分析表</text>
+<text x="210" y="277" font-size="18" text-anchor="start">2025-08-08</text>
+<text x="330" y="277" font-size="18" text-anchor="start">2025-08-09</text>
+<text x="465" y="277" font-size="18" text-anchor="start">2</text>
+<text x="500" y="277" font-size="18" text-anchor="start">数据分析组</text>
 </g>
 <g id="item">
-<rect x="628" y="263" width="61" height="20" fill="#00C7C1" stroke="grey">
+<rect x="628" y="262" width="61" height="20" fill="#00C7C1" stroke="grey">
 <title>效率对比分析表</title>
 </rect>
 </g>
 </g>
 <g id="task">
 <g id="text">
-<text x="10" y="308" font-size="18" text-anchor="start">成本核算模型</text>
-<text x="210" y="308" font-size="18" text-anchor="start">2025-08-09</text>
-<text x="330" y="308" font-size="18" text-anchor="start">2025-08-10</text>
-<text x="465" y="308" font-size="18" text-anchor="start">2</text>
-<text x="500" y="308" font-size="18" text-anchor="start">财务部</text>
+<text x="10" y="307" font-size="18" text-anchor="start">成本核算模型</text>
+<text x="210" y="307" font-size="18" text-anchor="start">2025-08-09</text>
+<text x="330" y="307" font-size="18" text-anchor="start">2025-08-10</text>
+<text x="465" y="307" font-size="18" text-anchor="start">2</text>
+<text x="500" y="307" font-size="18" text-anchor="start">财务部</text>
 </g>
 <g id="item">
-<rect x="659" y="293" width="61" height="20" fill="#00C7C1" stroke="grey">
+<rect x="659" y="292" width="61" height="20" fill="#00C7C1" stroke="grey">
 <title>成本核算模型</title>
 </rect>
 </g>
 </g>
 <g id="task">
 <g id="text">
-<text x="10" y="338" font-size="18" text-anchor="start">满意度问卷</text>
-<text x="210" y="338" font-size="18" text-anchor="start">2025-08-11</text>
-<text x="330" y="338" font-size="18" text-anchor="start">2025-08-12</text>
-<text x="465" y="338" font-size="18" text-anchor="start">2</text>
-<text x="500" y="338" font-size="18" text-anchor="start">HR部门</text>
+<text x="10" y="337" font-size="18" text-anchor="start">满意度问卷</text>
+<text x="210" y="337" font-size="18" text-anchor="start">2025-08-11</text>
+<text x="330" y="337" font-size="18" text-anchor="start">2025-08-12</text>
+<text x="465" y="337" font-size="18" text-anchor="start">2</text>
+<text x="500" y="337" font-size="18" text-anchor="start">HR部门</text>
 </g>
 <g id="item">
-<rect x="721" y="323" width="61" height="20" fill="#00C7C1" stroke="grey">
+<rect x="721" y="322" width="61" height="20" fill="#00C7C1" stroke="grey">
 <title>满意度问卷</title>
 </rect>
 </g>
 </g>
 <g id="task">
 <g id="text">
-<text x="10" y="368" font-size="18" text-anchor="start">焦点小组计划</text>
-<text x="210" y="368" font-size="18" text-anchor="start">2025-08-12</text>
-<text x="330" y="368" font-size="18" text-anchor="start">2025-08-13</text>
-<text x="465" y="368" font-size="18" text-anchor="start">2</text>
-<text x="500" y="368" font-size="18" text-anchor="start">市场部</text>
+<text x="10" y="367" font-size="18" text-anchor="start">焦点小组计划</text>
+<text x="210" y="367" font-size="18" text-anchor="start">2025-08-12</text>
+<text x="330" y="367" font-size="18" text-anchor="start">2025-08-13</text>
+<text x="465" y="367" font-size="18" text-anchor="start">2</text>
+<text x="500" y="367" font-size="18" text-anchor="start">市场部</text>
 </g>
 <g id="item">
-<rect x="752" y="353" width="61" height="20" fill="#00C7C1" stroke="grey">
+<rect x="752" y="352" width="61" height="20" fill="#00C7C1" stroke="grey">
 <title>焦点小组计划</title>
 </rect>
 </g>

@@ -37,7 +37,7 @@ class Text(Element):
         self.x = x
         self.y = y
         self.text = text
-        self.attrs = super().attribute(kwargs)
+        self.__attrs = super().attribute(kwargs)
         self.elements = []
 
     def append(self, element):
@@ -46,9 +46,9 @@ class Text(Element):
 
     def __str__(self):
         if self.text:
-            return f'<text x="{self.x}" y="{self.y}" {self.attrs}>{self.text}</text>'
+            return f'<text x="{self.x}" y="{self.y}" {self.__attrs}>{self.text}</text>'
         else:
-            return f'<text>{"\n".join(self.elements)}</text>'
+            return f'<text {self.__attrs}>{"\n".join(self.elements)}</text>'
 
 
 class TextPath(Element):

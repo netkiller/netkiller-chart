@@ -38,12 +38,12 @@ def main():
             data = markdown.fishbone()
             print(data)
             fishbone = Fishbone(data)
-            fishbone.main()
+            fishbone.save("test.svg")
+            fishbone.debug()
+            # fishbone.main()
 
             # workload.title("工作负载图")
             # workload.department("技术研发部")
-            # workload.setWorkweeks(6, 1)
-            # # workload.workload()
             # workload.save("workload1.svg")
 
 

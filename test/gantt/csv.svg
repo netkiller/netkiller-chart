@@ -22,7 +22,6 @@
 </marker>
 </defs>
 <style><![CDATA[
-/* 全局默认字体设置 */
 * {
   font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
   /* font-size: 16px;*/

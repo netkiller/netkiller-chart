@@ -41,9 +41,8 @@ def main():
     print(data)
     try:
 
-        gantt = Gantt()
+        gantt = Gantt(data)
         # gantt.hideTable()
-        gantt.load(data)
         gantt.author("Neo Chen")
         # gantt.setWorkweeks(6, 1)
         gantt.title("甘特图测试")

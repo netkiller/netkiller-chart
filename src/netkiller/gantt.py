@@ -55,6 +55,9 @@ class Canvas:
     fontSize = 18
     lineColor = "grey"
 
+    def __init__(self):
+        pass
+
     def getTextSize(self, text):
         #   if platform.system() == "Linux":
         #     font = r"/usr/local/share/netkiller/Songti.ttc"
@@ -353,11 +356,10 @@ class Calendar(Canvas):
 
 
 class Gantt(Calendar, Canvas):
-    data = {}
     textIndent = 0
     isBlank = False
 
-    def __init__(self) -> None:
+    def __init__(self, data: dict = None) -> None:
         super().__init__()
         # self.canvasWidth = self.width
         # self.canvasHeight = self.height
@@ -367,7 +369,10 @@ class Gantt(Calendar, Canvas):
         self.ganttTitle = None
         self.isLegend = True
         self.__department = None
-
+        if data:
+            self.data = data
+        else:
+            self.data = {}
         pass
 
     def blank(self, status):
@@ -587,9 +592,6 @@ class Gantt(Calendar, Canvas):
             except KeyError as err:
                 print("KeyError: predecessor=%s, %s" % (err, task))
 
-    def load(self, data):
-        self.data = data
-
     def __initialize(self, data):
         for id, item in data.items():
             if "subitem" in item:
@@ -657,7 +659,6 @@ class Gantt(Calendar, Canvas):
 
         self.draw = draw.Drawing(self.width, self.height)
         style = """<style><![CDATA[
-/* 全局默认字体设置 */
 * {
   font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
   /* font-size: 16px;*/
@@ -742,13 +743,11 @@ class Gantt(Calendar, Canvas):
         (options, args) = self.parser.parse_args()
         # exit()
 
-        data: dict = {}
-
         if options.stdin:
-            data = json.loads(sys.stdin.read())
+            self.data = json.loads(sys.stdin.read())
         elif options.csv:
             csv = Data()
-            data = csv.csvfile(options.csv)
+            self.data = csv.csvfile(options.csv)
         elif options.markdown:
             with open(options.markdown) as file:
                 markdown = Markdown(file.read())
@@ -760,7 +759,7 @@ class Gantt(Calendar, Canvas):
                 #     tmp.add(int(item["id"]), item["name"], item["start"], item["finish"], item["resource"],
                 #             int(item["predecessor"]), bool(item["milestone"]), int(item["parent"]))
                 # data = tmp.data
-                data = markdown.gantt()
+                self.data = markdown.gantt()
                 # print(data)
 
         # elif options.host:
@@ -771,7 +770,7 @@ class Gantt(Calendar, Canvas):
             print(options, args)
             print(json.dumps(data, ensure_ascii=False))
 
-        if not data:
+        if not self.data:
             self.usage()
 
         if options.save:
@@ -786,7 +785,6 @@ class Gantt(Calendar, Canvas):
             # # elif options.gantt:
             # gantt = Gantt()
             # self.gantt.hideTable()
-            self.load(data)
             self.title(options.title)
             self.author(options.name)
             self.department(options.department)
@@ -795,7 +793,6 @@ class Gantt(Calendar, Canvas):
             self.save(options.save)
 
         elif options.export:
-            self.load(data)
             self.title(options.title)
             self.author(options.name)
             self.setWorkweeks(options.workweeks, options.oddeven)

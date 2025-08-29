@@ -161,9 +161,8 @@ def main():
     }
     try:
 
-        gantt = Gantt()
+        gantt = Gantt(data)
         # gantt.table(True)
-        gantt.load(data)
         gantt.author("Neo Chen")
         # gantt.setWorkweeks(workweeks, options.oddeven)
         gantt.title("Test")

@@ -252,8 +252,6 @@ class Workload(Calendar):
         self.draw.append(draw.Rectangle(1, 1, self.canvasWidth,
                                         self.canvasHeight, fill='none', stroke='black'))
 
-        # 大边框
-        # self.draw.append(draw.Rectangle(1, 1, self.width - 2, self.height - 2, fill="none", stroke="black"))
         # self.legend()
 
     def title(self, title):
