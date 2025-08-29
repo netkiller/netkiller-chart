@@ -351,7 +351,7 @@ class Calendar(Canvas):
                            self.canvasHeight - self.canvasTop,
                            fill="none",
                            stroke="black"))
-        print(f"calendar: {self.canvasHeight}, top:{top}")
+        # print(f"calendar: {self.canvasHeight}, top:{top}")
         self.draw.append(background)
 
 
@@ -667,8 +667,7 @@ class Gantt(Calendar, Canvas):
                 """
 
         self.draw.append(draw.Raw(style))
-
-        print(f"rander: {self.canvasHeight}")
+        # print(f"rander: {self.canvasHeight}")
         self.__title()
         self.calendar()
 
