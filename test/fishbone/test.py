@@ -12,7 +12,7 @@ sys.path.insert(2, src)
 
 try:
     import io
-    from netkiller import Data
+    # from netkiller import Data
     from netkiller.fishbone import Fishbone
     from netkiller.markdown import Markdown
 
@@ -26,11 +26,38 @@ def main():
 # 石川鱼骨图
 - 产品目标
   - 竞品分析
+  - 品牌形象
+  - 产品生命周期
+  - 发现了一个名
 - 开发目标
   - 编码开发
   - 代码测试
 - 运营目标
   - 区域投放
+- 运营目标1
+  - 区域投放1
+  - 区域投放2
+  - 区域投放3
+  - 区域投放4
+  - 区域投放5
+- 运营目标1运营
+  - 区域投放11
+  - 区域投放21
+  - 区域投放31
+  - 区域投放41
+  - 区域投放51
+- 区域投放513
+  - 竞品分析
+  - 品牌形象
+  - 产品生命周期
+  - 发现了一个名
+  - 区域投放3
+  - 区域投放4
+  - 区域投放5
+- 运营目标1运营99
+  - 区域投放11
+  - 区域投放21
+  - 区域投放31  
         """
     try:
         with io.StringIO(text) as csv:
