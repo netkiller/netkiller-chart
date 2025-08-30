@@ -625,6 +625,10 @@ class Gantt(Calendar, Canvas):
             self.maxDate.append(item["finish"])
 
     def rander(self):
+
+        if not self.data:
+            raise ValueError("数据出错")
+
         self.maxDate = []
         self.minDate = []
 
@@ -767,7 +771,7 @@ class Gantt(Calendar, Canvas):
         #     self.loadFromMySQL(config)
         if options.debug:
             print(options, args)
-            print(json.dumps(data, ensure_ascii=False))
+            print(json.dumps(self.data, ensure_ascii=False))
 
         if not self.data:
             self.usage()

@@ -49,21 +49,22 @@ def main():
 245,编制居家办公健康指南,2025-08-25,2025-08-26,发言人3,0,0,0,FALSE
 246,规划社交活动安排,2025-08-26,2025-08-27,发言人1,0,0,0,FALSE"""
 
+    text1 = "id,name,start,finish,resource,progress,parent,predecessor,milestone"
+
     csv = Data()
-    data = csv.csvtext(text)
+    data = csv.csvtext(text1)
     print(data)
     try:
 
-        gantt = Gantt()
+        gantt = Gantt(data)
         # gantt.hideTable()
-        gantt.load(data)
         gantt.author("Neo Chen")
         gantt.setWorkweeks(6, 1)
         gantt.title("甘特图测试")
         # gantt.legend(False)
         # gantt.blank(True)
         gantt.department("技术研发部")
-        gantt.save("csv.svg")
+        gantt.save("csv.error.svg")
     except KeyboardInterrupt as e:
         print(e)
     except Exception as e:

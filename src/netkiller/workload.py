@@ -116,6 +116,9 @@ class Workload(Calendar):
 
     def workload(self):
 
+        if not self.data:
+            raise ValueError("数据出错")
+
         self.startPosition = self.resourceTextSize + 300
         left = self.startPosition
 

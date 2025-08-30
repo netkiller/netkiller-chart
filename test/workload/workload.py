@@ -37,6 +37,7 @@ def main():
 13,任务3,2023-03-15,2023-03-19,test,0,0,0,FALSE
 """
     try:
+        text = "id,name,start,finish,resource,progress,parent,predecessor,milestone"
         with io.StringIO(text) as csv:
             workload = Workload()
             data = workload.csv2workload(csv)
