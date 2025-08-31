@@ -42,8 +42,8 @@ def main():
   - 区域投放5
 - 运营目标1运营
   - 区域投放11
-  - 区域投放21
-  - 区域投放31
+  - 区域投放21    
+  - 区域投放31区域投放31
   - 区域投放41
   - 区域投放51
 - 区域投放513
@@ -63,15 +63,16 @@ def main():
         with io.StringIO(text) as csv:
             markdown = Markdown(text)
             data = markdown.fishbone()
-            print(data)
+            # print(data)
             fishbone = Fishbone(data)
+            fishbone.title("石川鱼骨图")
+            # fishbone.border(5)
+            fishbone.legend(False)
             fishbone.save("test.svg")
-            fishbone.debug()
+            # fishbone.debug()
             # fishbone.main()
 
-            # workload.title("工作负载图")
-            # workload.department("技术研发部")
-            # workload.save("workload1.svg")
+
 
 
     except KeyboardInterrupt as e:
