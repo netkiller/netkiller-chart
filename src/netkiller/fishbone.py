@@ -50,7 +50,7 @@ class Fishbone:
     fontSize = 20
 
     causeHeight = 30
-    effectWidth = {}
+    effectWidth = {"up": {}, "down": {}}
 
     def __init__(self, data: dict = None):
         self.svg = None
@@ -71,48 +71,57 @@ class Fishbone:
         bearing = "up"
         for effect, cause in self.data.items():
             self.__fishbone[bearing][effect] = cause
+
+            # self.__fontWidth(effect, cause)
+            self.effectWidth[bearing][effect] = {}
+            textWidth = self.font.getTextSize(effect)
+            self.effectWidth[bearing][effect][effect] = textWidth
+
+            # if textWidth > self.fishboneWidth:
+            #     self.fishboneWidth = textWidth
+
+            causeFont = Font(self.fontFamily, 18)
+            for item in cause:
+                textWidth = causeFont.getTextSize(item)
+                self.effectWidth[bearing][effect][item] = textWidth
+                # if textWidth > self.fishboneWidth:
+                #     self.fishboneWidth = textWidth
+
             if bearing == "up":
                 bearing = "down"
             else:
                 bearing = "up"
 
-            self.__fontWidth(effect, cause)
-
         if self.__title:
             self.canvasTop = 80
 
+        up = [n.values() for n in self.effectWidth['up'].values()]
+        upMaxWidth = sum([max(n) for n in up])
+
+        down = [n.values() for n in self.effectWidth['down'].values()]
+        downMaxWidth = sum([max(n) for n in down])
+
+        self.fishboneWidth = max(upMaxWidth, downMaxWidth)
+        # print()
+        # print(upMaxWidth)
+
         if countEffect == 1:
-            self.canvasWidth = self.fishtailWidth + countEffect * (
-                    self.fishboneWidth + self.gapWidth + self.space) + self.fishheadWidth
-            # self.spineWidth = self.fishtailWidth + countEffect * (
-            #         self.effectWidth + self.gapWidth + self.space)
+            self.canvasWidth = self.fishtailWidth + self.fishboneWidth + countEffect * (
+                    self.gapWidth + self.space) + self.fishheadWidth + self.gapWidth / 2
+            self.spineWidth = self.fishtailWidth + self.fishboneWidth + countEffect * (
+                    self.gapWidth / 2 + self.space) + self.fishheadWidth
         else:
-            self.canvasWidth = self.fishtailWidth + countEffect // 2 * (
-                    self.fishboneWidth + self.gapWidth + self.space) + self.fishheadWidth
-            # self.spineWidth = self.fishtailWidth + countEffect // 2 * (
-            #         self.effectWidth + self.gapWidth + self.space)
+            self.canvasWidth = self.fishtailWidth + self.fishboneWidth + countEffect // 2 * (
+                    self.gapWidth + self.space) + self.gapWidth + self.fishheadWidth + self.gapWidth / 2
+            self.spineWidth = self.fishtailWidth + self.fishboneWidth + countEffect // 2 * (
+                    self.gapWidth + self.space) + self.gapWidth / 2 + self.fishheadWidth
         self.canvasHeight = self.canvasTop + ((countCause + 1) * self.causeHeight) * 2 + self.spineHeight * 2
         self.spineY = self.canvasTop + ((countCause + 1) * self.causeHeight) + self.causeHeight
         self.width = self.canvasWidth + 2
         self.height = self.canvasHeight + 2
 
-        print(self.effectWidth)
+        # print(self.effectWidth)
         # reversed_dict = dict(reversed(list(my_dict.items())))
-
-    def __fontWidth(self, effect, cause):
-        # self.fishboneWidth = 0
-        self.effectWidth[effect] = {}
-        textWidth = self.font.getTextSize(effect)
-        if textWidth > self.fishboneWidth:
-            self.fishboneWidth = textWidth
-        self.effectWidth[effect][effect] = textWidth
-        causeFontSize = 18
-        causeFont = Font(self.fontFamily, causeFontSize)
-        for item in cause:
-            textWidth = causeFont.getTextSize(item)
-            if textWidth > self.fishboneWidth:
-                self.fishboneWidth = textWidth
-            self.effectWidth[effect][item] = textWidth
 
     def render(self):
         if not self.data:
@@ -163,11 +172,11 @@ class Fishbone:
 
         for effect, cause in self.__fishbone['up'].items():
 
-            longestText = max(self.effectWidth[effect].values())
+            longestText = max(self.effectWidth['up'][effect].values())
 
             self.canvasY = self.canvasTop
             # textWidth = self.font.getTextSize(effect)
-            effectTextWidth = self.effectWidth[effect][effect]
+            effectTextWidth = self.effectWidth['up'][effect][effect]
             effectColor = color.randomAndExclude(excludeColor)
             excludeColor.append(effectColor)
 
@@ -183,12 +192,12 @@ class Fishbone:
             group.append(Line(self.gapLeft, self.canvasY - self.causeHeight / 2, self.gapRight, self.spineY, stroke=effectColor, stroke_width="2"))
 
             self.canvasY += self.causeHeight / 2
-            excludeCauseColor = []
+            excludeCauseColor = [self.spineColor, effectColor]
             for item in cause:
                 cx = self.gapWidth * (self.canvasY - self.canvasTop) / (
                         self.spineY - self.causeHeight / 2 - self.canvasTop)
                 # textWidth = causeFont.getTextSize(item)
-                causeTextWidth = self.effectWidth[effect][item]
+                causeTextWidth = self.effectWidth['up'][effect][item]
                 self.canvasY += self.causeHeight
                 causeColor = color.randomAndExclude(excludeCauseColor)
                 excludeCauseColor.append(causeColor)
@@ -197,21 +206,21 @@ class Fishbone:
 
             self.svg.append(group)
             # self.canvasX += self.effectWidth + self.space
-            self.canvasX += longestText + self.space
-            self.spineWidth += longestText
+            self.canvasX += longestText + self.gapWidth + self.space
+            # if self.canvasX > self.spineWidth:
+            #     self.spineWidth = self.canvasX + self.gapWidth / 2 + self.fishheadWidth
 
         self.canvasX = self.fishtailWidth
         for effect, cause in self.__fishbone['down'].items():
-            print(self.effectWidth[effect])
-            longestText = max(self.effectWidth[effect].values())
+
+            longestText = max(self.effectWidth['down'][effect].values())
             self.canvasY = self.canvasHeight
             # textWidth = self.font.getTextSize(effect)
-            effectTextWidth = self.effectWidth[effect][effect]
+            effectTextWidth = self.effectWidth['down'][effect][effect]
             effectColor = color.randomAndExclude(excludeColor)
             excludeColor.append(effectColor)
 
             group = Group(clazz="effect")
-
             group.append(Rectangle(self.canvasX + longestText - effectTextWidth - 10, self.canvasY - self.causeHeight, effectTextWidth + 20, self.causeHeight, stroke="none", fill=effectColor, rx="5", ry="5"))
             group.append(Text(effect, self.canvasX + longestText - effectTextWidth / 2, self.canvasY - self.causeHeight / 4, text_anchor="middle", fill="white", font_size=self.fontSize))
 
@@ -220,12 +229,12 @@ class Fishbone:
             group.append(Line(self.gapLeft, self.canvasY - 15, self.gapRight, self.spineY, stroke=effectColor, stroke_width="2"))
 
             self.canvasY -= self.causeHeight / 2
-            excludeCauseColor = []
+            excludeCauseColor = [self.spineColor, effectColor]
             for item in cause:
                 cx = self.gapWidth * (self.canvasHeight - self.canvasY + 30) / (
                         self.spineY - self.causeHeight / 2 - self.canvasTop)
                 # textWidth = causeFont.getTextSize(item)
-                causeTextWidth = self.effectWidth[effect][item]
+                causeTextWidth = self.effectWidth['down'][effect][item]
                 self.canvasY -= self.causeHeight
                 causeColor = color.randomAndExclude(excludeCauseColor)
                 excludeCauseColor.append(causeColor)
@@ -233,7 +242,9 @@ class Fishbone:
                 group.append(Text(item, self.gapLeft + cx - causeTextWidth - 20, self.canvasY - self.causeHeight / 4, fill=causeColor, font_size=causeFontSize))
 
             self.svg.append(group)
-            self.canvasX += longestText + self.space
+            self.canvasX += longestText + self.gapWidth + self.space
+            # if self.canvasX > self.spineWidth:
+            #     self.spineWidth = self.canvasX + self.gapWidth / 2 + self.fishheadWidth
 
         group = Group(clazz="effect")
         # self.svg.append(Rectangle(x="10", y=self.spineY, width=self.spineWidth, height=self.spineHeight, rx="5", ry="5", style="stroke: black; fill: none;"))
