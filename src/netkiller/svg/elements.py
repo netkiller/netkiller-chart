@@ -292,7 +292,7 @@ class Group(Element):
         return self
 
     def __str__(self):
-        return f'<g {self.__attrs}>\n{"\n".join(self.elements)}\n</g>'
+        return f'<g {self.__attrs}>\n\t{"\n\t".join(self.elements)}\n</g>'
 
 
 class Switch(Element):
@@ -306,4 +306,13 @@ class Switch(Element):
         return self
 
     def __str__(self):
-        return f'<switch>{"\n".join(self.elements)}\n</switch>'
+        return f'<switch>\n{"\n".join(self.elements)}\n</switch>'
+
+
+class Use(Element):
+    def __init__(self, id: str, **kwargs):
+        self.id = id
+        self.__attrs = super().attribute(kwargs)
+
+    def __str__(self):
+        return f'<use xlink:href="#{self.id}" {self.__attrs} />'

@@ -60,17 +60,18 @@ def main():
   - 区域投放31  
         """
     try:
-        with io.StringIO(text) as csv:
-            markdown = Markdown(text)
-            data = markdown.fishbone()
-            # print(data)
-            fishbone = Fishbone(data)
-            fishbone.title("石川鱼骨图")
-            # fishbone.border(5)
-            fishbone.legend(False)
-            fishbone.save("test.svg")
-            # fishbone.debug()
-            # fishbone.main()
+
+        # markdown = Markdown()
+        # data = markdown.fishbone()
+        # print(data)
+        fishbone = Fishbone()
+        fishbone.markdown(text)
+        fishbone.title("石川鱼骨图")
+        # fishbone.border(5)
+        fishbone.legend(False)
+        fishbone.save("test.svg")
+        # fishbone.debug()
+        print(fishbone.show())
 
 
 

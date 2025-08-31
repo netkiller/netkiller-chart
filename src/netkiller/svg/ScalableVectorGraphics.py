@@ -49,7 +49,7 @@ class Svg:
         self.__script = text
 
     def symbol(self, id: str, element):
-        self.elements.append(f'<symbol id="{id}">{element.__str__()}</symbol>')
+        self.elements.append(f'<symbol id="{id}">\n\t{element.__str__()}\n</symbol>')
 
     def use(self, id: str, **kwargs):
         self.elements.append(f'<use xlink:href="#{id}" {self.__attribute(kwargs)}/>')
@@ -67,18 +67,34 @@ class Svg:
             self.elements.append(text.__str__())
 
     def render(self):
-        self.elements.insert(0,
-                             f'<svg {" ".join(self.attribute)} xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
+        svg = []
+        # self.elements.insert(0,
+        #                      f'<svg {" ".join(self.attribute)} xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
+        # if self.__defs:
+        #     self.elements.insert(1, f'<defs>\n{"\n".join(self.__defs)}\n</defs>')
+        # if self.__style:
+        #     self.elements.insert(1, f'<style type="text/css"><![CDATA[\n{self.__style}\n]]></style>')
+        # if self.__script:
+        #     self.elements.append(f'<script>\n// <![CDATA[\n{self.__script}\n// ]]>\n</script>')
+        # self.elements.append("</svg>")
+        # return "\n".join(self.elements)
+
+        svg.append(f'<svg {" ".join(self.attribute)} xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">')
         if self.__defs:
-            self.elements.insert(1, f'<defs>\n{"\n".join(self.__defs)}\n</defs>')
+            svg.append(f'<defs>\n\t{"\n\t".join(self.__defs)}\n</defs>')
         if self.__style:
-            self.elements.insert(1, f'<style type="text/css"><![CDATA[\n{self.__style}\n]]></style>')
+            svg.append(f'<style type="text/css"><![CDATA[\n{self.__style}\n]]></style>')
         if self.__script:
-            self.elements.append(f'<script>\n// <![CDATA[\n{self.__script}\n// ]]>\n</script>')
-        self.elements.append("</svg>")
-        return "\n".join(self.elements)
+            svg.append(f'<script>\n// <![CDATA[\n{self.__script}\n// ]]>\n</script>')
+        svg.extend(self.elements)
+        svg.append("</svg>")
+
+        return "\n".join(svg)
 
     def __str__(self):
+        return self.render()
+
+    def show(self):
         return self.render()
 
     def debug(self):

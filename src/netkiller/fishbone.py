@@ -13,9 +13,10 @@ try:
     import json
     # from netkiller import Data
     from netkiller.svg.ScalableVectorGraphics import Svg
-    from netkiller.svg.elements import Text, Line, Circle, Rectangle, Group, Path, Image
+    from netkiller.svg.elements import Text, Line, Circle, Rectangle, Group, Path, Image, Use
     from netkiller.svg.color import Color
     from netkiller.svg.font import Font
+    from netkiller.markdown import Markdown
 except ImportError as err:
     print("Error: %s" % (err))
     exit()
@@ -95,7 +96,12 @@ class Fishbone:
         # reversed_dict = dict(reversed(list(my_dict.items())))
 
     def render(self):
+        if not self.data:
+            raise ValueError(f"数据出错")
         color = Color()
+        causeFontSize = 18
+        causeFont = Font(self.fontFamily, causeFontSize)
+
         self.__scan()
 
         excludeColor = []
@@ -156,12 +162,12 @@ class Fishbone:
             for item in cause:
                 cx = self.gapWidth * (self.canvasY - self.canvasTop) / (
                         self.spineX - self.causeHeight / 2 - self.canvasTop)
-                textWidth = self.font.getTextSize(item)
+                textWidth = causeFont.getTextSize(item)
                 self.canvasY += self.causeHeight
                 causeColor = color.randomAndExclude(excludeCauseColor)
                 excludeCauseColor.append(causeColor)
                 group.append(Circle(cx=self.gapLeft + cx, cy=self.canvasY - 15, r="3", fill=effectColor, stroke="none", stroke_width="1"))
-                group.append(Text(item, self.gapLeft + cx - textWidth - 20, self.canvasY - self.causeHeight / 4, fill=causeColor, font_size=self.fontSize))
+                group.append(Text(item, self.gapLeft + cx - textWidth - 20, self.canvasY - self.causeHeight / 4, fill=causeColor, font_size=causeFontSize))
 
             self.svg.append(group)
             self.canvasX += self.causeWidth + self.space
@@ -173,7 +179,6 @@ class Fishbone:
             textWidth = self.font.getTextSize(effect)
             effectColor = color.randomAndExclude(excludeColor)
             excludeColor.append(effectColor)
-            print(excludeColor)
             group.append(Rectangle(self.canvasX - 10, self.canvasY - self.causeHeight, textWidth + 20, self.causeHeight, stroke="none", fill=effectColor, rx="5", ry="5"))
             group.append(Text(effect, self.canvasX + textWidth / 2, self.canvasY - self.causeHeight / 4, text_anchor="middle", fill="white", font_size=self.fontSize))
 
@@ -186,22 +191,23 @@ class Fishbone:
             for item in cause:
                 cx = self.gapWidth * (self.canvasHeight - self.canvasY + 30) / (
                         self.spineX - self.causeHeight / 2 - self.canvasTop)
-                textWidth = self.font.getTextSize(item)
+                textWidth = causeFont.getTextSize(item)
                 self.canvasY -= self.causeHeight
                 causeColor = color.randomAndExclude(excludeCauseColor)
                 excludeCauseColor.append(causeColor)
                 group.append(Circle(cx=self.gapLeft + cx, cy=self.canvasY - 15, r="3", fill=effectColor, stroke="none", stroke_width="1"))
-                group.append(Text(item, self.gapLeft + cx - textWidth - 20, self.canvasY - self.causeHeight / 4, fill=causeColor, font_size=self.fontSize))
+                group.append(Text(item, self.gapLeft + cx - textWidth - 20, self.canvasY - self.causeHeight / 4, fill=causeColor, font_size=causeFontSize))
 
             self.svg.append(group)
             self.canvasX += self.causeWidth + self.space
-            self.svg.append(group)
 
+        group = Group(clazz="effect")
         # self.svg.append(Rectangle(x="10", y=self.spineX, width=self.spineWidth, height=self.spineHeight, rx="5", ry="5", style="stroke: black; fill: none;"))
-        self.svg.use("fishtail", x=1, y=self.spineX - 75, width=100, height=150)
-        self.svg.append(Line(x1="90", y1=self.spineX, x2=self.spineWidth + 2, y2=self.spineX, stroke=self.spineColor, stroke_width="8"))
-        self.svg.use("fishhead", x=self.spineWidth, y=self.spineX - 50, width=100, height=100)
-        self.svg.use("fisheye", x=self.spineWidth + 20, y=self.spineX - 25)
+        group.append(Use(id="fishtail", x=1, y=self.spineX - 75, width=100, height=150))
+        group.append(Line(x1="90", y1=self.spineX, x2=self.spineWidth + 2, y2=self.spineX, stroke=self.spineColor, stroke_width="8"))
+        group.append(Use(id="fishhead", x=self.spineWidth, y=self.spineX - 50, width=100, height=100))
+        group.append(Use(id="fisheye", x=self.spineWidth + 20, y=self.spineX - 25))
+        self.svg.append(group)
 
     def title(self, text):
         self.__title = text
@@ -216,10 +222,17 @@ class Fishbone:
         self.render()
         self.svg.save(filename)
 
+    def show(self):
+        return self.svg.show()
+
     def debug(self):
         print(f"Canvas {self.canvasWidth}x{self.canvasHeight}")
         print(self.__fishbone)
         pass
+
+    def markdown(self, text):
+        markdown = Markdown(text)
+        self.data = markdown.fishbone()
 
     def main(self):
 

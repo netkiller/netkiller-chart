@@ -13,144 +13,109 @@
         
 ]]></style>
 <desc>https://www.netkiller.cn</desc>
-<symbol id="fisheye"><circle cx="10" cy="10" r="10" fill="white" /></symbol>
-<symbol id="fishtail"><path d="M6.1898889,1.07915896 C8.01375639,1.44374413 39.1438014,24.7349676 99.5800239,70.9528293 C100.504417,72.644382 100.966613,74.3460926 100.966613,76.057961 C100.966613,77.7698295 100.504417,79.29126 99.5800239,80.6222526 C38.8991612,127.536265 7.76911622,150.993271 6.1898889,150.993271 C3.8210479,150.993271 3.08838333,149.893541 2.14697157,148.24665 C1.20555981,146.599759 0.704233203,144.978499 1.10657556,142.100604 C1.3748038,140.182007 14.3473837,119.418972 40.0243154,79.8114992 C40.8248165,78.2084364 41.2250671,76.9572571 41.2250671,76.057961 C41.2250671,75.158665 40.8248165,74.0777826 40.0243154,72.8153137 L1.10657556,10.0609163 C0.866234283,7.21127309 1.03706053,5.27477589 1.61905431,4.25142465 C2.49204497,2.7163978 3.45408765,0.532281203 6.1898889,1.07915896 Z" stroke="none" fill="#d62728" /></symbol>
-<symbol id="fishhead"><path d="M10.0436088,0.880253165 C31.150854,5.15544681 48.6202114,11.2098158 62.4516813,19.0433601 C76.2831511,26.8769044 89.134037,37.4836677 101.004339,50.8636498 C95.0232906,57.0226854 90.4281099,61.6094262 87.2187969,64.6238722 C84.0094839,67.6383182 81.0594073,70.1386926 78.3685671,72.1249953 C66.6292276,73.5598353 60.2503827,74.6755294 59.2320323,75.4720774 C58.2136819,76.2686254 62.1035274,76.9295203 70.9015687,77.4547621 C67.9815896,79.1338578 65.8096144,80.3671348 64.385643,81.1545932 C58.8868729,84.1954216 51.6843033,88.2759492 42.5402494,91.6010438 C36.6505834,93.7427303 25.8183699,96.8358 10.0436088,100.880253 C4.01742896,83.9414693 1.00433901,67.2692682 1.00433901,50.8636498 C1.00433901,34.4580314 4.01742896,17.7968992 10.0436088,0.880253165 Z" stroke="none" fill="#d62728" /></symbol>
+<symbol id="fisheye">
+	<circle cx="10" cy="10" r="10" fill="white" />
+</symbol>
+<symbol id="fishtail">
+	<path d="M6.1898889,1.07915896 C8.01375639,1.44374413 39.1438014,24.7349676 99.5800239,70.9528293 C100.504417,72.644382 100.966613,74.3460926 100.966613,76.057961 C100.966613,77.7698295 100.504417,79.29126 99.5800239,80.6222526 C38.8991612,127.536265 7.76911622,150.993271 6.1898889,150.993271 C3.8210479,150.993271 3.08838333,149.893541 2.14697157,148.24665 C1.20555981,146.599759 0.704233203,144.978499 1.10657556,142.100604 C1.3748038,140.182007 14.3473837,119.418972 40.0243154,79.8114992 C40.8248165,78.2084364 41.2250671,76.9572571 41.2250671,76.057961 C41.2250671,75.158665 40.8248165,74.0777826 40.0243154,72.8153137 L1.10657556,10.0609163 C0.866234283,7.21127309 1.03706053,5.27477589 1.61905431,4.25142465 C2.49204497,2.7163978 3.45408765,0.532281203 6.1898889,1.07915896 Z" stroke="none" fill="#ff7f0e" />
+</symbol>
+<symbol id="fishhead">
+	<path d="M10.0436088,0.880253165 C31.150854,5.15544681 48.6202114,11.2098158 62.4516813,19.0433601 C76.2831511,26.8769044 89.134037,37.4836677 101.004339,50.8636498 C95.0232906,57.0226854 90.4281099,61.6094262 87.2187969,64.6238722 C84.0094839,67.6383182 81.0594073,70.1386926 78.3685671,72.1249953 C66.6292276,73.5598353 60.2503827,74.6755294 59.2320323,75.4720774 C58.2136819,76.2686254 62.1035274,76.9295203 70.9015687,77.4547621 C67.9815896,79.1338578 65.8096144,80.3671348 64.385643,81.1545932 C58.8868729,84.1954216 51.6843033,88.2759492 42.5402494,91.6010438 C36.6505834,93.7427303 25.8183699,96.8358 10.0436088,100.880253 C4.01742896,83.9414693 1.00433901,67.2692682 1.00433901,50.8636498 C1.00433901,34.4580314 4.01742896,17.7968992 10.0436088,0.880253165 Z" stroke="none" fill="#ff7f0e" />
+</symbol>
 <text x="556.0" y="40.0" text-anchor="middle" fill="black" font-size="40">石川鱼骨图</text>
 <g class="effect">
-<rect x="90" y="80" width="100" height="30" rx="5" ry="5" stroke="none" fill="#bcbd22" />
-<text x="140.0" y="102.5" text-anchor="middle" fill="white" font-size="20">产品目标</text>
-<line x1="180" y1="95.0" x2="280" y2="350" stroke-width="2" stroke="#bcbd22" />
-<circle cx="197.64705882352942" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#bcbd22" />
-<text x="97.64705882352942" y="147.5" fill="#bcbd22" font-size="20">竞品分析</text>
-<circle cx="209.41176470588235" cy="170.0" r="3" stroke-width="1" stroke="none" fill="#bcbd22" />
-<text x="109.41176470588235" y="177.5" fill="#17becf" font-size="20">品牌形象</text>
-<circle cx="221.1764705882353" cy="200.0" r="3" stroke-width="1" stroke="none" fill="#bcbd22" />
-<text x="81.1764705882353" y="207.5" fill="#7f7f7f" font-size="20">产品生命周期</text>
-<circle cx="232.94117647058823" cy="230.0" r="3" stroke-width="1" stroke="none" fill="#bcbd22" />
-<text x="92.94117647058823" y="237.5" fill="#ff7f0e" font-size="20">发现了一个名</text>
+	<rect x="90" y="80" width="100" height="30" rx="5" ry="5" stroke="none" fill="#2ca02c" />
+	<text x="140.0" y="102.5" text-anchor="middle" fill="white" font-size="20">产品目标</text>
+	<line x1="180" y1="95.0" x2="280" y2="350" stroke-width="2" stroke="#2ca02c" />
+	<circle cx="197.64705882352942" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#2ca02c" />
+	<text x="105.64705882352942" y="147.5" fill="#2ca02c" font-size="18">竞品分析</text>
+	<circle cx="209.41176470588235" cy="170.0" r="3" stroke-width="1" stroke="none" fill="#2ca02c" />
+	<text x="117.41176470588235" y="177.5" fill="#d62728" font-size="18">品牌形象</text>
+	<circle cx="221.1764705882353" cy="200.0" r="3" stroke-width="1" stroke="none" fill="#2ca02c" />
+	<text x="93.1764705882353" y="207.5" fill="#8c564b" font-size="18">产品生命周期</text>
+	<circle cx="232.94117647058823" cy="230.0" r="3" stroke-width="1" stroke="none" fill="#2ca02c" />
+	<text x="104.94117647058823" y="237.5" fill="#17becf" font-size="18">发现了一个名</text>
 </g>
 <g class="effect">
-<rect x="294" y="80" width="100" height="30" rx="5" ry="5" stroke="none" fill="#2ca02c" />
-<text x="344.0" y="102.5" text-anchor="middle" fill="white" font-size="20">运营目标</text>
-<line x1="384" y1="95.0" x2="484" y2="350" stroke-width="2" stroke="#2ca02c" />
-<circle cx="401.6470588235294" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#2ca02c" />
-<text x="301.6470588235294" y="147.5" fill="#7f7f7f" font-size="20">区域投放</text>
+	<rect x="294" y="80" width="100" height="30" rx="5" ry="5" stroke="none" fill="#7f7f7f" />
+	<text x="344.0" y="102.5" text-anchor="middle" fill="white" font-size="20">运营目标</text>
+	<line x1="384" y1="95.0" x2="484" y2="350" stroke-width="2" stroke="#7f7f7f" />
+	<circle cx="401.6470588235294" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
+	<text x="309.6470588235294" y="147.5" fill="#1f77b4" font-size="18">区域投放</text>
 </g>
 <g class="effect">
-<rect x="498" y="80" width="151" height="30" rx="5" ry="5" stroke="none" fill="#1f77b4" />
-<text x="573.5" y="102.5" text-anchor="middle" fill="white" font-size="20">运营目标1运营</text>
-<line x1="639" y1="95.0" x2="739" y2="350" stroke-width="2" stroke="#1f77b4" />
-<circle cx="656.6470588235294" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
-<text x="534.6470588235294" y="147.5" fill="#8c564b" font-size="20">区域投放11</text>
-<circle cx="668.4117647058823" cy="170.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
-<text x="546.4117647058823" y="177.5" fill="#9467bd" font-size="20">区域投放21</text>
-<circle cx="680.1764705882352" cy="200.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
-<text x="456.17647058823525" y="207.5" fill="#7f7f7f" font-size="20">区域投放31区域投放31</text>
-<circle cx="691.9411764705883" cy="230.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
-<text x="569.9411764705883" y="237.5" fill="#e377c2" font-size="20">区域投放41</text>
-<circle cx="703.7058823529412" cy="260.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
-<text x="581.7058823529412" y="267.5" fill="#17becf" font-size="20">区域投放51</text>
+	<rect x="498" y="80" width="151" height="30" rx="5" ry="5" stroke="none" fill="#bcbd22" />
+	<text x="573.5" y="102.5" text-anchor="middle" fill="white" font-size="20">运营目标1运营</text>
+	<line x1="639" y1="95.0" x2="739" y2="350" stroke-width="2" stroke="#bcbd22" />
+	<circle cx="656.6470588235294" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#bcbd22" />
+	<text x="544.6470588235294" y="147.5" fill="#17becf" font-size="18">区域投放11</text>
+	<circle cx="668.4117647058823" cy="170.0" r="3" stroke-width="1" stroke="none" fill="#bcbd22" />
+	<text x="556.4117647058823" y="177.5" fill="#bcbd22" font-size="18">区域投放21</text>
+	<circle cx="680.1764705882352" cy="200.0" r="3" stroke-width="1" stroke="none" fill="#bcbd22" />
+	<text x="476.17647058823525" y="207.5" fill="#9467bd" font-size="18">区域投放31区域投放31</text>
+	<circle cx="691.9411764705883" cy="230.0" r="3" stroke-width="1" stroke="none" fill="#bcbd22" />
+	<text x="579.9411764705883" y="237.5" fill="#7f7f7f" font-size="18">区域投放41</text>
+	<circle cx="703.7058823529412" cy="260.0" r="3" stroke-width="1" stroke="none" fill="#bcbd22" />
+	<text x="591.7058823529412" y="267.5" fill="#e377c2" font-size="18">区域投放51</text>
 </g>
 <g class="effect">
-<rect x="702" y="80" width="173" height="30" rx="5" ry="5" stroke="none" fill="#ff7f0e" />
-<text x="788.5" y="102.5" text-anchor="middle" fill="white" font-size="20">运营目标1运营99</text>
-<line x1="865" y1="95.0" x2="965" y2="350" stroke-width="2" stroke="#ff7f0e" />
-<circle cx="882.6470588235294" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#ff7f0e" />
-<text x="760.6470588235294" y="147.5" fill="#17becf" font-size="20">区域投放11</text>
-<circle cx="894.4117647058823" cy="170.0" r="3" stroke-width="1" stroke="none" fill="#ff7f0e" />
-<text x="772.4117647058823" y="177.5" fill="#8c564b" font-size="20">区域投放21</text>
-<circle cx="906.1764705882352" cy="200.0" r="3" stroke-width="1" stroke="none" fill="#ff7f0e" />
-<text x="784.1764705882352" y="207.5" fill="#e377c2" font-size="20">区域投放31</text>
+	<rect x="702" y="80" width="173" height="30" rx="5" ry="5" stroke="none" fill="#1f77b4" />
+	<text x="788.5" y="102.5" text-anchor="middle" fill="white" font-size="20">运营目标1运营99</text>
+	<line x1="865" y1="95.0" x2="965" y2="350" stroke-width="2" stroke="#1f77b4" />
+	<circle cx="882.6470588235294" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
+	<text x="770.6470588235294" y="147.5" fill="#17becf" font-size="18">区域投放11</text>
+	<circle cx="894.4117647058823" cy="170.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
+	<text x="782.4117647058823" y="177.5" fill="#9467bd" font-size="18">区域投放21</text>
+	<circle cx="906.1764705882352" cy="200.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
+	<text x="794.1764705882352" y="207.5" fill="#2ca02c" font-size="18">区域投放31</text>
 </g>
 <g class="effect">
-<rect x="90" y="590" width="100" height="30" rx="5" ry="5" stroke="none" fill="#9467bd" />
-<text x="140.0" y="612.5" text-anchor="middle" fill="white" font-size="20">开发目标</text>
-<line x1="180" y1="605" x2="280" y2="350" stroke-width="2" stroke="#9467bd" />
-<circle cx="197.64705882352942" cy="560.0" r="3" stroke-width="1" stroke="none" fill="#9467bd" />
-<text x="97.64705882352942" y="567.5" fill="#d62728" font-size="20">编码开发</text>
-<circle cx="209.41176470588235" cy="530.0" r="3" stroke-width="1" stroke="none" fill="#9467bd" />
-<text x="109.41176470588235" y="537.5" fill="#e377c2" font-size="20">代码测试</text>
+	<rect x="90" y="590" width="100" height="30" rx="5" ry="5" stroke="none" fill="#9467bd" />
+	<text x="140.0" y="612.5" text-anchor="middle" fill="white" font-size="20">开发目标</text>
+	<line x1="180" y1="605" x2="280" y2="350" stroke-width="2" stroke="#9467bd" />
+	<circle cx="197.64705882352942" cy="560.0" r="3" stroke-width="1" stroke="none" fill="#9467bd" />
+	<text x="105.64705882352942" y="567.5" fill="#ff7f0e" font-size="18">编码开发</text>
+	<circle cx="209.41176470588235" cy="530.0" r="3" stroke-width="1" stroke="none" fill="#9467bd" />
+	<text x="117.41176470588235" y="537.5" fill="#d62728" font-size="18">代码测试</text>
 </g>
 <g class="effect">
-<rect x="90" y="590" width="100" height="30" rx="5" ry="5" stroke="none" fill="#9467bd" />
-<text x="140.0" y="612.5" text-anchor="middle" fill="white" font-size="20">开发目标</text>
-<line x1="180" y1="605" x2="280" y2="350" stroke-width="2" stroke="#9467bd" />
-<circle cx="197.64705882352942" cy="560.0" r="3" stroke-width="1" stroke="none" fill="#9467bd" />
-<text x="97.64705882352942" y="567.5" fill="#d62728" font-size="20">编码开发</text>
-<circle cx="209.41176470588235" cy="530.0" r="3" stroke-width="1" stroke="none" fill="#9467bd" />
-<text x="109.41176470588235" y="537.5" fill="#e377c2" font-size="20">代码测试</text>
+	<rect x="294" y="590" width="111" height="30" rx="5" ry="5" stroke="none" fill="#e377c2" />
+	<text x="349.5" y="612.5" text-anchor="middle" fill="white" font-size="20">运营目标1</text>
+	<line x1="395" y1="605" x2="495" y2="350" stroke-width="2" stroke="#e377c2" />
+	<circle cx="412.6470588235294" cy="560.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
+	<text x="310.6470588235294" y="567.5" fill="#7f7f7f" font-size="18">区域投放1</text>
+	<circle cx="424.4117647058824" cy="530.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
+	<text x="322.4117647058824" y="537.5" fill="#ff7f0e" font-size="18">区域投放2</text>
+	<circle cx="436.1764705882353" cy="500.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
+	<text x="334.1764705882353" y="507.5" fill="#d62728" font-size="18">区域投放3</text>
+	<circle cx="447.94117647058823" cy="470.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
+	<text x="345.94117647058823" y="477.5" fill="#e377c2" font-size="18">区域投放4</text>
+	<circle cx="459.70588235294116" cy="440.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
+	<text x="357.70588235294116" y="447.5" fill="#2ca02c" font-size="18">区域投放5</text>
 </g>
 <g class="effect">
-<rect x="294" y="590" width="111" height="30" rx="5" ry="5" stroke="none" fill="#e377c2" />
-<text x="349.5" y="612.5" text-anchor="middle" fill="white" font-size="20">运营目标1</text>
-<line x1="395" y1="605" x2="495" y2="350" stroke-width="2" stroke="#e377c2" />
-<circle cx="412.6470588235294" cy="560.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="301.6470588235294" y="567.5" fill="#7f7f7f" font-size="20">区域投放1</text>
-<circle cx="424.4117647058824" cy="530.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="313.4117647058824" y="537.5" fill="#e377c2" font-size="20">区域投放2</text>
-<circle cx="436.1764705882353" cy="500.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="325.1764705882353" y="507.5" fill="#1f77b4" font-size="20">区域投放3</text>
-<circle cx="447.94117647058823" cy="470.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="336.94117647058823" y="477.5" fill="#9467bd" font-size="20">区域投放4</text>
-<circle cx="459.70588235294116" cy="440.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="348.70588235294116" y="447.5" fill="#ff7f0e" font-size="20">区域投放5</text>
+	<rect x="498" y="590" width="133" height="30" rx="5" ry="5" stroke="none" fill="#8c564b" />
+	<text x="564.5" y="612.5" text-anchor="middle" fill="white" font-size="20">区域投放513</text>
+	<line x1="621" y1="605" x2="721" y2="350" stroke-width="2" stroke="#8c564b" />
+	<circle cx="638.6470588235294" cy="560.0" r="3" stroke-width="1" stroke="none" fill="#8c564b" />
+	<text x="546.6470588235294" y="567.5" fill="#d62728" font-size="18">竞品分析</text>
+	<circle cx="650.4117647058823" cy="530.0" r="3" stroke-width="1" stroke="none" fill="#8c564b" />
+	<text x="558.4117647058823" y="537.5" fill="#1f77b4" font-size="18">品牌形象</text>
+	<circle cx="662.1764705882352" cy="500.0" r="3" stroke-width="1" stroke="none" fill="#8c564b" />
+	<text x="534.1764705882352" y="507.5" fill="#17becf" font-size="18">产品生命周期</text>
+	<circle cx="673.9411764705883" cy="470.0" r="3" stroke-width="1" stroke="none" fill="#8c564b" />
+	<text x="545.9411764705883" y="477.5" fill="#bcbd22" font-size="18">发现了一个名</text>
+	<circle cx="685.7058823529412" cy="440.0" r="3" stroke-width="1" stroke="none" fill="#8c564b" />
+	<text x="583.7058823529412" y="447.5" fill="#8c564b" font-size="18">区域投放3</text>
+	<circle cx="697.4705882352941" cy="410.0" r="3" stroke-width="1" stroke="none" fill="#8c564b" />
+	<text x="595.4705882352941" y="417.5" fill="#9467bd" font-size="18">区域投放4</text>
+	<circle cx="709.2352941176471" cy="380.0" r="3" stroke-width="1" stroke="none" fill="#8c564b" />
+	<text x="607.2352941176471" y="387.5" fill="#ff7f0e" font-size="18">区域投放5</text>
 </g>
 <g class="effect">
-<rect x="294" y="590" width="111" height="30" rx="5" ry="5" stroke="none" fill="#e377c2" />
-<text x="349.5" y="612.5" text-anchor="middle" fill="white" font-size="20">运营目标1</text>
-<line x1="395" y1="605" x2="495" y2="350" stroke-width="2" stroke="#e377c2" />
-<circle cx="412.6470588235294" cy="560.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="301.6470588235294" y="567.5" fill="#7f7f7f" font-size="20">区域投放1</text>
-<circle cx="424.4117647058824" cy="530.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="313.4117647058824" y="537.5" fill="#e377c2" font-size="20">区域投放2</text>
-<circle cx="436.1764705882353" cy="500.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="325.1764705882353" y="507.5" fill="#1f77b4" font-size="20">区域投放3</text>
-<circle cx="447.94117647058823" cy="470.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="336.94117647058823" y="477.5" fill="#9467bd" font-size="20">区域投放4</text>
-<circle cx="459.70588235294116" cy="440.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
-<text x="348.70588235294116" y="447.5" fill="#ff7f0e" font-size="20">区域投放5</text>
+	<use xlink:href="#fishtail" x="1" y="275" width="100" height="150" />
+	<line x1="90" y1="350" x2="1014" y2="350" stroke-width="8" stroke="#ff7f0e" />
+	<use xlink:href="#fishhead" x="1012" y="300" width="100" height="100" />
+	<use xlink:href="#fisheye" x="1032" y="325" />
 </g>
-<g class="effect">
-<rect x="498" y="590" width="133" height="30" rx="5" ry="5" stroke="none" fill="#7f7f7f" />
-<text x="564.5" y="612.5" text-anchor="middle" fill="white" font-size="20">区域投放513</text>
-<line x1="621" y1="605" x2="721" y2="350" stroke-width="2" stroke="#7f7f7f" />
-<circle cx="638.6470588235294" cy="560.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="538.6470588235294" y="567.5" fill="#2ca02c" font-size="20">竞品分析</text>
-<circle cx="650.4117647058823" cy="530.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="550.4117647058823" y="537.5" fill="#d62728" font-size="20">品牌形象</text>
-<circle cx="662.1764705882352" cy="500.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="522.1764705882352" y="507.5" fill="#1f77b4" font-size="20">产品生命周期</text>
-<circle cx="673.9411764705883" cy="470.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="533.9411764705883" y="477.5" fill="#9467bd" font-size="20">发现了一个名</text>
-<circle cx="685.7058823529412" cy="440.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="574.7058823529412" y="447.5" fill="#17becf" font-size="20">区域投放3</text>
-<circle cx="697.4705882352941" cy="410.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="586.4705882352941" y="417.5" fill="#e377c2" font-size="20">区域投放4</text>
-<circle cx="709.2352941176471" cy="380.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="598.2352941176471" y="387.5" fill="#7f7f7f" font-size="20">区域投放5</text>
-</g>
-<g class="effect">
-<rect x="498" y="590" width="133" height="30" rx="5" ry="5" stroke="none" fill="#7f7f7f" />
-<text x="564.5" y="612.5" text-anchor="middle" fill="white" font-size="20">区域投放513</text>
-<line x1="621" y1="605" x2="721" y2="350" stroke-width="2" stroke="#7f7f7f" />
-<circle cx="638.6470588235294" cy="560.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="538.6470588235294" y="567.5" fill="#2ca02c" font-size="20">竞品分析</text>
-<circle cx="650.4117647058823" cy="530.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="550.4117647058823" y="537.5" fill="#d62728" font-size="20">品牌形象</text>
-<circle cx="662.1764705882352" cy="500.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="522.1764705882352" y="507.5" fill="#1f77b4" font-size="20">产品生命周期</text>
-<circle cx="673.9411764705883" cy="470.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="533.9411764705883" y="477.5" fill="#9467bd" font-size="20">发现了一个名</text>
-<circle cx="685.7058823529412" cy="440.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="574.7058823529412" y="447.5" fill="#17becf" font-size="20">区域投放3</text>
-<circle cx="697.4705882352941" cy="410.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="586.4705882352941" y="417.5" fill="#e377c2" font-size="20">区域投放4</text>
-<circle cx="709.2352941176471" cy="380.0" r="3" stroke-width="1" stroke="none" fill="#7f7f7f" />
-<text x="598.2352941176471" y="387.5" fill="#7f7f7f" font-size="20">区域投放5</text>
-</g>
-<use xlink:href="#fishtail" x="1" y="275" width="100" height="150"/>
-<line x1="90" y1="350" x2="1014" y2="350" stroke-width="8" stroke="#d62728" />
-<use xlink:href="#fishhead" x="1012" y="300" width="100" height="100"/>
-<use xlink:href="#fisheye" x="1032" y="325"/>
 </svg>
