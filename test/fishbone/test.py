@@ -59,19 +59,42 @@ def main():
   - 区域投放21
   - 区域投放31  
         """
+
+    text2 = """
+- 区域投放31区域投放31
+  - 产品生命周期产品生命周期产品生命周期产品生命周期
+  - 产品生命周期产品生命周期产品生命周期产品生命周期
+  - 产品生命周期
+- 产品生命周期
+  - 发现了一个名
+  - 区域投放3
+  - 区域投放4生命周期产品生命周期产品生命周生命周期产
+  - 品生命周期产品生命周生命周期产品生命周期产品生命周
+  - 区域投放5
+    """
+    #     - 运营目标1运营99
+    #     - 区域投放11
+    #     - 区域投放21
+    #     - 区域投放31
+    #     - 区域投放513
+    #     - 竞品分析
+    #     - 品牌形象
+    #
+    #
+
     try:
 
         # markdown = Markdown()
         # data = markdown.fishbone()
         # print(data)
         fishbone = Fishbone()
-        fishbone.markdown(text)
+        fishbone.markdown(text2)
         fishbone.title("石川鱼骨图")
         # fishbone.border(5)
         fishbone.legend(False)
         fishbone.save("test.svg")
         # fishbone.debug()
-        print(fishbone.show())
+        # print(fishbone.show())
 
 
 
