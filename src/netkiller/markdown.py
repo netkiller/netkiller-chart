@@ -8,7 +8,7 @@
 try:
     import re
     import json
-    from netkiller import Data
+    from netkiller.data import Data
 except ImportError as err:
     print("Error: %s" % (err))
     exit()

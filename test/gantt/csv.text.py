@@ -11,7 +11,7 @@ sys.path.insert(2, src)
 
 
 try:
-    from netkiller import Data
+    from netkiller.data import Data
     from netkiller.gantt import Gantt
 
 except ImportError as err:

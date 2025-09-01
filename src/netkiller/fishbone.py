@@ -11,7 +11,7 @@
 try:
     import os, re
     import json
-    # from netkiller import Data
+    # from netkiller.data import Data
     from netkiller.svg.ScalableVectorGraphics import Svg
     from netkiller.svg.elements import Text, Line, Circle, Rectangle, Group, Path, Image, Use
     from netkiller.svg.color import Color
@@ -58,6 +58,7 @@ class Fishbone:
         self.__fishbone = {"up": {}, "down": {}}
         self.font = Font(self.fontFamily, self.fontSize)
         self.__title = None
+        self.__department = None
         self.__border = 0
         self.__legend = True
         pass
@@ -163,7 +164,8 @@ class Fishbone:
         if self.__legend:
             self.svg.append(Text("https://www.netkiller.cn - design by netkiller", self.canvasWidth / 2, self.spineY - 5, text_anchor="middle", fill="grey"))
             self.svg.append(Image(5, 5, 100, 35, href="https://www.netkiller.cn/graphics/by-nc-sa.png"))
-
+        if self.__department:
+            self.svg.append(Text(self.__department, self.canvasWidth / 2, self.canvasTop - self.causeHeight + 15, text_anchor="middle", fill="grey", font_size=16))
         # self.svg.append(Rectangle(200, 200, 100, 100, style="stroke:#009900; fill: #00cc00"))
 
         # self.svg.use(100, 50, "shape1", style="stroke: #00ff00; fill: none;")
@@ -256,6 +258,9 @@ class Fishbone:
 
     def title(self, text):
         self.__title = text
+
+    def department(self, text):
+        self.__department = text
 
     def border(self, width: int = 0):
         self.__border = width

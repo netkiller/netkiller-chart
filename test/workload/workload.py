@@ -12,7 +12,7 @@ sys.path.insert(2, src)
 
 try:
     import io
-    from netkiller import Data
+    from netkiller.data import Data
     from netkiller.workload import Workload
 
 except ImportError as err:

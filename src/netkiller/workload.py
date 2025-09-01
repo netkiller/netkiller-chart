@@ -21,7 +21,7 @@ sys.path.insert(1, module)
 
 import drawsvg as draw
 
-from netkiller import Data
+from netkiller.data import Data
 from netkiller.gantt import Gantt, Calendar
 
 

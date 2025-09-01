@@ -12,7 +12,6 @@ sys.path.insert(2, src)
 
 try:
     import io
-    # from netkiller import Data
     from netkiller.fishbone import Fishbone
     from netkiller.markdown import Markdown
 
@@ -96,6 +95,7 @@ def main():
         fishbone = Fishbone()
         fishbone.markdown(text2)
         fishbone.title("石川鱼骨图")
+        fishbone.department("技术研发部")
         fishbone.border(5)
         fishbone.legend(False)
         fishbone.save("test.svg")

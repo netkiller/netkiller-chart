@@ -25,7 +25,7 @@ try:
     import json
     import logging
     import logging.handlers
-    from netkiller import Data
+    from netkiller.data import Data
     from netkiller.markdown import Markdown
 except ImportError as err:
     print("Gantt Error: %s" % (err))
