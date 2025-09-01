@@ -124,12 +124,12 @@ class Fishbone:
         else:
             self.canvasWidth = self.fishtailWidth + self.fishboneWidth + countEffect // 2 * (
                     self.gapWidth + self.space) + self.gapWidth + self.fishheadWidth + self.gapWidth / 2
-            if countEffect % 2 == 0:
-                self.spineWidth = self.fishtailWidth + self.fishboneWidth + math.ceil(countEffect / 2) * (
-                        self.gapWidth + self.space) - self.gapWidth / 2 + self.fishheadWidth
-            else:
-                self.spineWidth = self.fishtailWidth + self.fishboneWidth + math.ceil(countEffect / 2) * (
-                        self.gapWidth + self.space) + self.fishheadWidth
+            # if countEffect % 2 == 0:
+            #     self.spineWidth = self.fishtailWidth + self.fishboneWidth + math.ceil(countEffect / 2) * (
+            #             self.gapWidth + self.space) - self.gapWidth / 2 + self.fishheadWidth
+            # else:
+            self.spineWidth = self.fishtailWidth + self.fishboneWidth + math.ceil(countEffect / 2) * (
+                    self.gapWidth + self.space) - self.gapWidth / 2 + self.fishheadWidth
         self.canvasHeight = self.canvasTop + ((countCause + 1) * self.causeHeight) * 2 + self.spineHeight * 2
         self.spineY = self.canvasTop + ((countCause + 1) * self.causeHeight) + self.causeHeight
         self.width = self.canvasWidth + 2
