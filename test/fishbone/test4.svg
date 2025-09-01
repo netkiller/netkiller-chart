@@ -1,0 +1,78 @@
+<svg width="912.0" height="382" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css"><![CDATA[
+
+    text {
+      /* 指定使用的系统字体或自定义字体 */
+      font-family: "SourceHanSansSC-Normal";
+      # 'SourceHanSansSC-Normal' , 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, ,"FiraSans";
+
+      /* 添加其他样式 */
+      # font-size: 16px;
+      # font-weight: bold;
+      # font-style: italic;
+    }        
+        
+]]></style>
+<desc>https://www.netkiller.cn</desc>
+<symbol id="fisheye">
+	<circle cx="10" cy="10" r="10" fill="white" />
+</symbol>
+<symbol id="fishtail">
+	<path d="M6.1898889,1.07915896 C8.01375639,1.44374413 39.1438014,24.7349676 99.5800239,70.9528293 C100.504417,72.644382 100.966613,74.3460926 100.966613,76.057961 C100.966613,77.7698295 100.504417,79.29126 99.5800239,80.6222526 C38.8991612,127.536265 7.76911622,150.993271 6.1898889,150.993271 C3.8210479,150.993271 3.08838333,149.893541 2.14697157,148.24665 C1.20555981,146.599759 0.704233203,144.978499 1.10657556,142.100604 C1.3748038,140.182007 14.3473837,119.418972 40.0243154,79.8114992 C40.8248165,78.2084364 41.2250671,76.9572571 41.2250671,76.057961 C41.2250671,75.158665 40.8248165,74.0777826 40.0243154,72.8153137 L1.10657556,10.0609163 C0.866234283,7.21127309 1.03706053,5.27477589 1.61905431,4.25142465 C2.49204497,2.7163978 3.45408765,0.532281203 6.1898889,1.07915896 Z" stroke="none" fill="#17becf" />
+</symbol>
+<symbol id="fishhead">
+	<path d="M10.0436088,0.880253165 C31.150854,5.15544681 48.6202114,11.2098158 62.4516813,19.0433601 C76.2831511,26.8769044 89.134037,37.4836677 101.004339,50.8636498 C95.0232906,57.0226854 90.4281099,61.6094262 87.2187969,64.6238722 C84.0094839,67.6383182 81.0594073,70.1386926 78.3685671,72.1249953 C66.6292276,73.5598353 60.2503827,74.6755294 59.2320323,75.4720774 C58.2136819,76.2686254 62.1035274,76.9295203 70.9015687,77.4547621 C67.9815896,79.1338578 65.8096144,80.3671348 64.385643,81.1545932 C58.8868729,84.1954216 51.6843033,88.2759492 42.5402494,91.6010438 C36.6505834,93.7427303 25.8183699,96.8358 10.0436088,100.880253 C4.01742896,83.9414693 1.00433901,67.2692682 1.00433901,50.8636498 C1.00433901,34.4580314 4.01742896,17.7968992 10.0436088,0.880253165 Z" stroke="none" fill="#17becf" />
+</symbol>
+<text x="455.0" y="40.0" text-anchor="middle" fill="black" font-size="40">石川鱼骨图</text>
+<text x="455.0" y="65" text-anchor="middle" fill="grey" font-size="16">技术研发部</text>
+<g class="effect">
+	<rect x="96" y="80" width="140" height="30" rx="5" ry="5" stroke="none" fill="#1f77b4" />
+	<text x="166.0" y="102.5" text-anchor="middle" fill="white" font-size="20">工具选择低效</text>
+	<line x1="226" y1="95.0" x2="326" y2="230" stroke-width="2" stroke="#1f77b4" />
+	<circle cx="259.3333333333333" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
+	<text x="113.33333333333331" y="147.5" fill="#8c564b" font-size="18">缺乏现代化设备</text>
+	<circle cx="281.55555555555554" cy="170.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
+	<text x="135.55555555555554" y="177.5" fill="#7f7f7f" font-size="18">仅依赖传统工具</text>
+	<circle cx="303.77777777777777" cy="200.0" r="3" stroke-width="1" stroke="none" fill="#1f77b4" />
+	<text x="157.77777777777777" y="207.5" fill="#9467bd" font-size="18">未评估工具效率</text>
+</g>
+<g class="effect">
+	<rect x="340" y="80" width="140" height="30" rx="5" ry="5" stroke="none" fill="#9467bd" />
+	<text x="410.0" y="102.5" text-anchor="middle" fill="white" font-size="20">工程进度缓慢</text>
+	<line x1="470" y1="95.0" x2="570" y2="230" stroke-width="2" stroke="#9467bd" />
+	<circle cx="503.3333333333333" cy="140.0" r="3" stroke-width="1" stroke="none" fill="#9467bd" />
+	<text x="375.3333333333333" y="147.5" fill="#7f7f7f" font-size="18">工具效率低下</text>
+	<circle cx="525.5555555555555" cy="170.0" r="3" stroke-width="1" stroke="none" fill="#9467bd" />
+	<text x="361.55555555555554" y="177.5" fill="#1f77b4" font-size="18">缺乏科学施工规划</text>
+	<circle cx="547.7777777777778" cy="200.0" r="3" stroke-width="1" stroke="none" fill="#9467bd" />
+	<text x="383.7777777777778" y="207.5" fill="#bcbd22" font-size="18">未制定明确时间表</text>
+</g>
+<g class="effect">
+	<rect x="150" y="350" width="140" height="30" rx="5" ry="5" stroke="none" fill="#e377c2" />
+	<text x="220.0" y="372.5" text-anchor="middle" fill="white" font-size="20">人力成本过高</text>
+	<line x1="280" y1="365" x2="380" y2="230" stroke-width="2" stroke="#e377c2" />
+	<circle cx="313.3333333333333" cy="320.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
+	<text x="149.33333333333331" y="327.5" fill="#9467bd" font-size="18">过分依赖人工操作</text>
+	<circle cx="335.55555555555554" cy="290.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
+	<text x="135.55555555555554" y="297.5" fill="#bcbd22" font-size="18">未考虑机械化替代方案</text>
+	<circle cx="357.77777777777777" cy="260.0" r="3" stroke-width="1" stroke="none" fill="#e377c2" />
+	<text x="193.77777777777777" y="267.5" fill="#2ca02c" font-size="18">劳动力分配不合理</text>
+</g>
+<g class="effect">
+	<rect x="430" y="350" width="140" height="30" rx="5" ry="5" stroke="none" fill="#2ca02c" />
+	<text x="500.0" y="372.5" text-anchor="middle" fill="white" font-size="20">施工方法单一</text>
+	<line x1="560" y1="365" x2="660" y2="230" stroke-width="2" stroke="#2ca02c" />
+	<circle cx="593.3333333333334" cy="320.0" r="3" stroke-width="1" stroke="none" fill="#2ca02c" />
+	<text x="411.33333333333337" y="327.5" fill="#ff7f0e" font-size="18">局限于传统挖掘方式</text>
+	<circle cx="615.5555555555555" cy="290.0" r="3" stroke-width="1" stroke="none" fill="#2ca02c" />
+	<text x="415.55555555555554" y="297.5" fill="#1f77b4" font-size="18">未考虑爆破等现代技术</text>
+	<circle cx="637.7777777777778" cy="260.0" r="3" stroke-width="1" stroke="none" fill="#2ca02c" />
+	<text x="455.7777777777778" y="267.5" fill="#8c564b" font-size="18">缺乏多方法协同作业</text>
+</g>
+<g class="effect">
+	<use xlink:href="#fishtail" x="1" y="155" width="100" height="150" />
+	<line x1="90" y1="230" x2="712.0" y2="230" stroke-width="8" stroke="#17becf" />
+	<use xlink:href="#fishhead" x="710.0" y="180" width="100" height="100" />
+	<use xlink:href="#fisheye" x="730.0" y="205" />
+</g>
+</svg>

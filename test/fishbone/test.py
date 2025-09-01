@@ -86,19 +86,90 @@ def main():
     #     - 品牌形象
     #
     #
+    test3 = """
+- 居家办公效率问题
+  - 任务量暴涨导致延期
+  - 办公室频繁被打断影响专注
+  - 通勤时间占用导致加班成本增加
+  - 协作工具操作不熟练
+  - 缺少工作与生活的时间界限
 
+- 居家办公体验问题
+  - 缺少升降桌等办公设备
+  - 缺乏零食水果等福利
+  - 需要自行解决饮食问题
+  - 缺少运动场景
+  - 社交交流减少
+
+- 居家办公试行方案执行问题
+  - 试行时间周期较短
+  - 到岗与居家天数分配可能不合理
+  - 申请流程存在滞后性
+  - 视频会议系统使用频率过高
+  - 行政部门统计工作负荷增加    
+    """
+    text1 = """
+- 如何提高移山效率
+  - 工具选择单一
+  - 缺乏现代化设备
+  - 人力劳动强度大
+  - 缺乏团队协作
+  - 未考虑环境影响
+
+- 移山工具优化方案
+  - 传统工具效率低下
+  - 未引入机械作业
+  - 工具维护不足
+  - 工具使用培训缺乏
+  - 工具更新不及时  
+
+    """
+    text4 = """
+- 工具选择低效
+  - 缺乏现代化设备
+  - 仅依赖传统工具
+  - 未评估工具效率
+
+- 人力成本过高
+  - 过分依赖人工操作
+  - 未考虑机械化替代方案
+  - 劳动力分配不合理
+
+- 工程进度缓慢
+  - 工具效率低下
+  - 缺乏科学施工规划
+  - 未制定明确时间表
+
+- 施工方法单一
+  - 局限于传统挖掘方式
+  - 未考虑爆破等现代技术
+  - 缺乏多方法协同作业    
+    """
     # markdown = Markdown()
     # data = markdown.fishbone()
     # print(data)
     fishbone = Fishbone()
-    fishbone.markdown(text2)
+
     fishbone.title("石川鱼骨图")
     fishbone.department("技术研发部")
-    fishbone.border(5)
+    # fishbone.border(5)
     fishbone.legend(False)
-    # fishbone.save("test.svg")
+    fishbone.markdown(test3)
+    fishbone.save("test3.svg")
+
+    fishbone.markdown(text2)
+    fishbone.save("test2.svg")
+
+    fishbone.markdown(text)
+    fishbone.save("test1.svg")
+
+    fishbone.markdown(text1)
+    fishbone.save("test1.svg")
+
+    fishbone.markdown(text4)
+    fishbone.save("test4.svg")
     # fishbone.debug()
-    print(fishbone.show())
+    # print(fishbone.show())
 
 
 if __name__ == "__main__":

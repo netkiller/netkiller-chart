@@ -9,8 +9,7 @@
 # 现代管理学先驱日本学者 石川馨 在川崎重工船厂创建品质管制过程时发明石川图，于1956年发表的著作《品质管理入门》创立的因果模型图，现在已经成为品质管理的七种基本工具之一，识别造成问题的所有潜在因素。
 
 try:
-    import os, re
-    import json
+    import os, re, math, json
     # from netkiller.data import Data
     from netkiller.svg.ScalableVectorGraphics import Svg
     from netkiller.svg.elements import Text, Line, Circle, Rectangle, Group, Path, Image, Use
@@ -54,7 +53,10 @@ class Fishbone:
 
     def __init__(self, data: dict = None):
         self.svg = None
-        self.data = data
+        if data:
+            self.data = data
+        else:
+            self.data = {}
         self.__fishbone = {"up": {}, "down": {}}
         self.font = Font(self.fontFamily, self.fontSize)
         self.__title = None
@@ -62,6 +64,14 @@ class Fishbone:
         self.__border = 0
         self.__legend = True
         pass
+
+    def clean(self):
+        self.svg = None
+        self.data = {}
+        self.__fishbone = {"up": {}, "down": {}}
+        self.effectWidth = {"up": {}, "down": {}}
+        # self.fishboneWidth = 0
+        self.spineWidth = 0
 
     def __scan(self):
         countEffect = self.data.__len__();
@@ -103,8 +113,8 @@ class Fishbone:
         downMaxWidth = sum([max(n) for n in down])
 
         self.fishboneWidth = max(upMaxWidth, downMaxWidth)
-        # print()
-        # print(upMaxWidth)
+        # print(countEffect, countEffect // 2, countEffect % 2, math.ceil(countEffect / 2))
+        # print(self.fishboneWidth)
 
         if countEffect == 1:
             self.canvasWidth = self.fishtailWidth + self.fishboneWidth + countEffect * (
@@ -114,8 +124,12 @@ class Fishbone:
         else:
             self.canvasWidth = self.fishtailWidth + self.fishboneWidth + countEffect // 2 * (
                     self.gapWidth + self.space) + self.gapWidth + self.fishheadWidth + self.gapWidth / 2
-            self.spineWidth = self.fishtailWidth + self.fishboneWidth + countEffect // 2 * (
-                    self.gapWidth + self.space) + self.gapWidth / 2 + self.fishheadWidth
+            if countEffect % 2 == 0:
+                self.spineWidth = self.fishtailWidth + self.fishboneWidth + math.ceil(countEffect / 2) * (
+                        self.gapWidth + self.space) - self.gapWidth / 2 + self.fishheadWidth
+            else:
+                self.spineWidth = self.fishtailWidth + self.fishboneWidth + math.ceil(countEffect / 2) * (
+                        self.gapWidth + self.space) + self.fishheadWidth
         self.canvasHeight = self.canvasTop + ((countCause + 1) * self.causeHeight) * 2 + self.spineHeight * 2
         self.spineY = self.canvasTop + ((countCause + 1) * self.causeHeight) + self.causeHeight
         self.width = self.canvasWidth + 2
@@ -142,7 +156,8 @@ class Fishbone:
         self.svg.style("""
     text {
       /* 指定使用的系统字体或自定义字体 */
-      font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal',"FiraSans";
+      font-family: "SourceHanSansSC-Normal";
+      # 'SourceHanSansSC-Normal' , 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, ,"FiraSans";
 
       /* 添加其他样式 */
       # font-size: 16px;
@@ -282,6 +297,9 @@ class Fishbone:
         pass
 
     def markdown(self, text):
+        if not text:
+            raise ValueError("Markdown 出错")
+        self.clean()
         markdown = Markdown(text)
         self.data = markdown.fishbone()
 
