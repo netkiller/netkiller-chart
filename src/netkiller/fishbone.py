@@ -273,6 +273,7 @@ class Fishbone:
         self.svg.save(filename)
 
     def show(self):
+        self.render()
         return self.svg.show()
 
     def debug(self):

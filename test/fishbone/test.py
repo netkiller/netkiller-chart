@@ -87,25 +87,18 @@ def main():
     #
     #
 
-    try:
-
-        # markdown = Markdown()
-        # data = markdown.fishbone()
-        # print(data)
-        fishbone = Fishbone()
-        fishbone.markdown(text2)
-        fishbone.title("石川鱼骨图")
-        fishbone.department("技术研发部")
-        fishbone.border(5)
-        fishbone.legend(False)
-        fishbone.save("test.svg")
-        # fishbone.debug()
-        print(fishbone.show())
-
-    except KeyboardInterrupt as e:
-        print(e)
-    except Exception as e:
-        print(e)
+    # markdown = Markdown()
+    # data = markdown.fishbone()
+    # print(data)
+    fishbone = Fishbone()
+    fishbone.markdown(text2)
+    fishbone.title("石川鱼骨图")
+    fishbone.department("技术研发部")
+    fishbone.border(5)
+    fishbone.legend(False)
+    # fishbone.save("test.svg")
+    # fishbone.debug()
+    print(fishbone.show())
 
 
 if __name__ == "__main__":
