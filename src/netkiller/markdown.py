@@ -100,11 +100,12 @@ class Markdown:
         # print(table)
         return csv_text
 
-    def table2list(self):
+    def table2list(self, skip: int = 0):
         """从 Markdown 文本中提取第一个表格并转为 DataFrame"""
         # 按行分割文本
         lines = [line.strip() for line in self.markdown.split('\n') if line.strip()]
-
+        if skip:
+            lines = lines[skip:]
         # 查找表格的起始和结束位置（寻找包含 | 的行）
         table = []
         is_table = False
@@ -115,7 +116,10 @@ class Markdown:
             #     is_table = True
             #     continue
             if '|' in line and '|-' not in line and '| :-' not in line:
-                table.append(line.strip('|').split('|'))  # 替换 | 为逗号
+                # table.append(line.strip('|').split('|'))  # 替换 | 为逗号
+                body = line.strip('|').split('|')
+                body = [item.strip() for item in body]
+                table.append(body)
             # elif in_table:
             #     break  # 表格结束
 

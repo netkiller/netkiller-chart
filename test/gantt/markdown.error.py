@@ -80,26 +80,27 @@ def main():
 ## 工作计划
 | 序号 | 任务名称 | 执行人 | 开始日期 | 结束日期 | 工时 |
 | :-----| :---- | :----: | :----: | :----: | :----: |
-| 1 | 制定居家办公试行方案的具体实施细则 | 周经理 | 2025-09-04 | 2025 | 2.5天/人 |
+| 1 | 制定居家办公试行方案的具体实施细则 | 周经理 | 2025-09-04 | 2025-01-11 | 2.5天/人 |
 | 2 | 行政部门统计居家办公数据 | 行政部门 | 2025-09-04 | 2025-09-08 | 1.5天/人 |
 | 3 | 评估居家办公对员工身心健康的影响 | 人力资源部 | 2025-09-08 | 2025-09-12 | 3天/人 |
 | 4 | 优化虚拟白板系统的使用体验 | IT部门 | 2025-09-15 | 2025-09-19 | 2天/人 |    
     """
 
     markdown = Markdown(text3)
-    items = markdown.table2dict()
+    # items = markdown.table2dict()
+    items = markdown.table2list(2)
     # print(items)
+
     tmp = Data()
     no = 1
     for item in items:
-        # print(item)
-        # tmp.add(item["id"], item["name"], item["start"], item["finish"], item["resource"],
-        #         item["predecessor"], item["milestone"], item["parent"])
-        tmp.add(item["序号"], item["任务名称"], item["开始日期"], item["结束日期"], item["执行人"],
-                0, None, None, None)
+        print(item)
+        tmp.add(item[0], item[1], item[3], item[4], item[2], 0, None, None, None)
+        # tmp.add(item["序号"], item["任务名称"], item["开始日期"], item["结束日期"], item["执行人"],
+        #         0, None, None, None)
         no += 1
     data = tmp.data
-    # print(data)
+    print(data)
     try:
 
         gantt = Gantt(data)
