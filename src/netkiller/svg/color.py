@@ -178,4 +178,6 @@ class Color:
         #     # color = self.color
 
         # print(color)
+        if not color:
+            color = self.color
         return random.choice(color)

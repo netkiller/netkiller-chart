@@ -145,6 +145,49 @@ def main():
   - 未考虑爆破等现代技术
   - 缺乏多方法协同作业    
     """
+
+    text5 = """
+- 居家办公影响工作效率
+  - 任务量暴涨导致延期
+  - 办公室频繁被打断
+  - 通勤时间占用导致加班费增加
+- 居家办公造成生活作息紊乱
+  - 缺乏场景切换导致时间管理混乱
+  - 报复性熬夜现象严重
+  - 没有固定上下班时间界限
+- 居家办公设备条件不足
+  - 缺乏专业办公桌椅
+  - 长时间通话设备不适
+  - 缺少办公室零食补给
+- 居家办公影响身心健康
+  - 缺乏运动空间和动力
+  - 饮食规律被打破
+  - 社交活动骤减
+- 协作工具使用问题
+  - 虚拟白板系统操作不熟练
+  - 新工具需要适应期
+  - 缺乏现场协作的即时性
+- 成本控制问题
+  - 加班费支出增加
+  - 需要额外设备投入
+  - 通勤补贴计算困难
+- 工作生活界限模糊
+  - 无法区分工作和休息空间
+  - 工作时间内易受家庭事务干扰
+  - 缺少同事监督机制
+- 团队沟通效率下降
+  - 视频会议替代现场会议效果欠佳
+  - 非正式沟通渠道减少
+  - 信息同步存在延迟
+- 试行方案执行困难
+  - 自主选择机制不明确
+  - 申请流程复杂
+  - 考勤管理难度增大
+- 技术支持不足
+  - 系统稳定性待验证
+  - IT支持响应速度慢
+  - 家庭网络环境差异大
+"""
     # markdown = Markdown()
     # data = markdown.fishbone()
     # print(data)
@@ -154,20 +197,23 @@ def main():
     fishbone.department("技术研发部")
     # fishbone.border(5)
     fishbone.legend(False)
-    fishbone.markdown(test3)
-    fishbone.save("test3.svg")
+    # fishbone.markdown(test3)
+    # fishbone.save("test3.svg")
+    #
+    # fishbone.markdown(text2)
+    # fishbone.save("test2.svg")
+    #
+    # fishbone.markdown(text)
+    # fishbone.save("test1.svg")
+    #
+    # fishbone.markdown(text1)
+    # fishbone.save("test1.svg")
+    #
+    # fishbone.markdown(text4)
+    # fishbone.save("test4.svg")
 
-    fishbone.markdown(text2)
-    fishbone.save("test2.svg")
-
-    fishbone.markdown(text)
-    fishbone.save("test1.svg")
-
-    fishbone.markdown(text1)
-    fishbone.save("test1.svg")
-
-    fishbone.markdown(text4)
-    fishbone.save("test4.svg")
+    fishbone.markdown(text5)
+    fishbone.save("test5.svg")
     # fishbone.debug()
     # print(fishbone.show())
 
