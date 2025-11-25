@@ -42,16 +42,20 @@ def main():
     # try:
 
     gantt = Gantt(data)
-    gantt.title("甘特图测试")
-    # gantt.hideTable()
+    # gantt.showTable = False
+    # gantt.showHeader = False
+    # gantt.title("甘特图测试")
+    # gantt.table(True)
     # gantt.author("Neo Chen")
     # # gantt.setWorkweeks(6, 1)
 
-    # # gantt.legend(False)
+    # gantt.legend(False)
     # # gantt.blank(True)
     # gantt.department("技术研发部")
-    # gantt.show()
-    gantt.save("gantt2.csv.svg")
+    # print(gantt.show())
+    # gantt.save("gantt2.csv.svg")
+    # print(gantt.header())
+    print(gantt.body())
 
     # except KeyboardInterrupt as e:
     #     print(e)

@@ -163,9 +163,20 @@ class Rectangle(Element):
             kwargs['fill'] = fill
         self.attrs = super().attribute(kwargs)
 
+        self.elements = []
+
+    def append(self, element):
+        self.elements.append(element.__str__())
+        return self
+
     def __str__(self):
-        # return f'<circle cx="{self.cx}" cy="{self.cy}" r="{self.r}" stroke="{self.stroke}" fill="{self.fill}" {self.attrs} />'
-        return f'<rect x="{self.x}" y="{self.y}" width="{self.width}" height="{self.height}" {self.attrs} />'
+        return f'<g {self.__attrs}>\n\t{"\n\t".join(self.elements)}\n</g>'
+
+    def __str__(self):
+        if self.elements:
+            return f'<rect x="{self.x}" y="{self.y}" width="{self.width}" height="{self.height}" {self.attrs} >\n\t{"\n\t".join(self.elements)}\n</rect>'
+        else:
+            return f'<rect x="{self.x}" y="{self.y}" width="{self.width}" height="{self.height}" {self.attrs} />'
 
 
 class Image(Element):
