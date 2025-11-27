@@ -5,97 +5,156 @@
                   /* font-size: 16px;*/
                 }
 ]]></style>
+<g id="background">
+	<rect x="1" y="1" width="30" height="390" fill="#cccccc" >
+	<title>1</title>
+</rect>
+	<rect x="32" y="1" width="30" height="390" fill="#cccccc" >
+	<title>2</title>
+</rect>
+	<rect x="63" y="1" width="30" height="390" fill="#cccccc" >
+	<title>3</title>
+</rect>
+	<rect x="94" y="1" width="30" height="390" fill="#dddddd" >
+	<title>4</title>
+</rect>
+	<rect x="125" y="1" width="30" height="390" fill="#dddddd" >
+	<title>5</title>
+</rect>
+	<line x1="155" y1="1" x2="155" y2="390" stroke="black" />
+	<rect x="156" y="1" width="30" height="390" fill="#cccccc" >
+	<title>6</title>
+</rect>
+	<rect x="187" y="1" width="30" height="390" fill="#cccccc" >
+	<title>7</title>
+</rect>
+	<rect x="218" y="1" width="30" height="390" fill="#cccccc" >
+	<title>8</title>
+</rect>
+	<rect x="249" y="1" width="30" height="390" fill="#cccccc" >
+	<title>9</title>
+</rect>
+	<rect x="280" y="1" width="30" height="390" fill="#cccccc" >
+	<title>10</title>
+</rect>
+	<rect x="311" y="1" width="30" height="390" fill="#dddddd" >
+	<title>11</title>
+</rect>
+	<rect x="342" y="1" width="30" height="390" fill="#dddddd" >
+	<title>12</title>
+</rect>
+	<line x1="372" y1="1" x2="372" y2="390" stroke="black" />
+	<rect x="373" y="1" width="30" height="390" fill="#cccccc" >
+	<title>13</title>
+</rect>
+	<rect x="404" y="1" width="30" height="390" fill="#cccccc" >
+	<title>14</title>
+</rect>
+	<rect x="435" y="1" width="30" height="390" fill="#cccccc" >
+	<title>15</title>
+</rect>
+	<rect x="466" y="1" width="30" height="390" fill="#cccccc" >
+	<title>16</title>
+</rect>
+	<rect x="497" y="1" width="30" height="390" fill="#cccccc" >
+	<title>17</title>
+</rect>
+	<rect x="528" y="1" width="30" height="390" fill="#dddddd" >
+	<title>18</title>
+</rect>
+	<rect x="559" y="1" width="30" height="390" fill="#dddddd" >
+	<title>19</title>
+</rect>
+	<line x1="589" y1="1" x2="589" y2="390" stroke="black" />
+	<rect x="590" y="1" width="30" height="390" fill="#cccccc" >
+	<title>20</title>
+</rect>
+	<line x1="1" y1="1" x2="619" y2="1" stroke="grey" />
+	<line x1="1" y1="31" x2="619" y2="31" stroke="grey" />
+	<line x1="1" y1="61" x2="619" y2="61" stroke="grey" />
+	<line x1="1" y1="91" x2="619" y2="91" stroke="grey" />
+	<line x1="1" y1="121" x2="619" y2="121" stroke="grey" />
+	<line x1="1" y1="151" x2="619" y2="151" stroke="grey" />
+	<line x1="1" y1="181" x2="619" y2="181" stroke="grey" />
+	<line x1="1" y1="211" x2="619" y2="211" stroke="grey" />
+	<line x1="1" y1="241" x2="619" y2="241" stroke="grey" />
+	<line x1="1" y1="271" x2="619" y2="271" stroke="grey" />
+	<line x1="1" y1="301" x2="619" y2="301" stroke="grey" />
+	<line x1="1" y1="331" x2="619" y2="331" stroke="grey" />
+	<line x1="1" y1="361" x2="619" y2="361" stroke="grey" />
+	<line x1="1" y1="391" x2="619" y2="391" stroke="grey" />
+</g>
 <g id="tasks">
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<polyline points="1,95 310,95 310,112 300,103 11,103 1,112 1,95" stroke="none" fill="#333333" />
+	<polyline points="1,8 310,8 310,25 300,16 11,16 1,25 1,8" stroke="none" fill="#333333" />
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<rect x="63" y="123" width="61" height="20" stroke="grey" fill="#00C7C1" />
+	<rect x="63" y="36" width="61" height="20" stroke="grey" fill="#00C7C1" />
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<rect x="125" y="153" width="92" height="20" stroke="grey" fill="#00C7C1" />
+	<rect x="125" y="66" width="92" height="20" stroke="grey" fill="#00C7C1" />
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<rect x="218" y="183" width="92" height="20" stroke="grey" fill="#00C7C1" />
+	<rect x="218" y="96" width="92" height="20" stroke="grey" fill="#00C7C1" />
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<rect x="218" y="213" width="92" height="20" stroke="grey" fill="#00C7C1" />
-	<rect x="220" y="216" width="58" height="14" fill="#B2F2EA" />
-	<text x="223" y="226" font-size="10" text-anchor="start" fill="black" font-family="SourceHanSansSC-Normal">66%</text>
+	<rect x="218" y="126" width="92" height="20" stroke="grey" fill="#00C7C1" />
+	<rect x="220" y="129" width="58" height="14" fill="#B2F2EA" />
+	<text x="223" y="139" font-size="10" text-anchor="start" fill="black" font-family="SourceHanSansSC-Normal">66%</text>
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<path d="M 47,242 L 58,253 L 47,264 L 36,253 L 47,242 Z" fill="#333333" />
-	<text x="62" y="258" font-size="16" text-anchor="start" fill="#333333">2023年03月02日</text>
+	<path d="M 47,155 L 58,166 L 47,177 L 36,166 L 47,155 Z" fill="#333333" />
+	<text x="62" y="171" font-size="16" text-anchor="start" fill="#333333">2023年03月02日</text>
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<rect x="311" y="273" width="309" height="20" stroke="grey" fill="#00C7C1" />
-	<rect x="313" y="276" width="58" height="14" fill="#B2F2EA" />
-	<text x="316" y="286" font-size="10" text-anchor="start" fill="black" font-family="SourceHanSansSC-Normal">20%</text>
+	<rect x="311" y="186" width="309" height="20" stroke="grey" fill="#00C7C1" />
+	<rect x="313" y="189" width="58" height="14" fill="#B2F2EA" />
+	<text x="316" y="199" font-size="10" text-anchor="start" fill="black" font-family="SourceHanSansSC-Normal">20%</text>
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<path d="M 295,302 L 306,313 L 295,324 L 284,313 L 295,302 Z" fill="#333333" />
-	<text x="310" y="318" font-size="16" text-anchor="start" fill="#333333">2023年03月10日</text>
+	<path d="M 295,215 L 306,226 L 295,237 L 284,226 L 295,215 Z" fill="#333333" />
+	<text x="310" y="231" font-size="16" text-anchor="start" fill="#333333">2023年03月10日</text>
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<polyline points="280,335 589,335 589,352 579,343 290,343 280,352 280,335" stroke="none" fill="#333333" />
+	<polyline points="280,248 589,248 589,265 579,256 290,256 280,265 280,248" stroke="none" fill="#333333" />
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<rect x="280" y="363" width="61" height="20" stroke="grey" fill="#00C7C1" />
+	<rect x="280" y="276" width="61" height="20" stroke="grey" fill="#00C7C1" />
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<rect x="342" y="393" width="92" height="20" stroke="grey" fill="#00C7C1" />
+	<rect x="342" y="306" width="92" height="20" stroke="grey" fill="#00C7C1" />
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<rect x="435" y="423" width="154" height="20" stroke="grey" fill="#00C7C1" />
+	<rect x="435" y="336" width="154" height="20" stroke="grey" fill="#00C7C1" />
 </g>
 </g>
-	<g id="task">
+	<g class="task">
 	<g id="item">
-	<rect x="435" y="453" width="154" height="20" stroke="grey" fill="#00C7C1" />
+	<rect x="435" y="366" width="154" height="20" stroke="grey" fill="#00C7C1" />
 </g>
-</g>
-</g>
-<g id="handover">
-	<g id="link">
-	<path d="M 125,133 H 140 H 143" stroke-width="2" marker-end="arrow" stroke="black" fill="none" />
-</g>
-	<g id="link">
-	<path d="M 218,163 H 233 H 173" stroke-width="2" marker-end="arrow" stroke="black" fill="none" />
-</g>
-	<g id="link">
-	<path d="M 218,163 H 233 H 203" stroke-width="2" marker-end="arrow" stroke="black" fill="none" />
-</g>
-	<g id="link">
-	<path d="M 311,223 H 295 H 353" stroke-width="2" marker-end="arrow" stroke="black" fill="none" />
-</g>
-	<g id="link">
-	<path d="M 342,373 H 357 H 383" stroke-width="2" marker-end="arrow" stroke="black" fill="none" />
-</g>
-	<g id="link">
-	<path d="M 435,403 H 450 H 413" stroke-width="2" marker-end="arrow" stroke="black" fill="none" />
 </g>
 </g>
 </svg>

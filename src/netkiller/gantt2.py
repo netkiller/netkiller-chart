@@ -17,7 +17,6 @@ try:
     sys.path.insert(1, module)
 
     import calendar
-    import drawsvg as draw
     from datetime import datetime, date
     import platform
     from PIL import ImageFont, ImageDraw, Image
@@ -568,7 +567,9 @@ class Gantt(Calendar, Canvas):
         self.showTable = status
 
     def items(self, line, subitem=False):
-        top = self.canvasTop + self.rowHeight * 3 + self.itemLine * self.rowHeight + self.splitLineHeight * self.itemLine
+        top = self.canvasTop + self.itemLine * self.rowHeight + self.splitLineHeight * self.itemLine
+        if self.showHeader:
+            top += self.rowHeight * 3
 
         begin = datetime.strptime(line["start"], "%Y-%m-%d").day
         # end = datetime.strptime(line['end'], '%Y-%m-%d').day
@@ -583,9 +584,9 @@ class Gantt(Calendar, Canvas):
 
         self.linkPosition[line["id"]] = {"x": left, "y": top, "width": right}
 
-        lineGroup = ele.Group(id="task")
+        lineGroup = ele.Group(clazz="task")
         if self.showTable:
-            table = ele.Group(id="text")
+            table = ele.Group(clazz="text")
 
             table.append(ele.Text(
                 line["name"], font_size=self.fontSize, x=10 + (self.textIndent * self.textIndentSize), y=top + 20,
@@ -845,21 +846,112 @@ class Gantt(Calendar, Canvas):
         self.draw.save('header.svg')
         return self.draw.show()
 
+    def background(self, draw, begin, end):
+        if not self.showHeader:
+            self.canvasHeight -= self.rowHeight * 3
+        offsetX = 1
+        column = 0
+
+        # begin = datetime.strptime(self.beginDate, "%Y-%m-%d")
+        # end = datetime.strptime(self.endDate, "%Y-%m-%d")
+
+        beginDay = begin.day
+        endDay = end.day
+        # print(beginDay, endDay)
+
+        weekNumberOfYear = datetime.strptime(str(begin.year) + "-" + str(begin.month) + "-01", "%Y-%m-%d").strftime("%W")
+        # weekNumberOfYear = begin.strftime('%W')
+        # weekNumberOfYear = datetime.date(datetime.now().year,month,1).strftime('%W')
+
+        background = ele.Group(id="background")
+
+        for day in range(beginDay, endDay + 1):
+            # numberOfWeek = self.weekNumberOfMonth(datetime.strptime(str(begin.year)+'-'+str(begin.month)+'-'+str(day), '%Y-%m-%d').date())
+            weekday = calendar.weekday(begin.year, begin.month, day)
+
+            # currentweekNumberOfYear = datetime.strptime(str(begin.year) + "-" + str(begin.month) + "-" + str(day), "%Y-%m-%d").strftime("%W")
+            # print(weekNumberOfYear, currentweekNumberOfYear)
+            # if currentweekNumberOfYear != weekNumberOfYear:
+            #     weekNumberOfYear = currentweekNumberOfYear
+            # weekGroups[weekNumberOfYear] = ele.Group(id="week" + str(weekNumberOfYear))
+            if self.firstsd == True:
+                if (int(weekNumberOfYear) % 2) == 0:
+                    self.workweeks = 6
+                else:
+                    self.workweeks = 5
+            if weekday >= self.workweeks:
+                color = "#dddddd"
+            else:
+                color = "#cccccc"
+
+            x = self.columeWidth * (column) + offsetX
+            # self.dayPosition[date(year=int(begin.year), month=int(begin.month), day=int(day)).strftime("%Y-%m-%d")] = x
+
+            # if day == beginDay:
+            #     weekGroups[weekNumberOfYear].append(
+            #         ele.Text(begin.strftime("%Y年%m月"), font_size=20, x=x + 4, y=self.canvasTop + self.rowHeight - 10, fill="#555555"))
+            # # 右侧封闭
+            # # if day == endDay:
+            # #     weekGroups[weekNumberOfYear].append(
+            # #         draw.Line(x + self.columeWidth, top, x + self.columeWidth, self.canvasHeight, stroke="black"))
+            #
+            # # dayName = ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"]
+            # dayName = ["一", "二", "三", "四", "五", "六", "日"]
+            #
+            # weekGroups[weekNumberOfYear].append(
+            #     ele.Text(dayName[
+            #                  weekday], font_size=20, x=x + 4, y=self.canvasTop + self.columeWidth * 2 - 10, fill="#555555"))
+            # if day < 10:
+            #     numberOffsetX = 10
+            # else:
+            #     numberOffsetX = 5
+
+            # 日栏位
+            # print(self.weekdayPosition)
+            r = ele.Rectangle(x, self.canvasTop, self.columeWidth, self.canvasHeight, fill=color).append(ele.Title(str(day)))
+
+            background.append(r)
+            # 周分割线
+            if weekday == 6:
+                background.append(ele.Line(x + self.columeWidth, self.canvasTop, x + self.columeWidth, self.canvasHeight,
+                                           stroke="black"))
+            # # 日期
+            # weekGroups[
+            #     weekNumberOfYear].append(ele.Text(str(day), font_size=20, x=x + numberOffsetX, y=self.canvasTop + self.columeWidth * 3 - 10, fill="#555555"))
+
+            # if column:
+            offsetX += self.splitLineHeight
+            column += 1
+
+        self.weekdayPosition = x + self.columeWidth
+
+        # 分割线
+        for n in range(0, self.lineNumber + 1):
+            top = self.canvasTop + (self.rowHeight + self.splitLineHeight) * n
+            background.append(
+                ele.Line(self.canvasLeft, top, self.canvasWidth, top, stroke="grey"))
+
+        draw.append(background)
+
     def body(self):
         self.showTable = False
+        self.showHeader = False
         self.draw = Svg(self.width, self.height)
         style = """* {
                   font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
                   /* font-size: 16px;*/
                 }"""
         self.draw.style(style)
+
+        self.background(self.draw, begin=self.beginDate, end=self.endDate)
+
         self.taskGroup = ele.Group(id="tasks")
         self.__tasks(self.data)
         self.draw.append(self.taskGroup)
-
-        self.handover = ele.Group(id="handover")
-        self.__predecessor(self.data)
-        self.draw.append(self.handover)
+        #
+        # self.handover = ele.Group(id="handover")
+        # self.__predecessor(self.data)
+        # self.draw.append(self.handover)
         self.draw.save('body.svg')
         return self.draw.show()
 
