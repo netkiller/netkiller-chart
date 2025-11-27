@@ -83,6 +83,7 @@
 	<line x1="1" y1="331" x2="619" y2="331" stroke="grey" />
 	<line x1="1" y1="361" x2="619" y2="361" stroke="grey" />
 	<line x1="1" y1="391" x2="619" y2="391" stroke="grey" />
+	<rect x="1" y="1" width="619" height="390" stroke="black" fill="none" />
 </g>
 <g id="tasks">
 	<g class="task">

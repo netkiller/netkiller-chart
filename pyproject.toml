@@ -19,6 +19,7 @@ dependencies = [
     "svgwrite",
     "pillow",
     "xmind",
+    "dominate"
 ]
 
 [project.urls]

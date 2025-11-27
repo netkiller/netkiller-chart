@@ -15,7 +15,6 @@ try:
     # print(module)
     # sys.path.insert(0, ".")
     sys.path.insert(1, module)
-
     import calendar
     from datetime import datetime, date
     import platform
@@ -834,7 +833,8 @@ class Gantt(Calendar, Canvas):
         return self.draw.show()
 
     def header(self):
-        self.draw = Svg(self.width, self.height)
+        height = self.rowHeight * 3
+        self.draw = Svg(self.width, height)
         style = """* {
           font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
           /* font-size: 16px;*/
@@ -931,6 +931,11 @@ class Gantt(Calendar, Canvas):
             background.append(
                 ele.Line(self.canvasLeft, top, self.canvasWidth, top, stroke="grey"))
 
+        background.append(
+            ele.Rectangle(self.canvasLeft, self.canvasTop, self.canvasWidth,
+                          self.canvasHeight,
+                          fill="none",
+                          stroke="black"))
         draw.append(background)
 
     def body(self):
@@ -954,6 +959,21 @@ class Gantt(Calendar, Canvas):
         # self.draw.append(self.handover)
         self.draw.save('body.svg')
         return self.draw.show()
+
+    def h5(self):
+
+        html = f"""
+        <style>
+        
+        </style>
+        <div >
+        <div id="header" style="float: left; " >{self.header()}</div>
+        <div style="float: left; ">{self.body()}</div>
+        </div>
+        """
+
+        with open('test.html', 'w') as f:
+            f.write(html)
 
     def usage(self):
         self.parser.print_help()
