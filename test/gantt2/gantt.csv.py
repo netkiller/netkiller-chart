@@ -38,7 +38,7 @@ def main():
     csv = Data()
     data = csv.csvtext(text)
 
-    # print(data)
+    print(data)
     # try:
 
     gantt = Gantt(data)
@@ -57,6 +57,7 @@ def main():
     # print(gantt.header())
     # print(gantt.body())
     gantt.h5()
+
     # except KeyboardInterrupt as e:
     #     print(e)
     # except Exception as e:

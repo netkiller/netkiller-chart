@@ -962,13 +962,95 @@ class Gantt(Calendar, Canvas):
 
     def h5(self):
 
-        html = f"""
+        style = """
         <style>
+        #gantt {
+            display: flex; /* 启用Flex布局 */
+            width: 100%; /* 容器宽度（可自定义） */
+            # height: 400px; /* 容器高度（可自定义） */
+            # gap: 20px; /* 左右元素间距（可选） */
+        }
+        
+         #table {
+            flex: 1; /* 占1份宽度（自适应） */
+            # background-color: #e8f4f8;
+            # padding: 20px;
+        }
+        #calendar {
+            flex: 2; /* 占2份宽度（自适应，比例1:2） */
+            # background-color: #fdf2f8;
+            # padding: 20px;
+        }
+        
+        .title {
+            height: 58px;
+        }
+        .table {
+            display: table;
+            border-collapse: collapse;
+            width: 600px;
+            # margin: 20px auto;
+        }
+        .table-row {
+            display: table-row;
+        }
+        .table-header {
+            display: table-cell;
+            background-color: #f0f0f0;
+            font-weight: bold;
+            text-align: center;
+            height: 30px;
+        }
+        .table-cell {
+            display: table-cell;
+            # padding: 10px;
+            border: 1px solid #ccc;
+            
+            height: 30px;
+        }
         
         </style>
-        <div >
-        <div id="header" style="float: left; " >{self.header()}</div>
-        <div style="float: left; ">{self.body()}</div>
+        """
+
+        items = []
+        for id, item in self.data.items():
+            items.append(f"""
+        <div class="table-row">
+            <div class="table-cell">{item['id']}</div>
+            <div class="table-cell">{item['name']}</div>
+            <div class="table-cell">{item['start']}</div>
+            <div class="table-cell">{item['finish']}</div>
+            <div class="table-cell">{item['resource']}</div>
+        </div>
+        """)
+
+        html = f"""
+        {style}
+        <div id="gantt">
+            <div id="task">
+                <div class="title">
+                
+                </div>
+                <div class="table">
+                    <div class="table-row">
+                        <div class="table-header">序号</div>
+                        <div class="table-header">任务</div>
+                        <div class="table-header">开始日期</div>
+                        <div class="table-header">结束日期</div>
+                        <div class="table-header">资源</div>
+                    </div>
+                    {"\n".join(items)}
+                 </div>
+                
+            </div>
+            <div id="calendar" >
+                <div id="calendarHeader" style="">
+                    {self.header()}
+                </div>
+                <div id="calendarBody" style="">
+                    {self.body()}
+                </div>
+            </div>
         </div>
         """
 
