@@ -34,21 +34,24 @@ class Title(Element):
 class Text(Element):
     def __init__(self, text: str = None, x: int = 0, y: int = 0, **kwargs):
         super().__init__()
-        self.x = x
-        self.y = y
-        self.text = text
+
+        if x:
+            kwargs['x'] = x
+        if y:
+            kwargs['y'] = y
+
         self.__attrs = super().attribute(kwargs)
         self.elements = []
+
+        if text:
+            self.elements.append(text)
 
     def append(self, element):
         self.elements.append(element.__str__())
         return self
 
     def __str__(self):
-        if self.text:
-            return f'<text x="{self.x}" y="{self.y}" {self.__attrs}>{self.text}</text>'
-        else:
-            return f'<text {self.__attrs}>{"\n".join(self.elements)}</text>'
+        return f'<text {self.__attrs}>{"\n".join(self.elements)}</text>'
 
 
 class TextPath(Element):

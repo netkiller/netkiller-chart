@@ -55,7 +55,7 @@ class Canvas:
     # fontFamily = "Songti"
     fontFamily = "SourceHanSansSC-Normal"
     # fontFamily = "DejaVuSans"
-    fontSize = 18
+    fontSize = 16
     lineColor = "grey"
 
     def __init__(self):
@@ -75,7 +75,7 @@ class Canvas:
 
         # try:
         # font = ImageFont.truetype(r"Songti.ttc", size=self.fontSize, encoding="utf-8")
-        font = ImageFont.truetype(self.fontFamily, size=self.fontSize, encoding="utf-8")
+        font = ImageFont.truetype(self.fontFamily, size=18, encoding="utf-8")
         # except IOError:
         #     raise FileNotFoundError(f"字体文件不存在：{font_path}，请替换为系统中实际存在的字体路径")
         # if self.fontSize > 0:
@@ -109,7 +109,7 @@ class Calendar(Canvas):
     nameTextSize = 1
     dateTextSize = 0
     resourceTextSize = 90
-    textIndentSize = 40
+    textIndentSize = 20
 
     beginDate = datetime.now().date()
     endDate = datetime.now().date()
@@ -228,12 +228,12 @@ class Calendar(Canvas):
 
             # 日栏位
             # print(self.weekdayPosition)
-            r = ele.Rectangle(x, top + self.rowHeight * 2, self.columeWidth, self.calendarHeight - top - self.rowHeight * 2, fill=color).append(ele.Title(str(day)))
+            r = ele.Rectangle(x, top + self.rowHeight * 2, self.columeWidth, self.calendarHeight - self.rowHeight * 2, fill=color).append(ele.Title(str(day)))
             weekGroups[weekNumberOfYear].append(r)
             # 周分割线
             if weekday == 6:
                 weekGroups[
-                    weekNumberOfYear].append(ele.Line(x + self.columeWidth, top + self.rowHeight, x + self.columeWidth, self.calendarHeight,
+                    weekNumberOfYear].append(ele.Line(x + self.columeWidth, top + self.rowHeight, x + self.columeWidth, self.canvasHeight,
                                                       stroke="black"))
             # 日期
             weekGroups[
@@ -424,9 +424,7 @@ class Calendar(Canvas):
         # right = draw.Line(self.canvasWidth, 0,
         #                   self.canvasWidth, self.canvasHeight, stroke='black')
         # 周线
-        background.append(
-            ele.Line(self.canvasLeft, top + self.rowHeight * 2, self.canvasWidth, self.rowHeight * 2,
-                     stroke="grey"))
+        background.append(ele.Line(self.canvasLeft, top + self.rowHeight * 2, self.canvasWidth, top + self.rowHeight * 2, stroke="grey"))
         # 日期线
         background.append(ele.Line(self.canvasLeft, top + self.rowHeight * 3, self.canvasWidth, top + self.rowHeight * 3, stroke="grey"))
         # 上边封闭
@@ -436,7 +434,7 @@ class Calendar(Canvas):
         # 底部封闭
         # background.append(draw.Line(1, self.canvasHeight, self.canvasWidth, self.canvasHeight, stroke="black"))
 
-        top = top + self.rowHeight * 3
+        top = top + self.rowHeight * 3 + self.splitLineHeight * 3
         # 分割线
         for n in range(0, self.lineNumber):
             top = top + self.rowHeight + self.splitLineHeight
@@ -444,10 +442,7 @@ class Calendar(Canvas):
                 ele.Line(self.canvasLeft, top, self.canvasWidth, top, stroke="grey"))
 
         # 日历边框
-        background.append(
-            ele.Rectangle(self.canvasLeft, self.canvasTop, self.canvasWidth, self.canvasHeight,
-                          fill="none",
-                          stroke="black"))
+        background.append(ele.Rectangle(self.canvasLeft, self.canvasTop, self.canvasWidth, self.calendarHeight, fill="none", stroke="black"))
         # print(f"calendar: {self.canvasHeight}, top:{top}")
         self.draw.append(background)
 
@@ -559,127 +554,6 @@ class Gantt(Calendar, Canvas):
     def table(self, status: bool = False):
         self.showTable = status
 
-    # def items(self, line, subitem=False):
-    #     top = self.canvasTop + self.itemLine * self.rowHeight + self.splitLineHeight * self.itemLine
-    #
-    #     begin = datetime.strptime(line["start"], "%Y-%m-%d").day
-    #     # end = datetime.strptime(line['end'], '%Y-%m-%d').day
-    #     end = (datetime.strptime(line["finish"], "%Y-%m-%d").date() - datetime.strptime(line["start"],
-    #                                                                                     "%Y-%m-%d").date()).days
-    #     # left += self.columeWidth * (begin - 1) + (1 * begin)
-    #     # # 日宽度 + 竖线宽度
-    #     right = self.columeWidth * (end + 1) + (1 * end)
-    #
-    #     left = self.dayPosition[line["start"]]
-    #     # right = self.dayPosition[line['end']]
-    #
-    #     self.linkPosition[line["id"]] = {"x": left, "y": top, "width": right}
-    #
-    #     lineGroup = ele.Group(clazz="task")
-    #     if self.showTable:
-    #         table = ele.Group(clazz="text")
-    #
-    #         table.append(ele.Text(
-    #             line["name"], font_size=self.fontSize, x=10 + (self.textIndent * self.textIndentSize), y=top + 20,
-    #             text_anchor="start"))
-    #         # text.append(draw.TSpan(line['begin'], text_anchor='start'))
-    #         # text.append(draw.TSpan(line['end'], text_anchor='start'))
-    #
-    #         table.append(ele.Text(
-    #             line["start"], font_size=self.fontSize, x=self.nameTextSize + 15, y=top + 20, text_anchor="start"))
-    #         table.append(
-    #             ele.Text(
-    #                 line["finish"], font_size=self.fontSize, x=self.nameTextSize + self.dateTextSize + 35, y=top + 20,
-    #                 text_anchor="start"))
-    #         # if 'progress' in line:
-    #         #     table.append(draw.Text(
-    #         #         str(line['progress']), 20, self.nameTextSize + 200, top + 20, text_anchor='start'))
-    #         leftOffset = 0
-    #         if end + 1 < 10:
-    #             leftOffset = 10
-    #         elif end + 1 < 100:
-    #             leftOffset = 5
-    #         table.append(
-    #             ele.Text(str(end + 1), font_size=self.fontSize, x=self.nameTextSize + self.dateTextSize * 2 + 60 + leftOffset,
-    #                      y=top + 20,
-    #                      text_anchor="start"))
-    #         if "resource" in line:
-    #             table.append(
-    #                 ele.Text(str(
-    #                     line["resource"]), font_size=self.fontSize, x=self.nameTextSize + self.dateTextSize * 2 + 105,
-    #                     y=top + 20,
-    #                     text_anchor="start"))
-    #         lineGroup.append(table)
-    #
-    #     group = ele.Group(id="item")
-    #     # fill='none', stroke='black'
-    #
-    #     if subitem:
-    #         # print(begin,end)
-    #         # print(left,top,right)
-    #         offsetY = 7
-    #         length = left + right
-    #         group.append(
-    #             ele.Polyline(
-    #                 # 坐标
-    #                 (left, top + offsetY),
-    #                 # 横线
-    #                 (length, top + offsetY),
-    #                 # 竖线
-    #                 (length, top + 24),
-    #                 # 斜线
-    #                 (length - 10, top + 15),
-    #                 # 横线2
-    #                 (left + 10, top + 15),
-    #                 # # 斜线
-    #                 (left, top + 24),
-    #                 # # 闭合竖线
-    #                 (left, top + offsetY),
-    #                 fill="#333333",
-    #                 stroke="none",
-    #             )
-    #         )
-    #     else:
-    #         if "milestone" in line and line["milestone"]:
-    #             mleft = left + 15
-    #             mtop = top + 4
-    #             p = ele.Path(fill="#333333")
-    #             p.M(mleft, mtop).L(mleft + 11, top + 15).L(mleft, top + 26).L(mleft - 11, top + 15).L(mleft, mtop).Z()
-    #             group.append(p)
-    #             group.append(
-    #                 ele.Text(datetime.strptime(
-    #                     line["start"], "%Y-%m-%d").strftime("%Y年%m月%d日"), font_size=16, x=left + 30,
-    #                          y=top + 20, text_anchor="start", fill="#333333"))
-    #         else:
-    #             # 工时
-    #             r = ele.Rectangle(left, top + 5, right, self.barHeight, fill="#00C7C1", stroke="grey")
-    #             # r.append_title(line["name"])
-    #             group.append(r)
-    #
-    #             # 进度
-    #             if "progress" in line and line["progress"] > 0:
-    #                 progress = 0
-    #                 if line["progress"] > end + 1:
-    #                     progress = end + 1
-    #                 else:
-    #                     progress = line["progress"]
-    #
-    #                 progressBar = ele.Rectangle(left + 2, top + 8, 30 * progress - 2, self.progressHeight,
-    #                                             fill="#B2F2EA")
-    #                 # progressBar.append_title(str(progress))
-    #                 group.append(progressBar)
-    #                 group.append(
-    #                     ele.Text("%d%%" % ((progress / (
-    #                             end + 1)) * 100), font_size=10, x=left + 5, y=top + 18, text_anchor="start",
-    #                              fill="black", font_family=self.fontFamily))
-    #
-    #     # 分割线
-    #     # group.append(draw.Lines(1, top + self.rowHeight, self.canvasWidth, top + self.rowHeight, stroke="grey"))
-    #
-    #     lineGroup.append(group)
-    #     self.itemLine += 1
-    #     return lineGroup
-
     def __items(self, line, subitem=False):
         top = self.canvasTop + self.itemLine * self.rowHeight + self.splitLineHeight * self.itemLine
         # if self.showHeader:
@@ -703,16 +577,16 @@ class Gantt(Calendar, Canvas):
             table = ele.Group(clazz="text")
 
             table.append(ele.Text(
-                line["name"], font_size=self.fontSize, x=10 + (self.textIndent * self.textIndentSize), y=top + 20,
+                line["name"], font_size=self.fontSize, x=10 + (self.textIndent * self.textIndentSize), y=top + 23,
                 text_anchor="start"))
             # text.append(draw.TSpan(line['begin'], text_anchor='start'))
             # text.append(draw.TSpan(line['end'], text_anchor='start'))
 
             table.append(ele.Text(
-                line["start"], font_size=self.fontSize, x=self.nameTextSize + 15, y=top + 20, text_anchor="start"))
+                line["start"], font_size=self.fontSize, x=self.nameTextSize + 15, y=top + 23, text_anchor="start"))
             table.append(
                 ele.Text(
-                    line["finish"], font_size=self.fontSize, x=self.nameTextSize + self.dateTextSize + 35, y=top + 20,
+                    line["finish"], font_size=self.fontSize, x=self.nameTextSize + self.dateTextSize + 35, y=top + 23,
                     text_anchor="start"))
             # if 'progress' in line:
             #     table.append(draw.Text(
@@ -724,13 +598,13 @@ class Gantt(Calendar, Canvas):
                 leftOffset = 5
             table.append(
                 ele.Text(str(end + 1), font_size=self.fontSize, x=self.nameTextSize + self.dateTextSize * 2 + 60 + leftOffset,
-                         y=top + 20,
+                         y=top + 23,
                          text_anchor="start"))
             if "resource" in line:
                 table.append(
                     ele.Text(str(
                         line["resource"]), font_size=self.fontSize, x=self.nameTextSize + self.dateTextSize * 2 + 105,
-                        y=top + 20,
+                        y=top + 23,
                         text_anchor="start"))
             lineGroup.append(table)
 
@@ -740,6 +614,7 @@ class Gantt(Calendar, Canvas):
         if subitem:
             # print(begin,end)
             # print(left,top,right)
+
             offsetY = 7
             length = left + right
             group.append(
@@ -772,10 +647,10 @@ class Gantt(Calendar, Canvas):
                 group.append(
                     ele.Text(datetime.strptime(
                         line["start"], "%Y-%m-%d").strftime("%Y年%m月%d日"), font_size=16, x=left + 30,
-                             y=top + 20, text_anchor="start", fill="#333333"))
+                             y=top + 23, text_anchor="start", fill="#333333"))
             else:
                 # 工时
-                r = ele.Rectangle(left, top + 5, right, self.barHeight, fill="#00C7C1", stroke="grey")
+                r = ele.Rectangle(left + 1, top + 8, right - 1, self.barHeight, fill="#00C7C1", stroke="grey")
                 # r.append_title(line["name"])
                 group.append(r)
 
@@ -787,13 +662,13 @@ class Gantt(Calendar, Canvas):
                     else:
                         progress = line["progress"]
 
-                    progressBar = ele.Rectangle(left + 2, top + 8, 30 * progress - 2, self.progressHeight,
+                    progressBar = ele.Rectangle(left + 2, top + 11, 30 * progress - 2, self.progressHeight,
                                                 fill="#B2F2EA")
                     # progressBar.append_title(str(progress))
                     group.append(progressBar)
                     group.append(
                         ele.Text("%d%%" % ((progress / (
-                                end + 1)) * 100), font_size=10, x=left + 5, y=top + 18, text_anchor="start",
+                                end + 1)) * 100), font_size=10, x=left + 5, y=top + 22, text_anchor="start",
                                  fill="black", font_family=self.fontFamily))
 
         # 分割线
@@ -802,22 +677,6 @@ class Gantt(Calendar, Canvas):
         lineGroup.append(group)
         self.itemLine += 1
         return lineGroup
-
-    # def tasks(self, data):
-    #     for id, line in data.items():
-    #         try:
-    #             if "subitem" in line:
-    #                 item = self.items(line, True)
-    #                 self.taskGroup.append(item)
-    #                 self.textIndent += 1
-    #                 self.tasks(line["subitem"])
-    #                 self.textIndent -= 1
-    #             else:
-    #                 item = self.items(line)
-    #                 self.taskGroup.append(item)
-    #         except KeyError as err:
-    #             print("KeyError %s: %s" % (err, line))
-    #             exit()
 
     def __tasks(self, data):
         for id, line in data.items():
@@ -892,29 +751,23 @@ class Gantt(Calendar, Canvas):
             # end = datetime.strptime(item['finish'], '%Y-%m-%d').date()
             self.maxDate.append(item["finish"])
 
-    def randerTitle(self):
-        group = ele.Group(id="title", onclick="this.style.stroke = 'green'; ")
-        group.append(ele.Text(x=self.canvasWidth / 2, y=25, font_size=30, text_anchor="middle", font_family=self.fontFamily).append(self.__title))
-        if self.name:
-            group.append(ele.Text(self.name, font_szie=16, x=5, y=self.height - self.rowHeight / 2))
-        self.draw.append(group)
-
     def rander(self):
         self.itemLine = 0
         self.canvasTop = 1
         # if self.showTable:
         self.startPosition = self.nameTextSize + self.dateTextSize * 2 + self.resourceTextSize + 80
-        # if self.__title:
-        #     self.canvasTop = 50
+        if self.__title:
+            self.canvasTop = 50
 
         days = self.endDate - self.beginDate
         self.canvasWidth = self.startPosition + self.columeWidth * days.days + days.days + self.columeWidth
-        self.canvasHeight = self.canvasTop + self.rowHeight * 3 + self.rowHeight * self.lineNumber + self.splitLineHeight * (
-                self.lineNumber - 1)
+        self.canvasHeight = self.canvasTop + (
+                self.rowHeight * 3 + self.splitLineHeight * 3) + self.rowHeight * self.lineNumber + self.splitLineHeight * (
+                                    self.lineNumber - 1)
         self.width = self.canvasWidth + 2
-        self.height = self.canvasHeight + 2 + self.rowHeight
-        self.calendarHeight = self.canvasHeight
-
+        self.height = self.canvasHeight + 2 + self.rowHeight * 2
+        # self.calendarHeight = self.canvasHeight
+        self.calendarHeight = self.canvasHeight - self.canvasTop
         self.draw = Svg(self.width, self.height)
         style = """* {
   font-family: 'PingFang SC', 'Microsoft YaHei', 'SimHei', 'Arial', sans-serif, 'SourceHanSansSC-Normal';
@@ -923,26 +776,32 @@ class Gantt(Calendar, Canvas):
 
         self.draw.style(style)
         # print(f"rander: {self.canvasHeight}")
-        # if self.__title:
-        #     self.randerTitle()
+        if self.__title:
+            group = ele.Group(id="title", onclick="this.style.stroke = 'green'; ")
+            group.append(ele.Text(x=self.canvasWidth / 2, y=25, font_size=30, text_anchor="middle", font_family=self.fontFamily).append(self.__title))
+            if self.name:
+                group.append(ele.Text(self.name, font_szie=16, x=5, y=self.height - self.rowHeight / 2))
+            self.draw.append(group)
+
         self.calendar()
-        self.canvasTop = self.rowHeight * 3
+
         # if self.showTable:
         #     return
 
         # if not self.isBlank:
-        #     if self.__department:
-        #         self.draw.append(
-        #             ele.Text(self.__department, font_size=30, x=10, y=self.canvasTop + self.rowHeight + 10, fill="#555555")
-        #         )
-        # self.canvasTop = 0
+        if self.__department:
+            self.draw.append(
+                ele.Text(self.__department, font_size=30, x=10, y=self.canvasTop + self.rowHeight + 10, fill="#555555")
+            )
+        self.canvasTop = self.canvasTop + self.rowHeight * 3
+
         self.taskGroup = ele.Group(id="tasks")
         self.__tasks(self.data)
         self.draw.append(self.taskGroup)
 
-        self.handover = ele.Group(id="handover")
-        self.__predecessor(self.data)
-        self.draw.append(self.handover)
+        # self.handover = ele.Group(id="handover")
+        # self.__predecessor(self.data)
+        # self.draw.append(self.handover)
 
         # self.__legend()
 

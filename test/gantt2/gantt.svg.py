@@ -44,14 +44,14 @@ def main():
     gantt = Gantt(data)
     # gantt.showTable = False
     # gantt.showHeader = False
-    # gantt.title("甘特图测试")
+    gantt.title("甘特图测试")
     # gantt.table(True)
     # gantt.author("Neo Chen")
     # # gantt.setWorkweeks(6, 1)
 
     # gantt.legend(False)
     # # gantt.blank(True)
-    # gantt.department("技术研发部")
+    gantt.department("技术研发部")
     # print(gantt.show())
     gantt.save("gantt.svg")
     # print(gantt.header())
