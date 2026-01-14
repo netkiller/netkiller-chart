@@ -33,6 +33,13 @@ class Data:
             milestone: bool,
             parent: int):
 
+        try:
+            datetime.strptime(start, '%Y-%m-%d')
+            datetime.strptime(finish, '%Y-%m-%d')
+        except ValueError:
+            start = datetime.now().strftime('%Y-%m-%d')
+            finish = datetime.now().strftime('%Y-%m-%d')
+
         if not resource:
             resource = ""
         if not parent:
@@ -116,15 +123,10 @@ class Data:
                 # print(item)
 
                 try:
+                    datetime.strptime(item["start"], '%Y-%m-%d')
                     datetime.strptime(item["finish"], '%Y-%m-%d')
                 except ValueError:
-                    item["finish"] = datetime.now().strftime('%Y-%m-%d')
-
-                try:
-                    datetime.strptime(item["start"], '%Y-%m-%d')
-                except ValueError:
                     item["start"] = datetime.now().strftime('%Y-%m-%d')
-                    # 结束日期不能大于开始日期
                     item["finish"] = datetime.now().strftime('%Y-%m-%d')
 
                 if item["milestone"].lower() == "true":
