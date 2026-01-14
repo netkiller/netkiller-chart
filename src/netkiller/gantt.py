@@ -594,6 +594,7 @@ class Gantt(Calendar, Canvas):
 
     def __initialize(self, data):
         for id, item in data.items():
+            print(item)
             if "subitem" in item:
                 self.textIndent += 1
                 self.__initialize(item["subitem"])

@@ -497,18 +497,18 @@ class Gantt(Calendar, Canvas):
         endDay = end.day
         # print(beginDay, endDay)
 
-        weekNumberOfYear = datetime.strptime(str(begin.year) + "-" + str(begin.month) + "-01", "%Y-%m-%d").strftime(
-            "%W")
-
-        for day in range(beginDay, endDay + 1):
-            x = self.weekdayPosition + self.columeWidth * (column) + offsetX
-            self.dayPosition[date(year=int(begin.year), month=int(begin.month), day=int(day)).strftime("%Y-%m-%d")] = x
-
-            # if column:
-            offsetX += self.splitLineHeight
-            column += 1
-
-        self.weekdayPosition = x + self.columeWidth
+        # weekNumberOfYear = datetime.strptime(str(begin.year) + "-" + str(begin.month) + "-01", "%Y-%m-%d").strftime(
+        #     "%W")
+        #
+        # for day in range(beginDay, endDay + 1):
+        #     x = self.weekdayPosition + self.columeWidth * (column) + offsetX
+        #     self.dayPosition[date(year=int(begin.year), month=int(begin.month), day=int(day)).strftime("%Y-%m-%d")] = x
+        #
+        #     # if column:
+        #     offsetX += self.splitLineHeight
+        #     column += 1
+        #
+        # self.weekdayPosition = x + self.columeWidth
 
     def blank(self, status):
         self.isBlank = status

@@ -3,10 +3,11 @@
 ##############################################
 # Home	: https://www.netkiller.cn
 # Author: Neo <netkiller@msn.com>
-# Data: 2025-09-01
+# Data: 2026-01-14
 ##############################################
 import csv
 import io
+from datetime import datetime
 
 
 class Data:
@@ -113,6 +114,19 @@ class Data:
             # print(ids)
             for item in items:
                 # print(item)
+
+                try:
+                    datetime.strptime(item["finish"], '%Y-%m-%d')
+                except ValueError:
+                    item["finish"] = datetime.now().strftime('%Y-%m-%d')
+
+                try:
+                    datetime.strptime(item["start"], '%Y-%m-%d')
+                except ValueError:
+                    item["start"] = datetime.now().strftime('%Y-%m-%d')
+                    # 结束日期不能大于开始日期
+                    item["finish"] = datetime.now().strftime('%Y-%m-%d')
+
                 if item["milestone"].lower() == "true":
                     item["milestone"] = True
                 else:

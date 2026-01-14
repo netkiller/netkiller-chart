@@ -21,19 +21,21 @@ except ImportError as err:
 
 def main():
     text = """id,name,start,finish,resource,progress,parent,predecessor,milestone
-1,任务组,2023-03-01,2023-03-10,admin,1,0,0,FALSE
-2,aaa,2023-03-03,2023-03-04,test,0,1,0,FALSE
-3,bbb,2023-03-05,2023-03-07,,0,1,2,FALSE
-4,ccc,2023-03-08,2023-03-10,test,0,1,3,FALSE
-5,ddd,2023-03-08,2023-03-10,,2,1,3,FALSE
-6,aaa,2023-03-11,2023-03-20,test,2,0,0,FALSE
-7,aaabbb,2023-03-02,2023-03-03,closed,0,1,0,TRUE
-8,eeeee,2023-03-10,2023-03-13,,4,0,0,TRUE
-9,主任务主任务主任务,2023-03-10,2023-03-19,,0,0,0,FALSE
-10,子任务1,2023-03-10,2023-03-11,test,0,9,5,FALSE
-11,子任务2,2023-03-12,2023-03-14,test,0,9,10,FALSE
-12,子任务3,2023-03-15,2023-03-19,test,0,9,11,FALSE
-13,任务3,2023-03-15,2023-03-19,test,0,0,0,FALSE"""
+1,魔簧1.4.8开发计划,2025-12-24,2025-12-31,,1,0,0,FALSE
+2,增加负载均衡,2025-12-24,2025-12-26,陈景峰,0,1,0,FALSE
+3,安卓包裁剪,2025-12-24,2025-12-26,詹子聪,0,1,0,FALSE
+4,SIM卡切换,2025-12-29,2025-12-31,詹子聪,0,1,0,FALSE
+5,识别会议主题,2025-12-29,2025-12-31,陈景峰,2,1,0,FALSE
+6,观点生成频率调整,2025-12-29,2025-12-31,詹子聪,2,1,0,FALSE
+7,会议监控,2025-12-29,2025-12-31,陈景峰,0,1,0,FALSE
+8,设备留言,2025-12-29,2025-12-30,陈景峰,0,1,2,FALSE
+9,🎉1.4.8升级,2025-12-31,2025-12-31,,0,0,0,TRUE
+10,魔簧1.4.8开发计划,2026-01-04,2026-01-09,,0,0,0,FALSE
+11,垂直行业提示词功能,2026-01-04,2026-01-09,陈景峰,0,9,0,FALSE
+12,集成PPT,2026-01-04,2026-01-09,陈景峰,0,9,10,FALSE
+13,待定任务,2026-01-04,2026-01-09,詹子聪,0,9,11,FALSE
+14,🎉1.4.8升级,2026-01-09,2026-01-09,test,0,0,0,TRUE
+"""
 
     csv = Data()
     data = csv.csvtext(text)
@@ -44,14 +46,14 @@ def main():
     gantt = Gantt(data)
     # gantt.showTable = False
     # gantt.showHeader = False
-    gantt.title("甘特图测试")
+    gantt.title("魔簧智脑开发计划")
     # gantt.table(True)
     # gantt.author("Neo Chen")
     # # gantt.setWorkweeks(6, 1)
 
     # gantt.legend(False)
     # # gantt.blank(True)
-    gantt.department("技术研发部")
+    gantt.department("一体机/云平台/后台/小程序")
     # print(gantt.show())
     gantt.save("gantt.svg")
     # print(gantt.header())
